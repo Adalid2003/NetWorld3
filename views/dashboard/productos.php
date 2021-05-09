@@ -14,11 +14,11 @@ Dashboard_Page::headerTemplate('Administrar productos');
                 <div class="col s12">
                     <div class="input-field col s4 m6 valing-wrapper">
                         <i class="material-icons prefix ">search</i>
-                        <input type="text" id="buscar" name="buscar" required />
-                        <label for="buscar">Buscar producto...</label>
+                        <input type="text" id="search" name="search" required />
+                        <label for="search">Buscar producto...</label>
                     </div>
                     <div class="input-field col s6 m4 right-align">
-                        <button type="submit" class="btn waves-effect btn-medium green tooltipped " data-tooltip="Buscar"><i class="material-icons">check</i></button>
+                        <button type="submit" class="btn waves-effect  light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>
                     </div>
             </form>
         </div>
@@ -26,7 +26,7 @@ Dashboard_Page::headerTemplate('Administrar productos');
 </div>
 
 <div class="input-field col s6 m4">
-    <a href="#" onclick="openCreateDialog()" class="green btn-floating btn-large scale-transition" data-tooltip="Crear"><i class="material-icons">add</i></a>
+    <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1 tooltipped" data-tooltip="Crear"><i class="material-icons">add</i></a>
 </div>
 
 
@@ -37,16 +37,16 @@ Dashboard_Page::headerTemplate('Administrar productos');
             <th>Imagen</th>
             <th>Nombre</th>
             <th>Categoría</th>
+            <th>Precio (US$)</th>
             <th>Estado</th>
-            <th>Acción</th>
+            <th class="actions-column">Acción</th>
         </tr>
     </thead>
 
-    <tbody>
-
+    <tbody id="tbody-rows">
     </tbody>
 </table>
-</div>
+
 <div id="save-modal" class="modal">
     <div class="modal-content">
         <h4 id="modal-title" class="center-align"></h4>
@@ -64,12 +64,21 @@ Dashboard_Page::headerTemplate('Administrar productos');
                     </div>
                     <div class="input-field col s6">
                         <input id="precio_producto" type="number" name="precio_producto" class="validate" max="999.99" min="0.01" step="any" required>
-                        <label for="precio_producto">Precio (USD)</label>
+                        <label for="precio_producto">Precio ($)</label>
                     </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s6">
                         <select id="categoria_producto" name="categoria_producto">
                         </select>
                         <label>Categoría</label>
+                    </div>
+                    <div class="file-field input-field col s6">
+                        <div class="btn waves-effect tooltipped" data-tooltip="Seleccione una imagen de al menos 500x500">
+                            <span><i class="material-icons">image</i></span>
+                            <input id="archivo_producto" type="file" name="archivo_producto" accept=".gif, .jpg, .png" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input type="text" class="file-path validate" placeholder="Formatos aceptados: gif, jpg y png" />
+                        </div>
                     </div>
                     <div class="col s12 m6">
                         <p>
@@ -85,24 +94,15 @@ Dashboard_Page::headerTemplate('Administrar productos');
                         </p>
                     </div>
                 </div>
-                <div class="file-field input-field col s12 m6">
-                    <div class="btn waves-effect tooltipped" data-tooltip="Ingrese una imagen de al menos 500x500">
-                        <span><i class="material-icons">burst_mode</i></span>
-                        <input id="archivo_producto" type="file" name="archivo_producto" accept=".gif, .jpg, .png" />
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input type="text" class="file-path validate" placeholder="Formatos aceptados: gif, jpg y png" />
-                    </div>
-                </div>
                 <div class="row center-align">
-                    <a href="#!" class="modal-close waves-effect grey btn-flat white-text">Cancelar</a>
-                    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar">Guardar</button>
+                    <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
                 </div>
             </form>
-        </form>
     </div>
 </div>
-<!-- Se manda a llamar el footer -->
+
 <?php
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
 Dashboard_Page::footerTemplate('productos.js');
 ?>

@@ -137,7 +137,7 @@ class Productos extends Validator
     {
         $sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion, precio_producto, nombre_categoria, estado_producto
                 FROM productos INNER JOIN categorias USING(id_categoria)
-                WHERE nombre_producto ILIKE ? OR descripcion ILIKE ?
+                WHERE nombre_producto ILIKE ? OR nombre_categoria ILIKE ?
                 ORDER BY nombre_producto';
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
@@ -146,7 +146,7 @@ class Productos extends Validator
     public function createRow()
     {
         $sql = 'INSERT INTO productos(nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria, estado_producto)
-                VALUES(?, ?, ?, ?, ?, ?,)';
+                VALUES(?, ?, ?, ?, ?, ?)';
         $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->categoria, $this->estado);
         return Database::executeRow($sql, $params);
     }

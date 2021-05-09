@@ -52,6 +52,7 @@ class Dashboard_page
     <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
     <li><a href="../dashboard/Reportes.php">Reportes</a></li>
     <li><a href="../dashboard/Compras.php">Compras</a></li>
+    <li><a href="../dashboard/categorias.php">Categorías</a></li>
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </header>

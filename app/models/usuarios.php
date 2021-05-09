@@ -256,9 +256,7 @@ class Usuarios extends Validator
 
     public function readAll2()
     {
-        $sql = 'SELECT tipo_usuario
-                FROM tipo_usuario
-                ORDER BY id_tipo_usuario';
+        $sql = 'SELECT * FROM tipo_usuario';
         $params = null;
         return Database::getRows($sql, $params);
     }

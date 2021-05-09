@@ -247,7 +247,7 @@ class Usuarios extends Validator
 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 ORDER BY apellidos_usuario';
         $params = null;

@@ -3,18 +3,18 @@
 class Dashboard_page
 {
 
-  public static function headerTemplate($title)
-  {
+    public static function headerTemplate($title)
+    {
 
-    session_start();
-    print('<!DOCTYPE html>
+        session_start();
+        print('<!DOCTYPE html>
     <html>
      <!--Se crea el helper del header privado-->
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <title>Dashboard - '.$title.'</title>
+        <title>Dashboard - ' . $title . '</title>
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="../../resources/css/styles.css" media="screen,projection" />
         <!--Let browser know website is optimized for mobile-->
@@ -24,11 +24,11 @@ class Dashboard_page
     </head>
     
     <body>');
-    $filename = basename($_SERVER['PHP_SELF']);
-    if (isset($_SESSION['id_usuario'])) {
-      if ($filename != 'index.php' && $filename != 'register.php') {
-        self::modals();
-        print('    <header>
+        $filename = basename($_SERVER['PHP_SELF']);
+        if (isset($_SESSION['id_usuario'])) {
+            if ($filename != 'index.php' && $filename != 'register.php') {
+                self::modals();
+                print('    <header>
         <nav class="#0d47a1 blue darken-4" role="navigation">
             <div class="nav-wrapper">
                 <li class="material-icons">dashboard</li> <a href="">Dashboard</a>
@@ -57,14 +57,14 @@ class Dashboard_page
     </header>
     <h3 class="center-align">' . $title . '</h3>
     <main>');
-      } else {
-        header('location: main.php');
-      }
-    } else {
-      if ($filename != 'index.php' && $filename != 'register.php') {
-        header('location: index.php');
-      } else {
-        print('    <header>
+            } else {
+                header('location: main.php');
+            }
+        } else {
+            if ($filename != 'index.php' && $filename != 'register.php') {
+                header('location: index.php');
+            } else {
+                print('    <header>
       <nav class="#0d47a1 blue darken-4" role="navigation">
           <div class="nav-wrapper">
               <li class="material-icons">dashboard</li> <a href="">Dashboard</a>
@@ -92,26 +92,26 @@ class Dashboard_page
 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </header>
   <main>');
-      }
+            }
+        }
     }
-  }
-  public static function footerTemplate($controller)
-  {
-    if (isset($_SESSION['id_usuario'])) {
-      $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
+    public static function footerTemplate($controller)
+    {
+        if (isset($_SESSION['id_usuario'])) {
+            $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
       <script type="text/javascript" src="../../app/controllers/iniciar.js"></script>
       <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
       <script type="text/javascript" src="../../app/helpers/components.js"></script>
       
       <script type="text/javascript" src="../../app/controllers/' . $controller . '"></script>';
-    } else {
-      $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
+        } else {
+            $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
         <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
         <script type="text/javascript" src="../../app/helpers/components.js"></script>
         <script type="text/javascript" src="../../app/controllers/iniciar.js"></script>
         <script type="text/javascript" src="../../app/controllers/' . $controller . '"></script>';
-    }
-    print('</main>
+        }
+        print('</main>
       <!--Se crea el helper del footer publico-->
       <footer class="page-footer #2962ff blue accent-4">
           <div class="container">
@@ -152,11 +152,11 @@ class Dashboard_page
       ' . $scripts . '
       </body>
       </html>');
-  }
-  private static function modals()
-  {
-    // Se imprime el código HTML de las cajas de dialogo (modals).
-    print('
+    }
+    private static function modals()
+    {
+        // Se imprime el código HTML de las cajas de dialogo (modals).
+        print('
           <!-- Componente Modal para mostrar el formulario de editar perfil -->
           <div id="profile-modal" class="modal">
               <div class="modal-content">
@@ -227,7 +227,7 @@ class Dashboard_page
               </div>
           </div>
       ');
-  }
+    }
 }
 /*
 

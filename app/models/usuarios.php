@@ -247,7 +247,7 @@ class Usuarios extends Validator
 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 ORDER BY apellidos_usuario';
         $params = null;
@@ -256,9 +256,7 @@ class Usuarios extends Validator
 
     public function readAll2()
     {
-        $sql = 'SELECT tipo_usuario
-                FROM tipo_usuario
-                ORDER BY id_tipo_usuario';
+        $sql = 'SELECT * FROM tipo_usuario';
         $params = null;
         return Database::getRows($sql, $params);
     }

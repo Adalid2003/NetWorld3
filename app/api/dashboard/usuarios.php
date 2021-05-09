@@ -15,8 +15,8 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'readAll2':
-                if ($result['dataset'] = $usuario->readAll2()) {
+            case 'readAll':
+                if ($result['dataset'] = $usuario->readAll()) {
                     $result['status'] = 1;
                 } else {
                     if (Database::getException()) {

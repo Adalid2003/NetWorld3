@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
                 if ($usuario->setNombres($_POST['nombres_perfil'])) {
                     if ($usuario->setApellidos($_POST['apellidos_perfil'])) {
                         if ($usuario->setCorreo($_POST['correo_perfil'])) {
-                            if ($usuario->setAlias($_POST['alias_perfil'])) {
+                            if ($usuario->setUsuario($_POST['alias_perfil'])) {
                                 if ($usuario->editProfile()) {
                                     $result['status'] = 1;
                                     $_SESSION['alias_usuario'] = $usuario->getUsuario();
@@ -254,9 +254,7 @@ if (isset($_GET['action'])) {
                                 if ($_POST['clave1'] == $_POST['clave2']) {
                                     if ($usuario->setClave($_POST['clave1'])) {
                                         if ($usuario->setDui($_POST['DUI'])) {
-                                            if (isset('')) {
-                                                # code...
-                                            }
+                                            
                                         }
                                         if ($usuario->createRow()) {
                                             $result['status'] = 1;

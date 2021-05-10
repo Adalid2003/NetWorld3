@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let greeting = '';
     // Dependiendo del número de horas transcurridas en el día, se asigna un saludo para el usuario.
     if (hour < 12) {
-        greeting = 'Buenos días';
+        greeting = 'Buenos días XD';
     } else if (hour < 19) {
         greeting = 'Buenas tardes';
     } else if (hour <= 23) {

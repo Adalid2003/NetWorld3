@@ -186,7 +186,7 @@ class Usuarios extends Validator
 
     public function checkPassword($password)
     {
-        $sql = 'SELECT contraseña FROM usuarios WHERE id_usuario = ?';
+        $sql = 'SELECT contraseña FROM usuarios WHERE id_usuario=?';
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
         if (password_verify($password, $data['contraseña'])) {
@@ -196,17 +196,18 @@ class Usuarios extends Validator
         }
     }
 
+    
     public function changePassword()
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'UPDATE usuarios SET clave_usuario = ? WHERE id_usuario = ?';
+        $sql = 'UPDATE usuarios SET contraseña = ? WHERE id_usuario = ?';
         $params = array($hash, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
 
     public function readProfile()
     {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario
                 FROM usuarios
                 WHERE id_usuario = ?';
         $params = array($_SESSION['id_usuario']);
@@ -216,7 +217,7 @@ class Usuarios extends Validator
     public function editProfile()
     {
         $sql = 'UPDATE usuarios
-                SET nombres_usuario = ?, apellidos_usuario = ?, correo_usuario = ?, alias_usuario = ?
+                SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?, apodo_usuario = ?
                 WHERE id_usuario = ?';
         $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
@@ -227,7 +228,7 @@ class Usuarios extends Validator
     */
     public function searchRows($value)
     {
-        $sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario
                 FROM usuarios
                 WHERE apellidos_usuario ILIKE ? OR nombres_usuario ILIKE ?
                 ORDER BY apellidos_usuario';
@@ -239,7 +240,7 @@ class Usuarios extends Validator
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO usuarios(nombre_usuario, contraseña, DUI_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
+        $sql = 'INSERT INTO usuarios(nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $this->idTipoU, $this->direccion, $this->imagenU, $hash);
         return Database::executeRow($sql, $params);
@@ -263,7 +264,7 @@ class Usuarios extends Validator
 
     public function readOne()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, DUI_usuario, direccion, id_tipo_usuario, imagen_usuario, correo_usuario, apodo_usuario, apellidos_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);
@@ -273,7 +274,7 @@ class Usuarios extends Validator
     public function updateRow()
     {
         $sql = 'UPDATE usuarios 
-                SET nombres_usuario = ?, apellidos_usuario = ?, correo_usuario = ?
+                SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?
                 WHERE id_usuario = ?';
         $params = array($this->nombres, $this->apellidos, $this->correo, $this->id);
         return Database::executeRow($sql, $params);

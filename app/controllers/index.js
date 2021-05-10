@@ -1,6 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_USUARIOS = '../../app/api/dashboard/usuarios.php?action=';
-const ENDPOINT_USUARIOS = '../../app/api/dashboard/tipo_usuario.php?action=readAll';
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se inicializa el componente Tooltip asignado al botón del formulario para que funcione la sugerencia textual.
@@ -33,10 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-
-// Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
-fillSelect(ENDPOINT_USUARIOS, 'id_tipoU', null);
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de iniciar sesión.
 document.getElementById('session-form').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
@@ -54,6 +49,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
                     sweetAlert(1, response.message, 'main.php');
                 } else {
                     sweetAlert(2, response.exception, null);
+                    sweetAlert(2, "Error al iniciar sesion", null);
                 }
             });
         } else {

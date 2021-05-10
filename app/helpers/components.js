@@ -245,6 +245,7 @@ function fillSelect(endpoint, select, selected) {
     });
 }
 
+
 /*
 *   Función para generar una gráfica de barras verticales. Requiere el archivo chart.js para funcionar.
 *

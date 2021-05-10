@@ -15,17 +15,6 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'readAll':
-                if ($result['dataset'] = $usuario->readAll()) {
-                    $result['status'] = 1;
-                } else {
-                    if (Database::getException()) {
-                        $result['exception'] = Database::getException();
-                    } else {
-                        $result['exception'] = 'No hay categorías registradas';
-                    }
-                }
-                break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -283,12 +272,13 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->checkUser($_POST['apodo'])) {
-                    if ($usuario->checkPassword($_POST['clave'])) {
+                if ($usuario->checkUser($_POST['usuario'])) {
+                    if ($usuario->checkPassword($_POST['contra'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Autenticación correcta';
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
+                        $_SESSION['contraseña'] = $clave->getClave();
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();

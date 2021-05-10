@@ -9,12 +9,12 @@ Dashboard_Page::headerTemplate('Iniciar sesión');
         <form method="post" id="session-form">
             <div class="input-field col s12 m6 offset-m3">
                 <i class="material-icons prefix">person_pin</i>
-                <input id="usuario" type="text" name="usuario" class="validate" required/>
+                <input id="usuario1" type="text" name="usuario1" class="validate" required/>
                 <label for="usuario">Usuario</label>
             </div>
             <div class="input-field col s12 m6 offset-m3">
                 <i class="material-icons prefix">security</i>
-                <input id="contra" type="password" name="contra" class="validate" required/>
+                <input id="clave1" type="password" name="clave1" class="validate" required/>
                 <label for="contra">Contraseña</label>
             </div>
             <div class="col s12 center-align">

@@ -186,10 +186,10 @@ class Usuarios extends Validator
 
     public function checkPassword($password)
     {
-        $sql = 'SELECT contraseña FROM usuarios WHERE id_usuario=?';
+        $sql = 'SELECT clave FROM usuarios WHERE id_usuario=?';
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['contraseña'])) {
+        if (password_verify($password, $data['clave'])) {
             return true;
         } else {
             return false;
@@ -200,7 +200,7 @@ class Usuarios extends Validator
     public function changePassword()
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'UPDATE usuarios SET contraseña = ? WHERE id_usuario = ?';
+        $sql = 'UPDATE usuarios SET clave = ? WHERE id_usuario = ?';
         $params = array($hash, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
@@ -240,7 +240,7 @@ class Usuarios extends Validator
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO usuarios(nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
+        $sql = 'INSERT INTO usuarios(nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $this->idTipoU, $this->direccion, $this->imagenU, $hash);
         return Database::executeRow($sql, $params);
@@ -248,7 +248,7 @@ class Usuarios extends Validator
 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 ORDER BY apellidos_usuario';
         $params = null;
@@ -264,7 +264,7 @@ class Usuarios extends Validator
 
     public function readOne()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, contraseña, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);

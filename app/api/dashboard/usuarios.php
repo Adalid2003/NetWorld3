@@ -272,13 +272,12 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->checkUser($_POST['usuario'])) {
-                    if ($usuario->checkPassword($_POST['contra'])) {
+                if ($usuario->checkUser($_POST['usuario1'])) {
+                    if ($usuario->checkPassword($_POST['clave1'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Autenticación correcta';
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
-                        $_SESSION['contraseña'] = $clave->getClave();
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();

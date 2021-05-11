@@ -186,9 +186,12 @@ class Usuarios extends Validator
 
     public function checkPassword($password)
     {
-        $sql = 'SELECT clave FROM usuarios WHERE id_usuario=?';
+        $sql = 'SELECT clave FROM usuarios WHERE id_usuario= ?';
         $params = array($this->id);
-        $data = Database::getRow($sql, $params);
+        if($data = Database::getRow($sql, $params))
+        {
+            $this->clave = $data['clave'];
+        }
         if (password_verify($password, $data['clave'])) {
             return true;
         } else {

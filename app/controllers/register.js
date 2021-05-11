@@ -6,7 +6,7 @@ const ENDPOINT_USUARIOS = '../../app/api/dashboard/tipo_usuario.php?action=readA
 document.addEventListener('DOMContentLoaded', function () {
     // Se inicializa el componente Tooltip asignado al botón del formulario para que funcione la sugerencia textual.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
-
+    
     // Petición para verificar si existen usuarios.
     fetch(API_USUARIOS + 'readAll', {
         method: 'get'
@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
     });
 });
-// Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
 fillSelect(ENDPOINT_USUARIOS, 'id_tipoU', null);
+
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de registrar.
 document.getElementById('register-form').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-
+    
     fetch(API_USUARIOS + 'register', {
         method: 'post',
         body: new FormData(document.getElementById('register-form'))

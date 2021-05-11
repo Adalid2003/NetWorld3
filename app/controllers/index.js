@@ -49,7 +49,6 @@ document.getElementById('session-form').addEventListener('submit', function (eve
                     sweetAlert(1, response.message, 'main.php');
                 } else {
                     sweetAlert(2, response.exception, null);
-                    sweetAlert(2, "Error al iniciar sesion", null);
                 }
             });
         } else {

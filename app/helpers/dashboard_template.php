@@ -40,13 +40,13 @@ class Dashboard_page
         </nav>
         <ul id="slide-out" class="sidenav">
     <li><a class="subheader">Mantenimientos</a></li>
-    <li><a href="../dashboard/usuario.php">Usuarios</a></li>
-    <li><a href="../dashboard/productos.php">Productos</a></li>
-    <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
-    <li><a href="../dashboard/Reportes.php">Reportes</a></li>
-    <li><a href="../dashboard/Compras.php">Compras</a></li>
-    <li><a href="../dashboard/categorias.php">Categorías</a></li>
-    <li><a href="../dashboard/valoraciones.php">Valoraciones</a></li>
+    <li><a href="../dashboard/usuario.php"><i class="material-icons">person</i>Usuarios</a></li>
+    <li><a href="../dashboard/productos.php"><i class="material-icons">archive</i>Productos</a></li>
+    <li><a href="../dashboard/Proveedores.php"><i class="material-icons">group</i>Proveedores</a></li>
+    <li><a href="../dashboard/Reportes.php"><i class="material-icons">assignment</i>Reportes</a></li>
+    <li><a href="../dashboard/Compras.php"><i class="material-icons">shopping_cart</i>Compras</a></li>
+    <li><a href="../dashboard/categorias.php"><i class="material-icons">copyright</i>Categorías</a></li>
+    <li><a href="../dashboard/valoraciones.php"><i class="material-icons">check</i>Valoraciones</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Detalle de su cuenta</a></li>
     <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Usuario: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>

@@ -1,6 +1,6 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_USUARIOS = '../../app/api/dashboard/usuarios.php?action=';
-
+const ENDPOINT_USUARIOS = '../../app/api/dashboard/usuarios.php?action=readAll2';
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js
@@ -15,7 +15,7 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-            <td>${row.imagen_usuario}</td>
+            <td><img src="../../resources/img/users/${row.imagen_usuario}" class="materialboxed" height="100"></td>
             <td>${row.nombre_usuario}</td>
             <td>${row.apellidos_usuario}</td>
             <td>${row.dui_usuario}</td>
@@ -55,10 +55,13 @@ function openCreateDialog() {
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title').textContent = 'Crear usuario';
     // Se habilitan los campos de alias y contraseña.
-    document.getElementById('alias_usuario').disabled = false;
-    document.getElementById('clave_usuario').disabled = false;
-    document.getElementById('confirmar_clave').disabled = false;
+    document.getElementById('alias').disabled = false;
+    document.getElementById('clave1').disabled = false;
+    document.getElementById('clave2').disabled = false;
+    // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
+    fillSelect(ENDPOINT_USUARIOS, 'tipo_usuario', null);
 }
+
 
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdateDialog(id) {

@@ -101,8 +101,8 @@ class Usuarios extends Validator
     }
     public function setDireccion($value)
     {
-        if ($this->validatePassword($value)) {
-            $this->clave = $value;
+        if ($this->validateAlphanumeric($value, 1, 50)) {
+            $this->direccion = $value;
             return true;
         } else {
             return false;
@@ -248,7 +248,7 @@ class Usuarios extends Validator
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'INSERT INTO usuarios(nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombres, $hash, $this->dui, $this->direccion, $this->id_tipoU, $this->imagenU, $this->correo, $this->usuario, $this->apellidos,$hash);
+        $params = array($this->nombres, $hash, $this->dui, $this->direccion, $this->id_tipoU, $this->imagenU, $this->correo, $this->usuario, $this->apellidos);
         return Database::executeRow($sql, $params);
     }
 

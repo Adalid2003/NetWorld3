@@ -49,46 +49,48 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
     </tbody>
 </table>
 <div id="save-modal" class="modal">
-  <div class="row">
-    <h4 class="center">Gestionar usuarios</h4>
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate" required>
-          <label for="first_name">Nombre</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate" required>
-          <label for="last_name">Apellido</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="dui" type="text" class="validate" required>
-          <label for="dui_user">DUI</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="direccion" type="text" class="validate" required>
-          <label for="direccion_user">Dirección</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="password" type="password" class="validate" required>
-          <label for="password">Contraseña</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="email" type="email" class="validate" required>
-          <label for="email">Email</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="user" type="text" class="validate" required>
-          <label for="user">Usuario</label>
+<h4 id="modal-title" class="center-align"></h4>
+        <form method="post" id="save-form" enctype="multipart/form-data">
+<div class="row">
+        <div class="input-field col s12 m6">
+          	<i class="material-icons prefix">person</i>
+          	<input id="nombres" type="text" name="nombres" class="validate" required/>
+          	<label for="nombres">Nombres</label>
         </div>
         <div class="input-field col s12 m6">
-          <select>
-            <option value="" disabled selected>Tipo de usuario</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-          <label>Seleccione el tipo de usuario</label>
+            <i class="material-icons prefix">person</i>
+            <input id="apellidos" type="text" name="apellidos" class="validate" required/>
+            <label for="apellidos">Apellidos</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">email</i>
+            <input id="correo" type="email" name="correo" class="validate" required/>
+            <label for="correo">Correo</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">person_pin</i>
+            <input id="alias" type="text" name="alias" class="validate" required/>
+            <label for="alias">Usuario</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">security</i>
+            <input id="clave1" type="password" name="clave1" class="validate" required/>
+            <label for="clave1">Contrseña</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">security</i>
+            <input id="clave2" type="password" name="clave2" class="validate" required/>
+            <label for="clave2">Confirmar contraseña</label>
+        </div>
+        <div class="input-field col s6">
+                        <select id="tipo_usuario" name="tipo_usuario">
+                        </select>
+                        <label>Tipo de usuario</label>
+                    </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="dui" type="text" name="dui" class="validate" required/>
+            <label for="dui">DUI</label>
         </div>
         <div class="file-field input-field col s12 m6">
                     <div class="btn waves-effect tooltipped blue">
@@ -96,16 +98,23 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
                         <input id="foto_usuario" type="file" name="foto_usuario" accept=".jpg, .png"/>
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: jpg y png"/>
+                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: jpg y png" required/>
                     </div>
-                </div>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">map</i>
+            <input id="direccion" type="text" name="direccion" class="validate" required/>
+            <label for="direccion">Dirección</label>
+        </div>
       </div>
-      <div class="row center-align">
-        <a href="#!" class="modal-close waves-effect grey btn-flat white-text">Cancelar</a>
-        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar">Guardar</button>
-      </div>
-  </div>
+    </div>
+    <div class="row center-align">
+ 	    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Registrar"><i class="material-icons">send</i></button>
+    </div>
+            </form>
+    </div>
 </div>
+
 
   <!--Se manda a llamar al helper del footer-->
   <?php

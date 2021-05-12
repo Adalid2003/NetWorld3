@@ -1,11 +1,10 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_USUARIOS = '../../app/api/dashboard/usuarios.php?action=';
-const ENDPOINT_USUARIOS = '../../app/api/dashboard/tipo_usuario.php?action=readAll';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     
-fillSelect(ENDPOINT_USUARIOS, 'id_tipoU', null);
+
     // Se inicializa el componente Tooltip asignado al botón del formulario para que funcione la sugerencia textual.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
     

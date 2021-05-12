@@ -15,6 +15,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -237,6 +238,7 @@ if (isset($_GET['action'])) {
             case 'register':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombres($_POST['nombres'])) {
+                    if($usuario->setDireccion(($_POST['direccion']))){
                     if ($usuario->setApellidos($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
                             if ($usuario->setUsuario($_POST['alias'])) {
@@ -286,6 +288,9 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Nombres incorrectos';
                 }
+            }else{
+                $result['exception'] = 'Direccion incorrecta';
+            }
                 break;
                 case 'logIn':
                     print_r($_POST);

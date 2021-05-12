@@ -213,8 +213,8 @@ class Usuarios extends Validator
 
     public function readProfile()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario, imagen_usuario
-                FROM usuarios
+        $sql = 'SELECT  id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+        FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
                 WHERE id_usuario = ?';
         $params = array($_SESSION['id_usuario']);
         return Database::getRow($sql, $params);

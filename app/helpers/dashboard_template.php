@@ -32,7 +32,7 @@ class Dashboard_page
         <nav class="#0d47a1 blue darken-4" role="navigation">
             <div class="nav-wrapper">
                 <li class="material-icons">dashboard</li> <a href="">Dashboard</a>
-                <a id="logo-container" href="../../views/dashboard/dashboard.php" class="brand-logo container center">
+                <a id="logo-container" href="../../views/dashboard/main.php" class="brand-logo container center">
                 
                     NetWorld
                 </a>
@@ -46,9 +46,13 @@ class Dashboard_page
     <li><a href="../dashboard/Reportes.php">Reportes</a></li>
     <li><a href="../dashboard/Compras.php">Compras</a></li>
     <li><a href="../dashboard/categorias.php">Categorías</a></li>
+    <li><a href="../dashboard/valoraciones.php">Valoraciones</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Detalle de su cuenta</a></li>
-    <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>
+    <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Usuario: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>
+    <li><a href="#" onclick="openPasswordDialog()"><i class="material-icons">security</i>Cambiar contraseña</a></li>
+    <li><a href="#" onclick="openProfileDialog()"><i class="material-icons">person</i>Editar perfil</a></li>
+    <li><a href="#" onclick="logOut()"><i class="material-icons">clear</i>Cerrar sesión</a></li>
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </header>

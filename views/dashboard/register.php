@@ -6,7 +6,7 @@ Dashboard_Page::headerTemplate('Registrar primer usuario');
 ?>
 
 <!-- Formulario para registrar al primer usuario del dashboard -->
-<form method="post" id="register-form">
+<form method="post" id="register-form" enctype="multipart/form-data">
     <div class="row">
         <div class="input-field col s12 m6">
           	<i class="material-icons prefix">person</i>
@@ -34,13 +34,13 @@ Dashboard_Page::headerTemplate('Registrar primer usuario');
             <label for="clave1">Contrseña</label>
         </div>
         <div class="input-field col s12 m6">
-          <select id="id_tipoU" name="id_tipoU">
-          </select>
-          <label>Seleccione el tipo de usuario</label>
+            <i class="material-icons prefix">security</i>
+            <input id="clave2" type="password" name="clave2" class="validate" required/>
+            <label for="clave2">Confirmar contraseña</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">perm_identity</i>
-            <input id="dui" type="text" name="clave1" class="validate" required/>
+            <input id="dui" type="text" name="dui" class="validate" required/>
             <label for="dui">DUI</label>
         </div>
         <div class="file-field input-field col s12 m6">
@@ -49,12 +49,12 @@ Dashboard_Page::headerTemplate('Registrar primer usuario');
                         <input id="foto_usuario" type="file" name="foto_usuario" accept=".jpg, .png"/>
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: jpg y png"/>
+                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: jpg y png" required/>
                     </div>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">map</i>
-            <input id="direccion" type="text" name="clave1" class="validate" required/>
+            <input id="direccion" type="text" name="direccion" class="validate" required/>
             <label for="direccion">Dirección</label>
         </div>
       </div>

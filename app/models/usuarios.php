@@ -15,6 +15,7 @@ class Usuarios extends Validator
     private $imagenU = null;
     private $id_tipoU = null;
     private $dui = null;
+    private $ruta = '../../../resources/img/users/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -81,8 +82,8 @@ class Usuarios extends Validator
 
     public function setImagen($value)
     {
-        if ($this->validateAlphabetic($value, 1, 50)) {
-            $this->clave = $value;
+        if ($this->validateImageFile($value, 500, 500)) {
+            $this->imagenU = $this->getImageName();
             return true;
         } else {
             return false;
@@ -92,7 +93,7 @@ class Usuarios extends Validator
     public function setIdU($value)
     {
         if ($this->validateNaturalNumber($value)) {
-            $this->clave = $value;
+            $this->id_tipoU = $value;
             return true;
         } else {
             return false;
@@ -168,6 +169,11 @@ class Usuarios extends Validator
         return $this->dui;
     }
 
+    public function getRuta()
+    {
+        return $this->ruta;
+    }
+
     /*
     *   Métodos para gestionar la cuenta del usuario.
     */
@@ -184,15 +190,12 @@ class Usuarios extends Validator
         }
     }
 
-    public function checkPassword($password)
+    public function checkPassword($clave)
     {
         $sql = 'SELECT clave FROM usuarios WHERE id_usuario= ?';
         $params = array($this->id);
-        if($data = Database::getRow($sql, $params))
-        {
-            $this->clave = $data['clave'];
-        }
-        if (password_verify($password, $data['clave'])) {
+        $data = Database::getRow($sql, $params);
+        if (password_verify($clave, $data['clave'])) {
             return true;
         } else {
             return false;
@@ -245,14 +248,14 @@ class Usuarios extends Validator
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'INSERT INTO usuarios(nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $this->idTipoU, $this->direccion, $this->imagenU, $hash);
+        $params = array($this->nombres, $hash, $this->dui, $this->direccion, $this->id_tipoU, $this->imagenU, $this->correo, $this->usuario, $this->apellidos,$hash);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
-                FROM usuarios
+        $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+                FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
                 ORDER BY apellidos_usuario';
         $params = null;
         return Database::getRows($sql, $params);

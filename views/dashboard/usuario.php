@@ -1,6 +1,9 @@
 <!--Se manda a llamar al helper del header-->
 <?php
-include("../../app/helpers/dashboard_template.php");
+// Se incluye la clase con las plantillas del documento.
+require_once('../../app/helpers/dashboard_template.php');
+// Se imprime la plantilla del encabezado enviando el título de la página web.
+Dashboard_Page::headerTemplate('Administrar usuarios');
 ?>
 <title>Control usuarios</title>
 <!--Se crean las cartas de los formularios-->
@@ -21,69 +24,31 @@ include("../../app/helpers/dashboard_template.php");
       </div>
     </div>
   </div>
-  <table class="striped responsive-table">
+  <div class="input-field col s6 m4">
+    <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1 tooltipped" data-tooltip="Crear"><i class="material-icons">add</i></a>
+</div>
+
+
+<!-- Se hace la tabla responsiva -->
+<table class="striped responsive-table">
     <thead>
-      <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Tipo usuario</th>
-        <th>Estado</th>
-        <th>Acción</th>
-      </tr>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>DUI</th>
+            <th>Dirección</th>
+            <th>Tipo de usuario</th>
+            <th>Correo</th>
+            <th>Usuario</th>
+            <th class="actions-column">Acción</th>
+        </tr>
     </thead>
 
-    <tbody>
-      <a id="scale-demo" href="#modal1" class="green btn-floating btn-large scale-transition modal-trigger">
-        <i class="material-icons">add</i>
-      </a>
-      <h5>Agregar usuario</h5>
-      <tr>
-        <td><a class="brand-logo"> <img src="../../resources/img/users/user.png" height="85"></a></td>
-        <td>José Jiménez</td>
-        <td>Root</td>
-        <td>Activo</td>
-        <td>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="blue btn-floating btn-large scale-transition">
-            <i class="material-icons">autorenew</i>
-          </a>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="red btn-floating btn-large scale-transition">
-            <i class="material-icons">close</i>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td><a class="brand-logo"> <img src="../../resources/img/users/user.png" height="85"></a></td>
-        <td>Rene Meza</td>
-        <td>Administrador</td>
-        <td>Activo</td>
-        <td>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="blue btn-floating btn-large scale-transition">
-            <i class="material-icons">autorenew</i>
-          </a>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="red btn-floating btn-large scale-transition">
-            <i class="material-icons">close</i>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td><a class="brand-logo"> <img src="../../resources/img/users/user.png" height="85"></a></td>
-        <td>Wiliiam Amaya</td>
-        <td>Cliente</td>
-        <td>Activo</td>
-        <td>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="blue btn-floating btn-large scale-transition">
-            <i class="material-icons">autorenew</i>
-          </a>
-          <a id="scale-demo" href="../dashboard/usuarios.php" class="red btn-floating btn-large scale-transition">
-            <i class="material-icons">close</i>
-          </a>
-        </td>
-      </tr>
-
+    <tbody id="tbody-rows">
     </tbody>
-  </table>
-</div>
-<div id="modal1" class="modal">
+</table>
+<div id="save-modal" class="modal">
   <div class="row">
     <h4 class="center">Gestionar usuarios</h4>
     <form class="col s12">
@@ -144,5 +109,6 @@ include("../../app/helpers/dashboard_template.php");
 
   <!--Se manda a llamar al helper del footer-->
   <?php
-  include("../../app/helpers/template_footer_private.php");
-  ?>
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
+Dashboard_Page::footerTemplate('usuarios.js');
+?>

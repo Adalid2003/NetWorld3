@@ -111,7 +111,7 @@ class Usuarios extends Validator
     public function setDui($value)
     {
         if ($this->validateDUI($value)) {
-            $this->clave = $value;
+            $this->dui = $value;
             return true;
         } else {
             return false;
@@ -234,9 +234,9 @@ class Usuarios extends Validator
     */
     public function searchRows($value)
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario
-                FROM usuarios
-                WHERE apellidos_usuario ILIKE ? OR nombres_usuario ILIKE ?
+        $sql = 'SELECT  id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
+                FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
+                WHERE apellidos_usuario ILIKE ? OR nombre_usuario ILIKE ?
                 ORDER BY apellidos_usuario';
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
@@ -263,7 +263,7 @@ class Usuarios extends Validator
 
     public function readAll2()
     {
-        $sql = 'SELECT * FROM tipo_usuario';
+        $sql = 'SELECT id_tipo_usuario, tipo_usuario from tipo_usuario';
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -277,12 +277,13 @@ class Usuarios extends Validator
         return Database::getRow($sql, $params);
     }
 
-    public function updateRow()
+    public function updateRow($current_image)
     {
+        ($this->imagenU) ? $this->deleteFile($this->getRuta(), $current_image) : $this->imagenU = $current_image;
         $sql = 'UPDATE usuarios 
-                SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?
+                SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?, id_tipo_usuario = ?, dui_usuario= ?, imagen_usuario = ?, direccion = ?
                 WHERE id_usuario = ?';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->id);
+        $params = array($this->nombres, $this->apellidos, $this->correo, $this->id_tipoU, $this->dui, $this->imagenU, $this->direccion, $this->id);
         return Database::executeRow($sql, $params);
     }
 

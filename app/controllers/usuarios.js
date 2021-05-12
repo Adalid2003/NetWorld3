@@ -20,7 +20,6 @@ function fillTable(dataset) {
             <td>${row.apellidos_usuario}</td>
             <td>${row.dui_usuario}</td>
             <td>${row.direccion}</td>
-            <td>${row.dui_usuario}</td>
             <td>${row.tipo_usuario}</td>
             <td>${row.correo}</td>
             <td>${row.apodo_usuario}</td>
@@ -66,17 +65,22 @@ function openCreateDialog() {
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdateDialog(id) {
     // Se restauran los elementos del formulario.
+    // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
+    fillSelect(ENDPOINT_USUARIOS, 'tipo_usuario', null);
     document.getElementById('save-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title').textContent = 'Actualizar usuario';
-    // Se deshabilitan los campos de alias y contraseña.
-    document.getElementById('alias_usuario').disabled = true;
-    document.getElementById('clave_usuario').disabled = true;
-    document.getElementById('confirmar_clave').disabled = true;
 
+    // Se deshabilitan los campos de alias y contraseña.
+    document.getElementById('alias').disabled = true;
+    document.getElementById('clave1').disabled = true;
+    document.getElementById('clave2').disabled = true;
+
+    // Se establece el campo de archivo como opcional.
+    document.getElementById('foto_usuario').required = false;
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
     data.append('id_usuario', id);
@@ -92,9 +96,12 @@ function openUpdateDialog(id) {
                 if (response.status) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_usuario').value = response.dataset.id_usuario;
-                    document.getElementById('nombres_usuario').value = response.dataset.nombres_usuario;
-                    document.getElementById('apellidos_usuario').value = response.dataset.apellidos_usuario;
-                    document.getElementById('correo_usuario').value = response.dataset.correo_usuario;
+                    document.getElementById('nombres').value = response.dataset.nombre_usuario;
+                    document.getElementById('apellidos').value = response.dataset.apellidos_usuario;
+                    document.getElementById('correo').value = response.dataset.correo;
+                    document.getElementById('dui_u').value = response.dataset.dui_usuario;
+                    fillSelect(ENDPOINT_USUARIOS, 'tipo_usuario', response.dataset.id_tipo_usuario);
+                    document.getElementById('direccion').value = response.dataset.direccion;
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {

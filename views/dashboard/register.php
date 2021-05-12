@@ -40,8 +40,8 @@ Dashboard_Page::headerTemplate('Registrar primer usuario');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">perm_identity</i>
-            <input id="dui" type="text" name="dui" class="validate" required/>
-            <label for="dui">DUI</label>
+            <input id="dui_u" type="text" name="dui_u" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required/>
+            <label for="dui_u">DUI</label>
         </div>
         <div class="file-field input-field col s12 m6">
                     <div class="btn waves-effect tooltipped blue">

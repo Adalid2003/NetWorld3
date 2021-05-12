@@ -4,6 +4,8 @@ const ENDPOINT_USUARIOS = '../../app/api/dashboard/tipo_usuario.php?action=readA
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
+    
+fillSelect(ENDPOINT_USUARIOS, 'id_tipoU', null);
     // Se inicializa el componente Tooltip asignado al botón del formulario para que funcione la sugerencia textual.
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
     
@@ -33,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
     });
 });
-fillSelect(ENDPOINT_USUARIOS, 'id_tipoU', null);
 
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de registrar.
 document.getElementById('register-form').addEventListener('submit', function (event) {

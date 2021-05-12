@@ -47,6 +47,7 @@ class Dashboard_page
     <li><a href="../dashboard/Compras.php"><i class="material-icons">shopping_cart</i>Compras</a></li>
     <li><a href="../dashboard/categorias.php"><i class="material-icons">copyright</i>Categorías</a></li>
     <li><a href="../dashboard/valoraciones.php"><i class="material-icons">check</i>Valoraciones</a></li>
+    <li><a href="../dashboard/clientes.php"><i class="material-icons">check</i>Clientes</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Detalle de su cuenta</a></li>
     <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Usuario: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>

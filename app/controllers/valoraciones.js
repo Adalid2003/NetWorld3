@@ -13,13 +13,12 @@ function fillTable(dataset) {
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
         // Se establece un icono para el estado del producto.
-        (row.estado_comentario) ? icon = 'lock_open' : icon = 'lock_outline';
+        (row.estado_comentario) ? icon = 'check' : icon = 'block';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
                 <td>${row.calificacion_producto}</td>
                 <td>${row.comentario_producto}</td>
-                <td>${row.estado_comentario}</td>
                 <td><i class="material-icons">${icon}</i></td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.id_valoracion})" class="btn waves-effect  green darken-1  tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>

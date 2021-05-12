@@ -103,7 +103,7 @@ class Dashboard_page
       <script type="text/javascript" src="../../app/controllers/iniciar.js"></script>
       <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
       <script type="text/javascript" src="../../app/helpers/components.js"></script>
-      <script type="text/javascript" src="../../app/controllers/account.js"></script>
+      
       <script type="text/javascript" src="../../app/controllers/' . $controller . '"></script>';
         } else {
             $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>

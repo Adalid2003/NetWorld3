@@ -15,7 +15,7 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
                     <div class="input-field col s4 m6 valing-wrapper">
                         <i class="material-icons prefix ">search</i>
                         <input type="text" id="search" name="search" required />
-                        <label for="search">Buscar categoría...</label>
+                        <label for="search">Buscar valoración...</label>
                     </div>
                     <div class="input-field col s6 m4 right-align">
                         <button type="submit" class="btn waves-effect   light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>
@@ -68,10 +68,10 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
                     <div class="switch">
                         <span>Estado del comentario:</span>
                         <label>
-                            <i class="material-icons">visibility_off</i>
+                            <i class="material-icons">block</i>
                             <input id="estado_comentario" type="checkbox" name="estado_comentario" checked />
                             <span class="lever"></span>
-                            <i class="material-icons">visibility</i>
+                            <i class="material-icons">check</i>
                         </label>
                     </div>
                     </p>

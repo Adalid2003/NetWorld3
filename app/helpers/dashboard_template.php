@@ -50,9 +50,11 @@ class Dashboard_page
     <li><a href="../dashboard/usuario.php">Usuarios</a></li>
     <li><a href="../dashboard/productos.php">Productos</a></li>
     <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
+    <li><a href="../dashboard/categorias.php">Categorías</a></li>
+    <li><a href="../dashboard/valoraciones.php">Valoraciones</a></li>
     <li><a href="../dashboard/Reportes.php">Reportes</a></li>
     <li><a href="../dashboard/Compras.php">Compras</a></li>
-    <li><a href="../dashboard/categorias.php">Categorías</a></li>
+
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </header>
@@ -87,6 +89,8 @@ class Dashboard_page
   <li><a href="../dashboard/usuario.php">Usuarios</a></li>
   <li><a href="../dashboard/productos.php">Productos</a></li>
   <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
+  <li><a href="../dashboard/categorias.php">Categorías</a></li>
+  <li><a href="../dashboard/valoraciones.php">Valoraciones</a></li>
   <li><a href="../dashboard/Reportes.php">Reportes</a></li>
   <li><a href="../dashboard/Compras.php">Compras</a></li>
 </ul>
@@ -103,6 +107,7 @@ class Dashboard_page
       <script type="text/javascript" src="../../app/controllers/iniciar.js"></script>
       <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
       <script type="text/javascript" src="../../app/helpers/components.js"></script>
+      <script type="text/javascript" src="../../app/controllers/account.js"></script>
       
       <script type="text/javascript" src="../../app/controllers/' . $controller . '"></script>';
         } else {

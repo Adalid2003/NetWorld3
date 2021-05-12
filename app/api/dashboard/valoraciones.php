@@ -52,7 +52,13 @@ if (isset($_GET['action'])) {
                 $_POST = $valoraciones->validateForm($_POST);
                     if ($valoraciones->setComentario($_POST['comentario_producto'])) {
                         if ($valoraciones->setCalificacion($_POST['calificacion_producto'])) {
-                                    if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0)) {
+                                    if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0)) { 
+                                        if ($valoraciones->createRow()) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Valoracion creado correctamente';
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
                                     } else {
                                         $result['exception'] = 'Comentario incorrecto';
                                     }

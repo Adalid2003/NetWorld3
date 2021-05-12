@@ -215,7 +215,7 @@ if (isset($_GET['action'])) {
                                                 if ($usuario->setIdU($_POST['tipo_usuario'])) {
                                                     if (is_uploaded_file($_FILES['foto_usuario']['tmp_name'])) {
                                                         if ($usuario->setImagen($_FILES['foto_usuario'])) {
-                                                            if ($usuario->updateRow($_FILES['imagen_usuario'])) {
+                                                            if ($usuario->updateRow($_FILES['foto_usuario'])) {
                                                                 $result['status'] = 1;
                                                                 if ($usuario->saveFile($_FILES['foto_usuario'], $usuario->getRuta(), $usuario->getImagenU())) {
                                                                     $result['message'] = 'Usuario actualizado correctamente';
@@ -224,6 +224,7 @@ if (isset($_GET['action'])) {
                                                                 }
                                                             } else {
                                                                 $result['exception'] = Database::getException();
+                                                                $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                             }
                                                         } else {
                                                             $result['exception'] = $usuario->getImageError();;
@@ -359,7 +360,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'logIn':
-                print_r($_POST);
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->checkUser($_POST['usuario1'])) {
                     if ($usuario->checkPassword($_POST['clave'])) {

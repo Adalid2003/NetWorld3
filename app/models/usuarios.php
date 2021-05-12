@@ -213,7 +213,7 @@ class Usuarios extends Validator
 
     public function readProfile()
     {
-        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario
+        $sql = 'SELECT id_usuario, nombre_usuario, apellidos_usuario, correo, apodo_usuario, imagen_usuario
                 FROM usuarios
                 WHERE id_usuario = ?';
         $params = array($_SESSION['id_usuario']);

@@ -39,20 +39,16 @@ class Dashboard_page
             </div>
         </nav>
         <ul id="slide-out" class="sidenav">
-    <li><div class="user-view">
-      <div class="background">
-        <img src="../../resources/img/dash.jpg">
-      </div>
-      <a href="#user"><img class="circle" src="../../resources/img/users/user.png"></a>
-      <a href="#name"><span class="white-text name">José</span></a>
-      <a href="#email"><span class="white-text email">jose@gmail.com</span></a>
-    </div></li>
+    <li><a class="subheader">Mantenimientos</a></li>
     <li><a href="../dashboard/usuario.php">Usuarios</a></li>
     <li><a href="../dashboard/productos.php">Productos</a></li>
     <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
     <li><a href="../dashboard/Reportes.php">Reportes</a></li>
     <li><a href="../dashboard/Compras.php">Compras</a></li>
     <li><a href="../dashboard/categorias.php">Categorías</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Detalle de su cuenta</a></li>
+    <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </header>
@@ -103,7 +99,7 @@ class Dashboard_page
       <script type="text/javascript" src="../../app/controllers/iniciar.js"></script>
       <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
       <script type="text/javascript" src="../../app/helpers/components.js"></script>
-      
+      <script type="text/javascript" src="../../app/controllers/account.js"></script>
       <script type="text/javascript" src="../../app/controllers/' . $controller . '"></script>';
         } else {
             $scripts = '<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>

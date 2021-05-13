@@ -26,6 +26,17 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                case 'readAll2':
+                    if ($result['dataset'] = $valoraciones->readAll2()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay tipos de usuario registrados';
+                        }
+                    }
+                    break;
             case 'search':
                 $_POST = $valoraciones->validateForm($_POST);
                 if ($_POST['search'] != '') {
@@ -52,6 +63,8 @@ if (isset($_GET['action'])) {
                 $_POST = $valoraciones->validateForm($_POST);
                     if ($valoraciones->setComentario($_POST['comentario_producto'])) {
                         if ($valoraciones->setCalificacion($_POST['calificacion_producto'])) {
+                            if ($valoraciones->setProducto($_POST['producto_valoracion'])) {
+                                if ($valoraciones->setCliente($_POST['cliente_valoracion'])) {
                                     if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0)) { 
                                         if ($valoraciones->createRow()) {
                                             $result['status'] = 1;
@@ -66,9 +79,15 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Calificación incorrecto';
                         }
                     } else {
-                        $result['exception'] = 'Estado incorrecto';
+                        $result['exception'] = 'Producto incorrecto';
                     }
-                break;
+                } else {
+                    $result['exception'] = 'Cliente incorrecto';
+                }
+            } else {
+                $result['exception'] = 'Estado incorrecto';
+            }
+            break;
             case 'readOne':
                 if ($valoraciones->setId($_POST['id_valoracion'])) {
                     if ($result['dataset'] = $valoraciones->readOne()) {
@@ -90,6 +109,8 @@ if (isset($_GET['action'])) {
                     if ($data = $valoraciones->readOne()) {
                             if ($valoraciones->setComentario($_POST['comentario_producto'])) {
                                 if ($valoraciones->setCalificacion($_POST['calificacion_producto'])) {
+                                    if ($valoraciones->setProducto($_POST['producto_valoracion'])) {
+                                        if ($valoraciones->setCliente($_POST['cliente_valoracion'])) {
                                     if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0))
                                         if ($valoraciones->updateRow($_POST['id_valoracion'])) {
                                             $result['status'] = 1;
@@ -105,10 +126,15 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Calificación es incorrecta';
                     }
                 } else {
-                    $result['exception'] = 'Estado es incorrecto';
+                    $result['exception'] = 'Producto es incorrecto';
                 }
-
-                break;
+            } else {
+                $result['exception'] = 'Cliente es incorrecto';
+            }
+        } else {
+            $result['exception'] = 'Estado es incorrecto';
+        }
+            break;
             case 'delete':
                 if ($valoraciones->setId($_POST['id_valoracion'])) {
                     if ($data = $valoraciones->readOne()) {

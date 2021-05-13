@@ -145,9 +145,9 @@ class Productos extends Validator
 
     public function createRow()
     {
-        $sql = 'INSERT INTO productos(nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria, estado_producto)
-                VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->categoria, $this->estado);
+        $sql = 'INSERT INTO productos(nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria, estado_producto, id_usuario)
+                VALUES(?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->categoria, $this->estado, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
 

@@ -34,6 +34,8 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
             <th>Calificación</th>
             <th>Comentario</th>
             <th>Estado comentario</th>
@@ -62,6 +64,17 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
                 <div class="input-field col s6">
                     <input id="comentario_producto" type="text" name="comentario_producto" class="validate">
                     <label for="comentario_producto">Comentario</label>
+                </div>
+                    <div class="input-field col s6">
+                    <select id="producto_valoracion" name="producto_valoracion">
+                    </select>
+                    <label>Producto</label>
+                </div>
+                </div>
+                    <div class="input-field col s6">
+                    <select id="cliente_valoracion" name="cliente_valoracion">
+                    </select>
+                    <label>Cliente</label>
                 </div>
                 <div class="col s12 m12 center-align">
                     <p>

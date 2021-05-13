@@ -70,8 +70,7 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
                     </select>
                     <label>Producto</label>
                 </div>
-                </div>
-                    <div class="input-field col s6">
+                <div class="input-field col s6">
                     <select id="cliente_valoracion" name="cliente_valoracion">
                     </select>
                     <label>Cliente</label>
@@ -87,7 +86,7 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
                             <i class="material-icons">check</i>
                         </label>
                     </div>
-                    </p>
+                </div>
                 </div>
             </div>
             <div class="row center-align">

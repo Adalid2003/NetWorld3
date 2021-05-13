@@ -1,6 +1,7 @@
 // Constantes para establecer las rutas y parámetros de comunicación con la API.
 const API_VALORACIONES = '../../app/api/dashboard/valoraciones.php?action=';
 const ENDPOINT_VALORACIONES = '../../app/api/dashboard/valoraciones.php?action=readAll2';
+const ENDPOINT_CLIENTES = '../../app/api/dashboard/clientes.php?action=readAll';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -58,7 +59,7 @@ function openCreateDialog() {
     document.getElementById('modal-title').textContent = 'Ingresar una valoracion';
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
     fillSelect(ENDPOINT_VALORACIONES, 'producto_valoracion', null);
-    fillSelect(ENDPOINT_VALORACIONES, 'cliente_valoracion', null);
+    fillSelect(ENDPOINT_CLIENTES, 'cliente_valoracion', null);
 }
 
 // Función para preparar el formulario al momento de modificar un registro.

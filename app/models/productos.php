@@ -160,6 +160,7 @@ class Productos extends Validator
         return Database::getRows($sql, $params);
     }
 
+    
     public function readOne()
     {
         $sql = 'SELECT id_producto, nombre_producto, descripcion, precio_producto, imagen_producto, id_categoria, estado_producto

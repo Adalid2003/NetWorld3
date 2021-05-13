@@ -9,7 +9,6 @@ class Valoraciones extends Validator
     private $calificacion = null;
     private $comentario = null;
     private $estado = null;
-    private $estado = null;
     private $producto = null;
     private $cliente = null;
 
@@ -141,7 +140,7 @@ class Valoraciones extends Validator
 
     public function readAll2()
     {
-        $sql = 'SELECT id_producto, nombre_producto from productos';
+        $sql = 'SELECT * from productos';
         $params = null;
         return Database::getRows($sql, $params);
     }

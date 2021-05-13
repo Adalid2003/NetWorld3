@@ -96,60 +96,68 @@ if (isset($_GET['action'])) {
             case 'update':
                 //print_r($_POST);
                 $_POST = $clientes->validateForm($_POST);
-                if ($clientes->setNombres($_POST['nombres'])) {
-                    if ($clientes->setApellidos($_POST['apellidos'])) {
-                        if ($clientes->setDUI($_POST['dui_c'])) {
-                            if ($clientes->setTelefono($_POST['telefono'])) {
-                                if ($clientes->setNacimiento($_POST['fecha_nacimiento'])) {
-                                    if ($clientes->setDireccion($_POST['direccion'])) {
-                                        if ($clientes->setCorreo($_POST['correo'])) {
-                                                    if ($clientes->updateRow($_POST['id_cliente'])) {
+                if ($clientes->setId($_POST['id_cliente'])) {
+                    if ($clientes->readOne()) {
+                        if ($clientes->setNombres($_POST['nombres'])) {
+                            if ($clientes->setApellidos($_POST['apellidos'])) {
+                                if ($clientes->setDUI($_POST['dui_c'])) {
+                                    if ($clientes->setTelefono($_POST['telefono'])) {
+                                        if ($clientes->setNacimiento($_POST['fecha_nacimiento'])) {
+                                            if ($clientes->setDireccion($_POST['direccion'])) {
+                                                if ($clientes->setCorreo($_POST['correo'])) {
+                                                    if ($clientes->updateRow()) {
                                                         $result['status'] = 1;
                                                         $result['message'] = 'Cliente actualizado correctamente';
                                                     } else {
                                                         $result['exception'] = Database::getException();
                                                     }
+                                                } else {
+                                                    $result['exception'] = 'Correo incorrecto';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Direccion incorrecta';
+                                            }
                                         } else {
-                                            $result['exception'] = 'DUI incorrecto';
+                                            $result['exception'] = 'Fecha de nacimiento incorrecta';
                                         }
                                     } else {
-                                        $result['exception'] = 'Direccion incorrecta';
+                                        $result['exception'] = 'Telefono incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Fecha de nacimiento incorrecta';
+                                    $result['exception'] = 'DUI incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Telefono incorrecto';
+                                $result['exception'] = 'Apellido incorrecto';
                             }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
+                            $result['exception'] = 'Cliente incorrecto';
                         }
                     } else {
-                        $result['exception'] = 'Las contraseñas no coinciden';
+                        $result['exception'] = 'Cliente inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Contraseña incorrecta';
+                    $result['exception'] = 'Cliente incorrecto';
                 }
                 break;
-                case 'readOne':
-                    if ($clientes->setId($_POST['id_cliente'])) {
-                        if ($result['dataset'] = $clientes->readOne()) {
-                            $result['status'] = 1;
-                        } else {
-                            if (Database::getException()) {
-                                $result['exception'] = Database::getException();
-                            } else {
-                                $result['exception'] = 'Cliente inexistente';
-                            }
-                        }
+            case 'readOne':
+                if ($clientes->setId($_POST['id_cliente'])) {
+                    if ($result['dataset'] = $clientes->readOne()) {
+                        $result['status'] = 1;
                     } else {
-                        $result['exception'] = 'Usuario incorrecto';
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Cliente inexistente';
+                        }
                     }
-                    break;
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
             case 'delete':
-                if ($categoria->setId($_POST['id_cliente'])) {
-                    if ($data = $categoria->readOne()) {
-                        if ($categoria->deleteRow()) {
+                if ($clientes->setId($_POST['id_cliente'])) {
+                    if ($data = $clientes->readOne()) {
+                        if ($clientes->deleteRow()) {
                             $result['status'] = 1;
                         } else {
                             $result['exception'] = Database::getException();

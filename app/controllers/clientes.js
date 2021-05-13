@@ -15,14 +15,13 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td>${row.nombres_cliente}</td>
+                <td>${row.nombre_cliente}</td>
                 <td>${row.apellido_cliente}</td>
                 <td>${row.telefono_cliente}</td>
                 <td>${row.direccion_cliente}</td>
                 <td>${row.correo_cliente}</td>
                 <td>${row.dui_cliente}</td>
-                <td>${row.fecha_naciemiento}</td>
-                <td>${row.estado_cliente}</td>
+                <td>${row.fecha_nacimiento_cliente}</td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.id_cliente})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.id_cliente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -49,15 +48,27 @@ document.getElementById('search-form').addEventListener('submit', function (even
 
 // Función para preparar el formulario al momento de insertar un registro.
 function openCreateDialog() {
+    document.getElementById('clave1').disabled = false;
+    document.getElementById('clave2').disabled = false;
     // Se restauran los elementos del formulario.
     document.getElementById('save-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-title').textContent = 'Ingresar categoría';
-    // Se establece el campo de archivo como obligatorio.
-    document.getElementById('archivo_categoria').required = true;
+    document.getElementById('modal-title').textContent = 'Ingresar cliente';
+    // Se declara e inicializa un objeto para obtener la fecha y hora actual.
+    let today = new Date();
+    // Se declara e inicializa una variable para guardar el día en formato de 2 dígitos.
+    let day = ('0' + today.getDate()).slice(-2);
+    // Se declara e inicializa una variable para guardar el mes en formato de 2 dígitos.
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    // Se declara e inicializa una variable para guardar el año con la mayoría de edad.
+    let year = today.getFullYear() - 18;
+    // Se declara e inicializa una variable para establecer el formato de la fecha.
+    let date = `${year}-${month}-${day}`;
+    // Se asigna la fecha como valor máximo en el campo del formulario.
+    document.getElementById('fecha_nacimiento').setAttribute('max', date);
 }
 
 // Función para preparar el formulario al momento de modificar un registro.
@@ -68,13 +79,26 @@ function openUpdateDialog(id) {
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-title').textContent = 'Actualizar categoría';
-    // Se establece el campo de archivo como opcional.
-    document.getElementById('archivo_categoria').required = false;
+    document.getElementById('modal-title').textContent = 'Actualizar cliente';
+    // Se declara e inicializa un objeto para obtener la fecha y hora actual.
+    let today = new Date();
+    // Se declara e inicializa una variable para guardar el día en formato de 2 dígitos.
+    let day = ('0' + today.getDate()).slice(-2);
+    // Se declara e inicializa una variable para guardar el mes en formato de 2 dígitos.
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    // Se declara e inicializa una variable para guardar el año con la mayoría de edad.
+    let year = today.getFullYear() - 18;
+    // Se declara e inicializa una variable para establecer el formato de la fecha.
+    let date = `${year}-${month}-${day}`;
+    // Se asigna la fecha como valor máximo en el campo del formulario.
+    document.getElementById('fecha_nacimiento').setAttribute('max', date);
+   
+    document.getElementById('clave1').disabled = true;
+    document.getElementById('clave2').disabled = true;
 
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
-    data.append('id_categoria', id);
+    data.append('id_cliente', id);
 
     fetch(API_CLIENTES + 'readOne', {
         method: 'post',
@@ -86,9 +110,14 @@ function openUpdateDialog(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    document.getElementById('id_categoria').value = response.dataset.id_categoria;
-                    document.getElementById('nombre_categoria').value = response.dataset.nombre_categoria;
-                    document.getElementById('descripcion_categoria').value = response.dataset.descripcion_categoria;
+                    document.getElementById('id_cliente').value = response.dataset.id_cliente;
+                    document.getElementById('nombres').value = response.dataset.nombre_cliente;
+                    document.getElementById('apellidos').value = response.dataset.apellido_cliente;
+                    document.getElementById('direccion').value = response.dataset.direccion_cliente;
+                    document.getElementById('fecha_nacimiento').value = response.dataset.fecha_nacimiento_cliente;
+                    document.getElementById('correo').value = response.dataset.correo_cliente;
+                    document.getElementById('dui_c').value = response.dataset.dui_cliente;
+                    document.getElementById('telefono').value = response.dataset.telefono_cliente;
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {
@@ -110,19 +139,19 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     // Se define una variable para establecer la acción a realizar en la API.
     let action = '';
     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
-    if (document.getElementById('id_categoria').value) {
+    if (document.getElementById('id_cliente').value) {
         action = 'update';
     } else {
         action = 'create';
     }
-    saveRow(API_CATEGORIAS, action, 'save-form', 'save-modal');
+    saveRow(API_CLIENTES, action, 'save-form', 'save-modal');
 });
 
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.
 function openDeleteDialog(id) {
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
-    data.append('id_categoria', id);
+    data.append('id_cliente', id);
     // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
-    confirmDelete(API_CATEGORIAS, data);
+    confirmDelete(API_CLIENTES, data);
 }

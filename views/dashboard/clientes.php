@@ -14,7 +14,7 @@ Dashboard_Page::headerTemplate('Administrar clientes');
                 <div class="col s12">
                     <div class="input-field col s4 m6 valing-wrapper">
                         <i class="material-icons prefix ">search</i>
-                        <input type="text" id="search" name="search" required/>
+                        <input type="text" id="search" name="search" required />
                         <label for="search">Buscar cliente...</label>
                     </div>
                     <div class="input-field col s6 m4 right-align">
@@ -42,7 +42,6 @@ Dashboard_Page::headerTemplate('Administrar clientes');
             <th>DUI</th>
             <th>FECHA DE NACIMIENTO</th>
             <th>ESTADO</th>
-            <th>ACCIÓN</th>
         </tr>
     </thead>
     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
@@ -58,30 +57,58 @@ Dashboard_Page::headerTemplate('Administrar clientes');
         <!-- Formulario para crear o actualizar un registro -->
         <form method="post" id="save-form" enctype="multipart/form-data">
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-            <input class="hide" type="number" id="id_categoria" name="id_categoria"/>
+            <input class="hide" type="number" id="id_cliente" name="id_cliente" />
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input id="nombre_categoria" type="text" name="nombre_categoria" class="validate" required/>
-                    <label for="nombre_categoria">Nombre</label>
+                    <i class="material-icons prefix">person</i>
+                    <input id="nombres" type="text" name="nombres" class="validate" required />
+                    <label for="nombres">Nombres</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input id="descripcion_categoria" type="text" name="descripcion_categoria" class="validate"/>
-                    <label for="descripcion_categoria">Descripción</label>
+                    <i class="material-icons prefix">person</i>
+                    <input id="apellidos" type="text" name="apellidos" class="validate" required />
+                    <label for="apellidos">Apellidos</label>
                 </div>
-                <div class="file-field input-field col s12 m6">
-                    <div class="btn waves-effect tooltipped" data-tooltip="Seleccione una imagen de al menos 500x500">
-                        <span><i class="material-icons">burst_mode</i></span>
-                        <input id="archivo_categoria" type="file" name="archivo_categoria" accept=".gif, .jpg, .png"/>
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: gif, jpg y png"/>
-                    </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">email</i>
+                    <input id="correo" type="email" name="correo" class="validate" required />
+                    <label for="correo">Correo</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">security</i>
+                    <input id="clave1" type="password" name="clave1" class="validate" required />
+                    <label for="clave1">Contrseña</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">security</i>
+                    <input id="clave2" type="password" name="clave2" class="validate" required />
+                    <label for="clave2">Confirmar contraseña</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">perm_identity</i>
+                    <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required />
+                    <label for="dui_c">DUI</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">map</i>
+                    <input id="direccion" type="text" name="direccion" class="validate" required />
+                    <label for="direccion">Dirección</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">cake</i>
+                    <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="validate" required />
+                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="telefono" type="text" name="telefono" class="validate" required />
+                    <label for="telefono">Telefono</label>
                 </div>
             </div>
             <div class="row center-align">
-                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
-                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
-            </div>
+                    <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+                </div>
         </form>
     </div>
 </div>

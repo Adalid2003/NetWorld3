@@ -49,109 +49,116 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'create':
-                $_POST = $categoria->validateForm($_POST);
-                if ($categoria->setNombre($_POST['nombre_categoria'])) {
-                    if ($categoria->setDescripcion($_POST['descripcion_categoria'])) {
-                        if (is_uploaded_file($_FILES['archivo_categoria']['tmp_name'])) {
-                            if ($categoria->setImagen($_FILES['archivo_categoria'])) {
-                                if ($categoria->createRow()) {
-                                    $result['status'] = 1;
-                                    if ($categoria->saveFile($_FILES['archivo_categoria'], $categoria->getRuta(), $categoria->getImagen())) {
-                                        $result['message'] = 'Categoría creada correctamente';
+                $_POST = $clientes->validateForm($_POST);
+                if ($clientes->setNombres($_POST['nombres'])) {
+                    if ($clientes->setApellidos($_POST['apellidos'])) {
+                        if ($clientes->setDUI($_POST['dui_c'])) {
+                            if ($clientes->setTelefono($_POST['telefono'])) {
+                                if ($clientes->setNacimiento($_POST['fecha_nacimiento'])) {
+                                    if ($clientes->setDireccion($_POST['direccion'])) {
+                                        if ($clientes->setCorreo($_POST['correo'])) {
+                                            if ($_POST['clave1'] == $_POST['clave2']) {
+                                                if ($clientes->setClave($_POST['clave1'])) {
+                                                    if ($clientes->createRow()) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Cliente creado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
+                                                } else {
+                                                    $result['exception'] = 'Calificación incorrecto';
+                                                }
+                                            } else {
+                                                $result['exception'] = 'Estado incorrecto';
+                                            }
+                                        } else {
+                                            $result['exception'] = 'DUI incorrecto';
+                                        }
                                     } else {
-                                        $result['message'] = 'Categoría creada pero no se guardó la imagen';
+                                        $result['exception'] = 'Direccion incorrecta';
                                     }
                                 } else {
-                                    $result['exception'] = Database::getException();
+                                    $result['exception'] = 'Fecha de nacimiento incorrecta';
                                 }
                             } else {
-                                $result['exception'] = $categoria->getImageError();
+                                $result['exception'] = 'Telefono incorrecto';
                             }
                         } else {
-                            $result['exception'] = 'Seleccione una imagen';
+                            $result['exception'] = 'Correo incorrecto';
                         }
                     } else {
-                        $result['exception'] = 'Descripción incorrecta';
+                        $result['exception'] = 'Las contraseñas no coinciden';
                     }
                 } else {
-                    $result['exception'] = 'Nombre incorrecto';
-                }
-                break;
-            case 'readOne':
-                if ($categoria->setId($_POST['id_categoria'])) {
-                    if ($result['dataset'] = $categoria->readOne()) {
-                        $result['status'] = 1;
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Categoría inexistente';
-                        }
-                    }
-                } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Contraseña incorrecta';
                 }
                 break;
             case 'update':
-                $_POST = $categoria->validateForm($_POST);
-                if ($categoria->setId($_POST['id_categoria'])) {
-                    if ($data = $categoria->readOne()) {
-                        if ($categoria->setNombre($_POST['nombre_categoria'])) {
-                            if ($categoria->setDescripcion($_POST['descripcion_categoria'])) {
-                                if (is_uploaded_file($_FILES['archivo_categoria']['tmp_name'])) {
-                                    if ($categoria->setImagen($_FILES['archivo_categoria'])) {
-                                        if ($categoria->updateRow($data['imagen_catoria'])) {
-                                            $result['status'] = 1;
-                                            if ($categoria->saveFile($_FILES['archivo_categoria'], $categoria->getRuta(), $categoria->getImagen())) {
-                                                $result['message'] = 'Categoría modificada correctamente';
-                                            } else {
-                                                $result['message'] = 'Categoría modificada pero no se guardó la imagen';
-                                            }
+                //print_r($_POST);
+                $_POST = $clientes->validateForm($_POST);
+                if ($clientes->setNombres($_POST['nombres'])) {
+                    if ($clientes->setApellidos($_POST['apellidos'])) {
+                        if ($clientes->setDUI($_POST['dui_c'])) {
+                            if ($clientes->setTelefono($_POST['telefono'])) {
+                                if ($clientes->setNacimiento($_POST['fecha_nacimiento'])) {
+                                    if ($clientes->setDireccion($_POST['direccion'])) {
+                                        if ($clientes->setCorreo($_POST['correo'])) {
+                                                    if ($clientes->updateRow($_POST['id_cliente'])) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Cliente actualizado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
                                         } else {
-                                            $result['exception'] = Database::getException();
+                                            $result['exception'] = 'DUI incorrecto';
                                         }
                                     } else {
-                                        $result['exception'] = $categoria->getImageError();
+                                        $result['exception'] = 'Direccion incorrecta';
                                     }
                                 } else {
-                                    if ($categoria->updateRow($data['imagen_catoria'])) {
-                                        $result['status'] = 1;
-                                        $result['message'] = 'Categoría modificada correctamente';
-                                    } else {
-                                        $result['exception'] = Database::getException();
-                                    }
+                                    $result['exception'] = 'Fecha de nacimiento incorrecta';
                                 }
                             } else {
-                                $result['exception'] = 'Descripción incorrecta';
+                                $result['exception'] = 'Telefono incorrecto';
                             }
                         } else {
-                            $result['exception'] = 'Nombre incorrecto';
+                            $result['exception'] = 'Correo incorrecto';
                         }
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['exception'] = 'Las contraseñas no coinciden';
                     }
                 } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Contraseña incorrecta';
                 }
                 break;
+                case 'readOne':
+                    if ($clientes->setId($_POST['id_cliente'])) {
+                        if ($result['dataset'] = $clientes->readOne()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Cliente inexistente';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Usuario incorrecto';
+                    }
+                    break;
             case 'delete':
-                if ($categoria->setId($_POST['id_categoria'])) {
+                if ($categoria->setId($_POST['id_cliente'])) {
                     if ($data = $categoria->readOne()) {
                         if ($categoria->deleteRow()) {
                             $result['status'] = 1;
-                            if ($categoria->deleteFile($categoria->getRuta(), $data['imagen_catoria'])) {
-                                $result['message'] = 'Categoría eliminada correctamente';
-                            } else {
-                                $result['message'] = 'Categoría eliminada pero no se borró la imagen';
-                            }
                         } else {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'Categoría inexistente';
+                        $result['exception'] = 'Cliente inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Categoría incorrecta';
+                    $result['exception'] = 'Cliente incorrecta';
                 }
                 break;
             default:

@@ -90,7 +90,7 @@ function openUpdateDialog(id) {
                     document.getElementById('calificacion_producto').value = response.dataset.calificacion_producto;
                     document.getElementById('comentario_producto').value = response.dataset.comentario_producto;
                     fillSelect(ENDPOINT_VALORACIONES, 'producto_valoracion', response.dataset.id_producto);
-                    fillSelect(ENDPOINT_VALORACIONES, 'cliente_valoracion', response.dataset.id_cliente);
+                    fillSelect(ENDPOINT_CLIENTES, 'cliente_valoracion', response.dataset.id_cliente);
                     if (response.dataset.estado_comentario) {
                         document.getElementById('estado_comentario').checked = true;
                     } else {

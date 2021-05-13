@@ -115,9 +115,9 @@ class Valoraciones extends Validator
     {
         $sql = 'SELECT id_valoracion, calificacion_producto, comentario_producto, estado_comentario, nombre_cliente, nombre_producto
         FROM valoraciones INNER JOIN clientes USING(id_cliente) INNER JOIN productos USING(id_producto)
-        WHERE nombre_producto ILIKE ?
+        WHERE nombre_producto ILIKE ? or nombre_cliente ILIKE ?
         ORDER BY nombre_producto';
-        $params = array("%$value%");
+        $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
 

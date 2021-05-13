@@ -30,7 +30,7 @@ class Public_Page
         // Se comprueba si existe una sesión de cliente para mostrar el menú de opciones, de lo contrario se muestra otro menú.
         if (isset($_SESSION['id_cliente'])) {
             // Se verifica si la página web actual es diferente a login.php y register.php, de lo contrario se direcciona a index.php
-            if ($filename != 'login.php' && $filename != 'signin.php') {
+            if ($filename != 'login.php' && $filename != 'Registrar.php') {
                 print('
                 <header>
                 <nav class="#0d47a1 blue darken-4" role="navigation">
@@ -79,6 +79,7 @@ class Public_Page
                     </div>
                 </nav>
             </header>
+            <h3 class="center-align">' . $title . '</h3>
             <main>
         ');
             } else {
@@ -274,5 +275,3 @@ class Public_Page
     }
 }
 ?>
-}
-}

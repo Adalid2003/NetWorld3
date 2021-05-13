@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Se declara e inicializa una variable para establecer el formato de la fecha.
     let date = `${year}-${month}-${day}`;
     // Se asigna la fecha como valor máximo en el campo del formulario.
-    document.getElementById('nacimiento_cliente').setAttribute('max', date);
+    document.getElementById('fecha_nacimiento').setAttribute('max', date);
 });
 
 // Función para obtener un token del reCAPTCHA y asignarlo al formulario.

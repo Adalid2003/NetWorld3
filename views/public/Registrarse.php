@@ -5,8 +5,11 @@ require_once('../../app/helpers/header_template.php');
 Public_Page::headerTemplate('Registrar Cliente');
 ?>
 
+<h4 class="center-align indigo-text">Regístrate como cliente</h4>
 <!-- Formulario para registrar al primer usuario del dashboard -->
-<form method="post" id="register-form" enctype="multipart/form-data">
+<form method="post" id="register-form">
+ <!-- Campo oculto para asignar el token del reCAPTCHA -->
+ <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"/>
     <div class="row">
         <div class="input-field col s12 m6">
           	<i class="material-icons prefix">person</i>
@@ -40,29 +43,37 @@ Public_Page::headerTemplate('Registrar Cliente');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">perm_identity</i>
-            <input id="dui_u" type="text" name="dui_u" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required/>
-            <label for="dui_u">DUI</label>
-        </div>
-        <div class="file-field input-field col s12 m6">
-                    <div class="btn waves-effect tooltipped blue">
-                        <span><i class="material-icons">image</i></span>
-                        <input id="foto_usuario" type="file" name="foto_usuario" accept=".jpg, .png"/>
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Formatos aceptados: jpg y png" required/>
-                    </div>
+            <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required/>
+            <label for="dui_c">DUI</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">map</i>
             <input id="direccion" type="text" name="direccion" class="validate" required/>
             <label for="direccion">Dirección</label>
         </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">cake</i>
+            <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="validate" required/>
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">phone</i>
+            <input id="telefono" type="text" name="telefono" class="validate" required/>
+            <label for="telefono">Telefono</label>
+        </div>
+        <label class="center-align col s12">
+                <input type="checkbox" id="condicion" name="condicion" required/>
+                <span>Acepto <a href="#terminos" class="modal-trigger">términos y condiciones</a></span>
+            </label>
       </div>
     </div>
     <div class="row center-align">
  	    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Registrar"><i class="material-icons">send</i></button>
     </div>
 </form>
+
+<!-- Importación del archivo para que funcione el reCAPTCHA. Para más información https://developers.google.com/recaptcha/docs/v3 -->
+        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT"></script>
 
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.

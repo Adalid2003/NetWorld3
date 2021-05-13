@@ -223,10 +223,10 @@ class Clientes extends Validator
     */
     public function searchRows($value)
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellidos_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
                 FROM clientes
-                WHERE apellidos_cliente ILIKE ? OR nombres_cliente ILIKE ?
-                ORDER BY apellidos_cliente';
+                WHERE apellido_cliente ILIKE ? OR nombre_cliente ILIKE ?
+                ORDER BY apellido_cliente';
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }

@@ -27,7 +27,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'search':
-                $_POST = $categoria->validateForm($_POST);
+                $_POST = $clientes->validateForm($_POST);
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $clientes->searchRows($_POST['search'])) {
                         $result['status'] = 1;

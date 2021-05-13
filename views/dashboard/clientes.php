@@ -101,7 +101,7 @@ Dashboard_Page::headerTemplate('Administrar clientes');
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="telefono" type="text" name="telefono" class="validate" required />
+                    <input id="telefono" type="text" name="telefono" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required />
                     <label for="telefono">Telefono</label>
                 </div>
             </div>

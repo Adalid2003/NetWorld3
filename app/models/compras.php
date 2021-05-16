@@ -21,7 +21,36 @@ class Compras extends Validator
             return false;
         }
     }
+
+    public function setFecha($value)
+    {
+        if ($this->validateDate($value)) {
+            $this->fecha_compra = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setCliente($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->idC = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
     
+    public function setEstado($value)
+    {
+        if ($this->validateBoolean($value)) {
+            $this->estado_compra = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -74,7 +103,7 @@ class Compras extends Validator
 
     public function readAll2()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente from clientes';
+        $sql = 'SELECT * from clientes';
         $params = null;
         return Database::getRows($sql, $params);
     }

@@ -1,6 +1,7 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_COMPRAS = '../../app/api/dashboard/compras.php?action=';
-const ENDPOINT_COMPRAS = '../../app/api/dashboard/compras.php?action=readAll2';
+const ENDPOINT_COMPRAS = '../../app/api/dashboard/compras.php?action=readAll';
+const ENDPOINT_CLIENTES = '../../app/api/dashboard/clientes.php?action=readAll2';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -20,7 +21,7 @@ dataset.map(function (row) {
         <tr>
             
             <td>${row.fecha_compra}</td>
-            <td>${row.Cliente}</td>
+            <td>${row.nombre_cliente}</td>
             <td><i class="material-icons">${icon}</i></td>
             <td>
                 <a href="#" onclick="openUpdateDialog(${row.id_compra})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
@@ -55,7 +56,7 @@ function openCreateDialog() {
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title').textContent = 'Ingresar compra';
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
-    fillSelect(ENDPOINT_COMPRAS, 'id_cliente', null);
+    fillSelect(ENDPOINT_CLIENTES, 'id_cliente', null);
     
    
 }
@@ -87,7 +88,7 @@ function openUpdateDialog(id) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_compra').value = response.dataset.id_compra;
                     document.getElementById('fecha_compra').value = response.dataset.fecha_compra
-                    fillSelect(ENDPOINT_COMPRAS, 'id_cliente', response.dataset.id_cliente);
+                    fillSelect(ENDPOINT_CLIENTES, 'id_cliente', response.dataset.id_cliente);
                     if (response.dataset.estado_compra) {
                         document.getElementById('estado_compra').checked = true;
                     } else {

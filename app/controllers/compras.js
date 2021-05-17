@@ -1,7 +1,7 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_COMPRAS = '../../app/api/dashboard/compras.php?action=';
 const ENDPOINT_COMPRAS = '../../app/api/dashboard/compras.php?action=readAll';
-const ENDPOINT_CLIENTES = '../../app/api/dashboard/clientes.php?action=readAll2';
+const ENDPOINT_CLIENTES = '../../app/api/dashboard/clientes.php?action=readAll';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {

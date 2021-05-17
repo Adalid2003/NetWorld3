@@ -25,21 +25,33 @@ class proveedores extends Validator
     public function setNombre_proveedor($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
-            $this->nombre = $value;
+            $this->Nombre_proveedor = $value;
             return true;
         } else {
             return false;
         }
     }
-     public function setTelefono_proveedor($value)
+    public function setDireccion_proveedor($value)
     {
-        // Se verifica que el número tenga el formato 0000-0000 y que inicie con 2, 6 o 7.
-        if (preg_match('/^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/', $value)) {
+        if ($this->validateAlphanumeric($value, 1, 50)) {
+            $this->Direccion_proveedor = $value;
             return true;
         } else {
             return false;
         }
     }
+    
+        // Se verifica que el número tenga el formato 0000-0000 y que inicie con 2, 6 o 7.
+        public function setTelefono_proveedor($value)
+    {
+        if ($this->validatePhone($value)) {
+            $this->Telefono_proveedor = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -84,7 +96,7 @@ class proveedores extends Validator
     }
     public function readAll()
     {
-        $sql = 'SELECT id_proveedores,telefono_prov,direccion_prov
+        $sql = 'SELECT id_proveedor,nombre_proveedor,telefono_prov,direccion_prov
                 FROM proveedores
                 ORDER BY nombre_proveedor';
         $params = null;
@@ -92,7 +104,7 @@ class proveedores extends Validator
     }
     public function readOne()
     {
-        $sql = 'SELECT id_producto, telefono_prov,direccion_prov
+        $sql = 'SELECT nombre_proveedor, telefono_prov,direccion_prov
                 FROM proveedores
                 WHERE id_proveedor = ?';
         $params = array($this->id);
@@ -116,5 +128,4 @@ class proveedores extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-    
-
+}

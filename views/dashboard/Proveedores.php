@@ -21,7 +21,7 @@ Dashboard_Page::headerTemplate('Administrar proveedores');
 </div>
 
 <!-- Tabla para mostrar los registros existentes -->
-<table class="highlight">
+<table class="responsive-table highlight">
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>

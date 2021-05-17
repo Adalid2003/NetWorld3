@@ -31,7 +31,7 @@ Dashboard_Page::headerTemplate('Administrar productos');
 
 
 <!-- Se hace la tabla responsiva -->
-<table class="striped responsive-table">
+<table class="responsive-table highlight">
     <thead>
         <tr>
             <th>Imagen</th>

@@ -13,10 +13,9 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                
-                <td>${row.Nombre_proveedor}</td>
-                <td>${row.Telefono_proveedor}</td>
-                <td>${row.Direccion_proveedor}</td>
+                <td>${row.nombre_proveedor}</td>
+                <td>${row.telefono_prov}</td>
+                <td>${row.direccion_prov}</td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.id_proveedor})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.id_proveedor})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>

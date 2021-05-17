@@ -30,7 +30,7 @@ Dashboard_Page::headerTemplate('Administrar clientes');
 </div>
 
 <!-- Tabla para mostrar los registros existentes -->
-<table class="striped responsive-table">
+<table class="responsive-table highlight">
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>

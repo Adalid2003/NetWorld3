@@ -122,7 +122,7 @@ class Compras extends Validator
         $sql = 'UPDATE compra
                 SET fecha_compra = ?, id_cliente = ?, estado_compra = ?
                 WHERE id_compra = ?';
-        $params = array($this->fecha_compra, ,$this->estado_compra, $this->id_cliente, $this->id)
+        $params = array($this->fecha_compra, $this->idC, $this->estado_compra, $this->id)
         return Database::executeRow($sql, $params);
     }
     public function deleteRow()

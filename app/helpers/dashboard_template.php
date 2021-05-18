@@ -87,7 +87,6 @@ class Dashboard_page
   </div></li>
   <li><a href="../dashboard/usuario.php">Usuarios</a></li>
   <li><a href="../dashboard/productos.php">Productos</a></li>
-  <li><a href="../dashboard/Proveedores.php">Proveedores</a></li>
   <li><a href="../dashboard/Reportes.php">Reportes</a></li>
   <li><a href="../dashboard/Compras.php">Compras</a></li>
 </ul>

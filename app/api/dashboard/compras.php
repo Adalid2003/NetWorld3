@@ -71,21 +71,16 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Estado incorrectoo';
             }                  
               break;
-                if ($producto->setId($_POST['id_producto'])) {
-                    if ($result['dataset'] = $producto->readOne()) {
-              
-                if ($compra->setId($_POST['id_compra'])) {
-                    if ($result['dataset'] = $compra->readOne()) {
+
+            case 'readOne':
+                if ($valoraciones->setId($_POST['id_compra'])) {
+                    if ($result['dataset'] = $valoraciones->readOne()) {
                         $result['status'] = 1;
                     } else {
-                        $result['exception'] = Database::getException();
-                    } else {
-                        $result['exception'] = 'Este producto no existe';
-                    }
-                    }
-                } else {
-                    $result['exception'] = 'El producto es incorrecto';
-                            $result['exception'] = 'Esta compra  no existe';
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Esta compra no existe';
                         }
                     }
                 } else {

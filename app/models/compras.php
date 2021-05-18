@@ -78,10 +78,10 @@ class Compras extends Validator
     */
     public function searchRows($value)
     {
-        $sql = 'SELECT id_compra ,fecha_compra , id_cliente, estado_compra
-                FROM compra
-                WHERE fecha_compra ILIKE ?
-                ORDER BY fecha_compra';
+        $sql = 'SELECT id_compra ,fecha_compra , id_cliente, estado_compra,nombre_cliente
+                 FROM compra INNER JOIN clientes USING(id_cliente)
+                WHERE nombre_cliente ILIKE ?
+                ORDER BY nombre_cliente';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }

@@ -3,40 +3,40 @@
 require_once("../../app/helpers/dashboard_template.php");
 Dashboard_Page::headerTemplate('Administrar compras');
 ?>
-<title>Control compras</title>
-<!--Se crean las cartas de los formularios-->
 <div class="container">
     <div class="container center">
-        <h4>Compras</h4>
 
-
-        <div class="row">
-            <div class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">find_replace</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label for="autocomplete-input">Buscar compra...</label>
+        <!-- Se agrega el buscador -->
+        <div class="row center-align">
+            <form method="post" id="search-form">
+                <div class="col s12">
+                    <div class="input-field col s4 m6 valing-wrapper">
+                        <i class="material-icons prefix ">search</i>
+                        <input type="text" id="search" name="search" required />
+                        <label for="search">Buscar valoración...</label>
                     </div>
-                </div>
-            </div>
+                    <div class="input-field col s6 m4 right-align">
+                        <button type="submit" class="btn waves-effect   light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>
+                    </div>
+            </form>
         </div>
     </div>
-    <div class="input-field col s6 m4">
-        <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1  tooltipped" data-tooltip="Agregar"><i class="material-icons">add</i></a>
-    </div>
+</div>
+
+<div class="input-field col s6 m4">
+    <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1  tooltipped" data-tooltip="Agregar"><i class="material-icons">add</i></a>
+</div>
     <table class="striped responsive-table">
         <thead>
             <tr>
-
                 <th>Cliente</th>
                 <th>Fecha compra</th>
                 <th>Estado compra</th>
-
+                <th class="actions-column">Acción</th>
             </tr>
         </thead>
 
-        <tbody>
+        <tbody id="tbody-rows">>
 
         </tbody>
     </table>
@@ -57,15 +57,15 @@ Dashboard_Page::headerTemplate('Administrar compras');
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">date_range</i>
-                    <input id="fecha_co" type="date" name="fecha_co" class="validate" required />
-                    <label for="fecha_co">Fecha de la compra</label>
+                    <input id="fecha_compra" type="date" name="fecha_compra" class="validate" required />
+                    <label for="fecha_compra">Fecha de la compra</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <div class="switch">
-                        <span>Estado:</span>
+                        <span>Estado compra:</span>
                         <label>
                             <i class="material-icons">lock_outline</i>
-                            <input id="estado_producto" type="checkbox" name="estado_producto" checked />
+                            <input id="estado_compra" type="checkbox" name="estado_compra" checked />
                             <span class="lever"></span>
                             <i class="material-icons">lock_open</i>
                         </label>

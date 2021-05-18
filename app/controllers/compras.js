@@ -11,32 +11,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
 function fillTable(dataset){
-let content = '';
-// Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-dataset.map(function (row) {
-    // Se establece un icono para el estado de la compra
-    (row.estado_compra) ? icon = 'lock_open' : icon = 'lock_outline';
-    // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-    content += `
-        <tr>
-            
-            <td>${row.fecha_compra}</td>
-            <td>${row.nombre_cliente}</td>
-            <td><i class="material-icons">${icon}</i></td>
-            <td>
-                <a href="#" onclick="openUpdateDialog(${row.id_compra})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
-                <a href="#" onclick="openDeleteDialog(${row.id_compra})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                <a href="../../app/reports/dashboard/productos_categoria.php?id=${row.id_compra}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos"><i class="material-icons">assignment</i></a>
-            </td>
-        </tr>
-    `;
-});
-// Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
-document.getElementById('tbody-rows').innerHTML = content;
-// Se inicializa el componente Material Box asignado a las imagenes para que funcione el efecto Lightbox.
-M.Materialbox.init(document.querySelectorAll('.materialboxed'));
-// Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
-M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+    let content = '';
+    // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+    dataset.map(function (row) {
+        // Se establece un icono para el estado de la compra
+        (row.estado_compra) ? icon = 'lock_open' : icon = 'lock_outline';
+        // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+        content += `
+            <tr>
+                <td>${row.nombre_cliente}</td>
+                <td>${row.fecha_compra}</td>
+                <td><i class="material-icons">${icon}</i></td>
+                <td>
+                    <a href="#" onclick="openUpdateDialog(${row.id_compra})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.id_compra})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="../../app/reports/dashboard/productos_categoria.php?id=${row.id_compra}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos"><i class="material-icons">assignment</i></a>
+                </td>
+            </tr>
+        `;
+    });
+    // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
+    document.getElementById('tbody-rows').innerHTML = content;
+    // Se inicializa el componente Material Box asignado a las imagenes para que funcione el efecto Lightbox.
+    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+    // Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar.
 document.getElementById('search-form').addEventListener('submit', function (event) {
@@ -87,7 +86,7 @@ function openUpdateDialog(id) {
                 if (response.status) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_compra').value = response.dataset.id_compra;
-                    document.getElementById('fecha_compra').value = response.dataset.fecha_compra
+                    document.getElementById('fecha_compra').value = response.dataset.fecha_compra;
                     fillSelect(ENDPOINT_CLIENTES, 'cliente_compra', response.dataset.id_cliente);
                     if (response.dataset.estado_compra) {
                         document.getElementById('estado_compra').checked = true;

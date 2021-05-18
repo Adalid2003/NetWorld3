@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
             case 'create':
                 $_POST = $compra->validateForm($_POST);
                  if($compra->setfecha_compra($_POST['fecha_compra'])){
-                        if($compra->setIdC($_POST['id_cliente'])){
+                        if($compra->setIdC($_POST['compra_cliente'])){
                             if($compra->setestado_compra($_POST['estado_compra'])){
                                 if ($compra->createRow()) {
                                     $result['status'] = 1;
@@ -81,17 +81,18 @@ if (isset($_GET['action'])) {
                                 
               break;
             case 'readOne':
-                if ($compra->setId($_POST['id_compra'])) {
+                if ($producto->setId($_POST['id_producto'])) {
+                    if ($result['dataset'] = $producto->readOne()) {
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         } else {
-                            $result['exception'] = 'Compra inexistente';
+                            $result['exception'] = 'Este producto no existe';
                         }
                     }
                 } else {
-                    $result['exception'] = 'Compra incorrecta';
+                    $result['exception'] = 'El producto es incorrecto';
                 }
                 break;
                 case 'readAll2':
@@ -176,6 +177,7 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+
 
                     
                                   

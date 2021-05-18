@@ -190,6 +190,7 @@ class Public_Page
                                   <i class="material-icons">mail</i>
                                   www.support@networld.com
                                   </a>
+                            <a href="mision">Misión</a>
                   </div>
                   <div class="col l4 offset-l2 s12">
                       <h5 class="white-text">Otros</h5>
@@ -237,7 +238,7 @@ class Public_Page
             <div id="mision" class="modal">
                 <div class="modal-content">
                     <h4 class="center-align">MISIÓN</h4>
-                    <p>Ofrecer los mejores productos a nivel nacional para satisfacer a nuestros clientes y...</p>
+                    <p>En NetWorld trabajamos para ofrecer mayoritariamente dispositivos de red, ayudando así a locales de computación, colegios, grandes y pequeñas empresas, a eficientar la conexión entre los dispositivos en cuestión.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="modal-footer">
@@ -249,7 +250,7 @@ class Public_Page
             <div id="vision" class="modal">
                 <div class="modal-content">
                     <h4 class="center-align">VISIÓN</h4>
-                    <p>Ser la empresa lider en la región ofreciendo productos de calidad a precios accesibles y...</p>
+                    <p>Ser la compañía líder de habla hispana en proveer productos de red en Latinoamerica.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="modal-footer">
@@ -274,4 +275,3 @@ class Public_Page
         ');
     }
 }
-?>

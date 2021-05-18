@@ -68,7 +68,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cliente incorrecto';
                 }
             } else {
-                $result['exception'] = 'Estado incorrecto';
+                $result['exception'] = 'Estado incorrectoo';
             }                  
               break;
                 if ($producto->setId($_POST['id_producto'])) {

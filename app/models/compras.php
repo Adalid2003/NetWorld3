@@ -78,10 +78,10 @@ class Compras extends Validator
     */
     public function searchRows($value)
     {
-        $sql = 'SELECT id_compra ,fecha_compra,nombre_cliente,estado_compra
-                FROM compra INNER JOIN clientes USING(id_cliente)
-                WHERE nombre_cliente ILIKE ?
-                ORDER BY nombre_cliente';
+        $sql = 'SELECT id_compra ,fecha_compra , id_cliente, estado_compra
+                FROM compra
+                WHERE fecha_compra ILIKE ?
+                ORDER BY fecha_compra';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
@@ -94,9 +94,9 @@ class Compras extends Validator
     }
     public function readAll()
     {
-        $sql = 'SELECT id_compra ,fecha_compra,nombre_cliente,estado_compra
+        $sql = 'SELECT id_compra,fecha_compra, nombre_cliente,estado_compra
                 FROM compra INNER JOIN clientes USING(id_cliente)
-                ORDER BY nombre_cliente';
+                ORDER BY id_compra';
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -119,12 +119,11 @@ class Compras extends Validator
     public function updateRow()
     {
         $sql = 'UPDATE compra
-                SET fecha_compra = ?, estado_compra = ?, id_cliente = ?
+                SET fecha_compra = ?, id_cliente = ?, estado_compra = ?
                 WHERE id_compra = ?';
-        $params = array($this->fecha_compra, $this->estado_compra, $this->idC);
+        $params = array($this->fecha_compra, $this->idC, $this->estado_compra, $this->id);
         return Database::executeRow($sql, $params);
     }
-  
     public function deleteRow()
     {
         $sql = 'DELETE FROM compra

@@ -26,20 +26,20 @@ Dashboard_Page::headerTemplate('Administrar compras');
 <div class="input-field col s6 m4">
     <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1  tooltipped" data-tooltip="Agregar"><i class="material-icons">add</i></a>
 </div>
-    <table class="striped responsive-table">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Fecha compra</th>
-                <th>Estado compra</th>
-                <th class="actions-column">Acción</th>
-            </tr>
-        </thead>
+<table class="striped responsive-table">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha compra</th>
+            <th>Estado compra</th>
+            <th class="actions-column">Acción</th>
+        </tr>
+    </thead>
 
-        <tbody id="tbody-rows">>
+    <tbody id="tbody-rows">
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 </div>
 <div id="save-modal" class="modal">
     <div class="modal-content">
@@ -79,7 +79,7 @@ Dashboard_Page::headerTemplate('Administrar compras');
         </form>
     </div>
 </div>
-        <?php
-        // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
-        Dashboard_Page::footerTemplate('compras.js');
-        ?>
+<?php
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
+Dashboard_Page::footerTemplate('compras.js');
+?>

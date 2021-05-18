@@ -49,11 +49,12 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 case 'create':
-                    $_POST = $compra->validateForm($_POST);
-                    if($compra->setCliente($_POST['cliente_compra'])){
-                        if($compra->setfecha_compra($_POST['fecha_compra'])){
-                            if ($compra->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
-                                if ($compra->createRow()) {
+                    //print_r($_POST);
+                    $_POST = $compras->validateForm($_POST);
+                    if($compras->setCliente($_POST['cliente_compra'])){
+                        if($compras->setFecha($_POST['fecha_compra'])){
+                            if ($compras->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
+                                if ($compras->createRow()) {
                                     $result['status'] = 1;
                                     $result['message'] = 'Regitro de compra creada correctamente';
                                 } else {
@@ -104,13 +105,14 @@ if (isset($_GET['action'])) {
                         break;
     
                     case 'update':
-                        $_POST = $compra->validateForm($_POST);
-                        if ($compra->setId($_POST['id_compra'])) {
-                            if ($data = $compra->readOne()) {
-                                if($compra->setCliente($_POST['cliente_compra'])) {
-                                    if($compra->setFecha($_POST['fecha_compra'])) {
-                                        if ($compra->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
-                                            if ($compra->updateRow($_POST['id_compra'])) {
+                        //print_r($_POST);
+                        $_POST = $compras->validateForm($_POST);
+                        if ($compras->setId($_POST['id_compra'])) {
+                            if ($data = $compras->readOne()) {
+                                if($compras->setCliente($_POST['cliente_compra'])) {
+                                    if($compras->setFecha($_POST['fecha_compra'])) {
+                                        if ($compras->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
+                                            if ($compras->updateRow($_POST['id_compra'])) {
                                                 $result['status'] = 1;
                                                 $result['message'] = 'Compra modificada correctamente';
                                             } else {
@@ -132,24 +134,27 @@ if (isset($_GET['action'])) {
                                     $result['exception'] = 'Cliente incorrecto';
                                 }
                                 break;
-            case 'delete':
-                if ($compras->setId($_POST['id_compra'])) {
-                    if ($data = $compras->readOne()) {
-                        if ($compras->deleteRow()) {
-                            $result['status'] = 1;
-                        } else {
-                            $result['exception'] = Database::getException();
+
+                            }
                         }
-                    } else {
-                        $result['exception'] = 'Compra inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Compra incorrecta';
-                }
-                break;
+                            case 'delete':
+                                if ($compras->setId($_POST['id_compra'])) {
+                                    if ($data = $compras->readOne()) {
+                                        if ($compras->deleteRow()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Compra inexistente';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Compra incorrecta';
+                                }
+                                break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
-        }
+            }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.
@@ -160,3 +165,9 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+
+
+                    
+                                  
+
+                                    

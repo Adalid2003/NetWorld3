@@ -11,15 +11,16 @@ Dashboard_Page::headerTemplate('Administrar compras');
 
 
         <div class="row">
-            <div class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">find_replace</i>
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label for="autocomplete-input">Buscar compra...</label>
+    <!-- Se agrega el buscador -->
+    <form method="post" id="search-form">
+        <div class="input-field col s6 m4">
+            <i class="material-icons prefix">search</i>
+            <input id="search" type="text" name="search" required/>
+            <label for="search">Buscador</label>
+        </div>
+        <div class="input-field col s6 m4 right-align">
+                        <button type="submit" class="btn waves-effect  light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="input-field col s6 m4">

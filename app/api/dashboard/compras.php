@@ -51,7 +51,7 @@ if (isset($_GET['action'])) {
                 $_POST = $compra->validateForm($_POST);
                  if($compra->setfecha_compra($_POST['fecha_compra'])){
                         if($compra->setIdC($_POST['id_cliente'])){
-                            if($compra->setestado_compra($_POST['estado_compra'])){
+                            if ($compra->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
                                 if ($compra->createRow()) {
                                     $result['status'] = 1;
                                     
@@ -80,20 +80,22 @@ if (isset($_GET['action'])) {
 
                                 
               break;
-            case 'readOne':
+              case 'readOne':
                 if ($compra->setId($_POST['id_compra'])) {
+                    if ($result['dataset'] = $compra->readOne()) {
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         } else {
-                            $result['exception'] = 'Compra inexistente';
+                            $result['exception'] = 'Esta compra  no existe';
                         }
                     }
                 } else {
-                    $result['exception'] = 'Compra incorrecta';
+                    $result['exception'] = 'La compra es incorrecta';
                 }
                 break;
+
                 case 'readAll2':
                     if ($result['dataset'] = $compra->readAll2()) {
                         $result['status'] = 1;
@@ -105,13 +107,14 @@ if (isset($_GET['action'])) {
                         }
                     }
                     break;
+
                 case 'update':
                     $_POST = $compra->validateForm($_POST);
                     if ($compra->setId($_POST['id_compra'])) {
                         if ($data = $compra->readOne()) {
                             if($compra->setfecha_compra($_POST['fecha_compra'])){
                                 if($compra->setIdC($_POST['id_cliente'])){
-                                    if($compra->setestado_compra($_POST['estado_compra'])){
+                                    if ($producto->setEstado(isset($_POST['estado_producto']) ? 1 : 0)){
                                         if ($compra->updateRow()) {
                                             $result['status'] = 1;
                                             $result['message'] = 'Compra modificada correctamente';

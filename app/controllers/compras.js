@@ -56,7 +56,7 @@ function openCreateDialog() {
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title').textContent = 'Ingresar compra';
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
-    fillSelect(ENDPOINT_CLIENTES, 'id_cliente', null);
+    fillSelect(ENDPOINT_CLIENTES, 'cliente_compra', null);
     
    
 }
@@ -88,7 +88,7 @@ function openUpdateDialog(id) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_compra').value = response.dataset.id_compra;
                     document.getElementById('fecha_compra').value = response.dataset.fecha_compra
-                    fillSelect(ENDPOINT_CLIENTES, 'id_cliente', response.dataset.id_cliente);
+                    fillSelect(ENDPOINT_CLIENTES, 'cliente_compra', response.dataset.id_cliente);
                     if (response.dataset.estado_compra) {
                         document.getElementById('estado_compra').checked = true;
                     } else {

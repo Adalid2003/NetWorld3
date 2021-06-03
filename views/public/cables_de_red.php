@@ -3,7 +3,7 @@
 // Se incluye la clase con las plantillas del documento.
 require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
-Public_Page::headerTemplate('Cables de red')
+Public_Page::headerTemplate('Cable de red')
 ?>
  <!-- Se elabora el navbar de cables de red  -->
 <nav>

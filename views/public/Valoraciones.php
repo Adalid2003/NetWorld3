@@ -1,6 +1,9 @@
-<!-- MANDAR A LLAMAR HELPERS  -->
-<?php
-include("../../app/helpers/header_template.php");
+ <!-- Se manda a llamar el helper del header -->
+ <?php
+// Se incluye la clase con las plantillas del documento.
+require_once('../../app/helpers/header_template.php');
+// Se imprime la plantilla del encabezado enviando el título de la página web.
+Public_Page::headerTemplate('Valoraciones');
 ?>
 <!-- INICIALIZATION DE SELECT-->
 <script>

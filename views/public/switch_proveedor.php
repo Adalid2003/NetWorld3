@@ -1,6 +1,9 @@
-<!-- Se manda a llamar el template del sitio publico-->
-<?php
-include("../../app/helpers/header_template.php");
+ <!-- Se manda a llamar el helper del header -->
+ <?php
+// Se incluye la clase con las plantillas del documento.
+require_once('../../app/helpers/header_template.php');
+// Se imprime la plantilla del encabezado enviando el título de la página web.
+Public_Page::headerTemplate('Switch Proveedor');
 ?>
 <H1 class="black-text text-lighten-3" align="center">Switches para proveedores</H1>
 <H4 class="black-text text-lighten-3" align="center">Elija el producto que desea comprar</H2>

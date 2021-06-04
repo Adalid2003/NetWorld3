@@ -42,7 +42,6 @@ class Dashboard_page
     <li><a class="subheader">Mantenimientos</a></li>
     <li><a href="../dashboard/usuario.php"><i class="material-icons">person</i>Usuarios</a></li>
     <li><a href="../dashboard/productos.php"><i class="material-icons">archive</i>Productos</a></li>
-    <li><a href="../dashboard/Proveedores.php"><i class="material-icons">group</i>Proveedores</a></li>
     <li><a href="../dashboard/Reportes.php"><i class="material-icons">assignment</i>Reportes</a></li>
     <li><a href="../dashboard/Compras.php"><i class="material-icons">shopping_cart</i>Compras</a></li>
     <li><a href="../dashboard/categorias.php"><i class="material-icons">copyright</i>Categorías</a></li>

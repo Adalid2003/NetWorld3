@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
- <!--Se manda a llamar al helper del header-->
 <?php
-include("../../app/helpers/header_template.php");
+// Se incluye la clase con las plantillas del documento.
+require_once('../../app/helpers/header_template.php');
+// Se imprime la plantilla del encabezado enviando el título de la página web.
+Public_Page::headerTemplate('Iniciar sesión');
 ?>
 
 <head>
@@ -41,7 +41,7 @@ include("../../app/helpers/header_template.php");
     </div>
     <H5 class="black-text text-lighten-3 center-align">Es nuevo? por favor de <a href="../../views/public/Registrarse.php">click aquí</a> para registrarse</H1>
 </body>
- <!--Se manda a llamar al helper del footer-->
 <?php
-include("../../app/helpers/template_footer_public.php");
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
+Public_Page::footerTemplate('signin.js');
 ?>

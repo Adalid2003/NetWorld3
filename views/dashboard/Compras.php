@@ -13,7 +13,7 @@ Dashboard_Page::headerTemplate('Administrar compras');
                     <div class="input-field col s4 m6 valing-wrapper">
                         <i class="material-icons prefix ">search</i>
                         <input type="text" id="search" name="search" required />
-                        <label for="search">Buscar valoración...</label>
+                        <label for="search">Buscar compra...</label>
                     </div>
                     <div class="input-field col s6 m4 right-align">
                         <button type="submit" class="btn waves-effect   light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>

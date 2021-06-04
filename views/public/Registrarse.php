@@ -23,7 +23,7 @@ Public_Page::headerTemplate('Registrar Cliente');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">email</i>
-            <input id="correo" type="email" name="correo" class="validate" required/>
+            <input id="correo_cliente" type="email" name="correo_cliente" class="validate" required/>
             <label for="correo">Correo</label>
         </div>
         <div class="input-field col s12 m6">

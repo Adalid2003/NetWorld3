@@ -20,7 +20,7 @@ class Public_Page
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
-        <link rel="shotcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="shotcut icon" href="../../resources/img/logo.jpg" type="image/x-icon">
     </head>
     
     <body>');
@@ -30,56 +30,28 @@ class Public_Page
         // Se comprueba si existe una sesión de cliente para mostrar el menú de opciones, de lo contrario se muestra otro menú.
         if (isset($_SESSION['id_cliente'])) {
             // Se verifica si la página web actual es diferente a login.php y register.php, de lo contrario se direcciona a index.php
-            if ($filename != 'login.php' && $filename != 'Registrar.php') {
+            if ($filename != 'login.php' && $filename != 'Registrarse.php') {
                 print('
                 <header>
-                <nav class="#0d47a1 blue darken-4" role="navigation">
-                    <div class="nav-wrapper">
-                        <a href="../../views/public/index_publico.php" class="brand-logo"> <img src="../../resources/img/logo.jpg" height="65"></a>
-                        <a id="logo-container" href="../../views/public/index_publico.php" class="brand-logo container center">
-                        
-                            NetWorld
-                        </a>
-                        <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-                        <ul class="right hide-on-med-and-down">
-                            <li><a href="../../views/public/index_publico.php">Inicio</a></li>
-                            <li><a href="../../views/public/login.php">Iniciar sesión</a></li>
-                            <li><a href="../../views/public/carrito.php">Tu carrito</a></li>
-                        </ul>
-        
-                        <ul id="nav-mobile" class="sidenav">
-                            <li><a href="../../views/public/index_publico.php">Inicio</a></li>
-                            <li><a href="#">Iniciar sesión</a></li>
-                            <li><a href="#">Tu carrito</a></li>
-                        </ul>
-        
-                    </div>
-                </nav>
-                <nav class="#0d47a1 blue darken-4" role="navigation">
-                    <div class="nav-wrapper">
-                       
-                        <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-                        <ul class="hide-on-med-and-down">
-                            <li><a href="../../views/public/RouterPrincipal.php">Routers</a></li>
-                            <li><a href="../../views/public/index_modem.php">Modems</a></li>
-                            <li><a href="../../views/public/cables_de_red.php">Cables de red</a></li>
-                            <li><a href="../../views/public/index_hub.php">HUB</a></li>
-                            <li><a href="../../views/public/index_switch.php">Switch</a></li>
-                            <li><a href="../../views/public/Valoraciones.php">Valoraciones</a></li>
-                        </ul>
-        
-                        <ul id="nav-mobile" class="sidenav">
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Iniciar sesión</a></li>
-                            <li><a href="#">Tu carrito</a></li>
-                        </ul>
-        
-                    </div>
-                </nav>
+                <div class="navbar-fixed">
+                    <nav class="#2962ff blue accent-4">
+                        <div class="nav-wrapper">
+                            <a href="index.php" class="brand-logo"><img src="../../resources/img/logo.jpg" height="60"></a>
+                            <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
+                                <li><a href="cart.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
+                                <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="sidenav" id="mobile">
+                    <li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
+                    <li><a href="cart.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
+                    <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
+                </ul>
             </header>
-            <h3 class="center-align">' . $title . '</h3>
             <main>
         ');
             } else {
@@ -87,56 +59,30 @@ class Public_Page
             }
         } else {
             // Se verifica si la página web actual es diferente a index.php (Iniciar sesión) y a register.php (Crear primer usuario) para direccionar a index.php, de lo contrario se muestra un menú vacío.
-            if ($filename != 'cart.php') {
+            if ($filename != 'carrito.php') {
                 print('
                 <header>
-                <nav class="#0d47a1 blue darken-4" role="navigation">
-                    <div class="nav-wrapper">
-                        <a href="../../views/public/index_publico.php" class="brand-logo"> <img src="../../resources/img/logo.jpg" height="65"></a>
-                        <a id="logo-container" href="../../views/public/index_publico.php" class="brand-logo container center">
-                        
-                            NetWorld
-                        </a>
-                        <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-                        <ul class="right hide-on-med-and-down">
-                            <li><a href="../../views/public/index_publico.php">Inicio</a></li>
-                            <li><a href="../../views/public/login.php">Iniciar sesión</a></li>
-                            <li><a href="../../views/public/carrito.php">Tu carrito</a></li>
+                        <div class="navbar-fixed">
+                            <nav class="#2962ff blue accent-4">
+                                <div class="nav-wrapper">
+                                    <a href="index_publico.php" class="brand-logo"><img src="../../resources/img/logo.jpg" height="60"></a>
+                                    <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                                    <ul class="right hide-on-med-and-down">
+                                        <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
+                                        <li><a href="Registrarse.php"><i class="material-icons left">person</i>Crear cuenta</a></li>
+                                        <li><a href="login.php"><i class="material-icons left">login</i>Iniciar sesión</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <ul class="sidenav" id="mobile">
+                            <li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
+                            <li><a href="signin.php"><i class="material-icons left">person</i>Crear cuenta</a></li>
+                            <li><a href="login.php"><i class="material-icons left">login</i>Iniciar sesión</a></li>
                         </ul>
-        
-                        <ul id="nav-mobile" class="sidenav">
-                            <li><a href="../../views/public/index_publico.php">Inicio</a></li>
-                            <li><a href="#">Iniciar sesión</a></li>
-                            <li><a href="#">Tu carrito</a></li>
-                        </ul>
-        
-                    </div>
-                </nav>
-                <nav class="#0d47a1 blue darken-4" role="navigation">
-                    <div class="nav-wrapper">
-                       
-                        <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-                        <ul class="hide-on-med-and-down">
-                            <li><a href="../../views/public/RouterPrincipal.php">Routers</a></li>
-                            <li><a href="../../views/public/index_modem.php">Modems</a></li>
-                            <li><a href="../../views/public/cables_de_red.php">Cables de red</a></li>
-                            <li><a href="../../views/public/index_hub.php">HUB</a></li>
-                            <li><a href="../../views/public/index_switch.php">Switch</a></li>
-                            <li><a href="../../views/public/Valoraciones.php">Valoraciones</a></li>
-                        </ul>
-        
-                        <ul id="nav-mobile" class="sidenav">
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Iniciar sesión</a></li>
-                            <li><a href="#">Tu carrito</a></li>
-                        </ul>
-        
-                    </div>
-                </nav>
-            </header>
-            <main>
+                    </header>
+                    <main>
+                
         ');
             } else {
                 header('location: login.php');

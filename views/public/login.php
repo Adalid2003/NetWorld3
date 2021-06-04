@@ -13,35 +13,32 @@ Public_Page::headerTemplate('Iniciar sesión');
     <link rel="shotcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
-<body class="blogin">
-    <title>Iniciar sesión</title>
-    <H1 class="black-text text-lighten-3 center-align">Iniciar sesión</H1>
-    <div class="row">
-        <div class="col s12 14 offset-14">
-            <div class="card">
-                <div class="card-action white white-text">
-                    <div class="card-content"></div>
-                    <div class="form-field">
-                        <label for="usuario">Usuario</label>
-                        <input type="text" id="usermane">
-                    </div><br>
-                    <div class="form-field">
-                        <label for="password">Contraseña</label>
-                        <input type="password" id="password">
-                    </div><br>
-                    <div class="form-field center-align">
-                        <button class="btn-large blue">INGRESAR</button>
-                    </div><br>
-                    <div class="form-field center-align">
-                        <button class="btn blue">Olvide mi contraseña</button>
-                    </div>
-                </div>
+<!-- Contenedor para mostrar el formulario de inicio de sesión -->
+<div class="container">
+    <!-- Título del contenido principal -->
+    <h4 class="center-align indigo-text">Iniciar sesión</h4>
+    <!-- Formulario para iniciar sesión -->
+    <form method="post" id="session-form">
+        <div class="row">
+            <div class="input-field col s12 m4 offset-m4">
+                <i class="material-icons prefix">email</i>
+                <input type="email" id="usuario" name="usuario" class="validate" required/>
+                <label for="usuario">Correo electrónico</label>
+            </div>
+            <div class="input-field col s12 m4 offset-m4">
+                <i class="material-icons prefix">security</i>
+                <input type="password" id="clave" name="clave" class="validate" required/>
+                <label for="clave">Clave</label>
             </div>
         </div>
-    </div>
+        <div class="row center-align">
+            <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Ingresar"><i class="material-icons">send</i></button>
+        </div>
+    </form>
+</div>
     <H5 class="black-text text-lighten-3 center-align">Es nuevo? por favor de <a href="../../views/public/Registrarse.php">click aquí</a> para registrarse</H1>
 </body>
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
-Public_Page::footerTemplate('signin.js');
+Public_Page::footerTemplate('login.js');
 ?>

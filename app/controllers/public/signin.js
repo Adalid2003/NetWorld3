@@ -51,7 +51,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
                 } else {
                     // Se verifica si el token falló (ya sea por tiempo o por uso).
                     if (response.recaptcha) {
-                        sweetAlert(2, response.exception, 'index.php');
+                        sweetAlert(2, response.exception, 'index_publico.php');
                     } else {
                         sweetAlert(2, response.exception, null);
                         // Se genera un nuevo token.

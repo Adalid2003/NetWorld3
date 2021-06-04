@@ -3,7 +3,7 @@
 // Se incluye la clase con las plantillas del documento.
 require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
-Public_Page::headerTemplate('Registrar Cliente');
+Public_Page::headerTemplate('Inicio');
 ?>
 
 <body>
@@ -95,7 +95,7 @@ Public_Page::headerTemplate('Registrar Cliente');
     </div>
 </body>
 
- <!-- Se manda a llamar al helper del footer  -->
 <?php
-include("../../app/helpers/template_footer_public.php");
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
+Public_Page::footerTemplate('index.js');
 ?>

@@ -30,7 +30,7 @@ function readAllCategorias() {
                             <div class="col s12 m6 l4">
                                 <div class="card hoverable">
                                     <div class="card-image waves-effect waves-block waves-light">
-                                        <img class="activator" src="../../resources/img/categorias/${row.imagen_categoria}">
+                                        <img class="activator" src="../../resources/img/categorias/${row.imagen_catoria}">
                                     </div>
                                     <div class="card-content">
                                         <span class="card-title activator grey-text text-darken-4">
@@ -39,7 +39,7 @@ function readAllCategorias() {
                                         </span>
                                         <p class="center">
                                             <a href="${url}" class="tooltipped" data-tooltip="Ver más">
-                                                <i class="material-icons small">local_cafe</i>
+                                                <i class="material-icons small">computer</i>
                                             </a>
                                         </p>
                                     </div>

@@ -70,6 +70,7 @@ if (isset($_GET['action'])) {
                                             if ($cliente->setNacimiento($_POST['fecha_nacimiento'])) {
                                                 if ($cliente->setTelefono($_POST['telefono'])) {
                                                     if ($_POST['clave1'] == $_POST['clave2']) {
+                                                        if($cliente->setEstado(true)){
                                                         if ($cliente->setClave($_POST['clave1'])) {
                                                             if ($cliente->createRow()) {
                                                                 $result['status'] = 1;
@@ -80,7 +81,10 @@ if (isset($_GET['action'])) {
                                                         } else {
                                                             $result['exception'] = $cliente->getPasswordError();
                                                         }
-                                                    } else {
+                                                    }else{
+                                                        $result['exception'] = 'Estado incorrecto';
+                                                    }
+                                                }else {
                                                         $result['exception'] = 'Claves diferentes';
                                                     }
                                                 } else {

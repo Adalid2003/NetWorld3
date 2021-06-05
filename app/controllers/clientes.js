@@ -12,6 +12,8 @@ function fillTable(dataset) {
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
+        // Se establece un icono para el estado del cliente.
+        (row.estado_cliente)? icon = 'lock_open' : icon = 'lock_outline';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
@@ -22,6 +24,7 @@ function fillTable(dataset) {
                 <td>${row.correo_cliente}</td>
                 <td>${row.dui_cliente}</td>
                 <td>${row.fecha_nacimiento_cliente}</td>
+                <td><i class="material-icons">${icon}</i></td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.id_cliente})" class="btn waves-effect green darken-1 tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.id_cliente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -118,6 +121,11 @@ function openUpdateDialog(id) {
                     document.getElementById('correo').value = response.dataset.correo_cliente;
                     document.getElementById('dui_c').value = response.dataset.dui_cliente;
                     document.getElementById('telefono').value = response.dataset.telefono_cliente;
+                    if (response.dataset.estado_cliente) {
+                        document.getElementById('estado_cliente').checked = true;
+                    } else {
+                        document.getElementById('estado_cliente').checked = false;
+                    }
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
                 } else {

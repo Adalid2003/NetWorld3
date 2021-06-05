@@ -243,7 +243,7 @@ class Clientes extends Validator
 
     public function readAll()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, estado_cliente
                 FROM clientes
                 ORDER BY apellido_cliente';
         $params = null;
@@ -252,20 +252,11 @@ class Clientes extends Validator
 
     public function readOne()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, estado_cliente
                 FROM clientes
                 WHERE id_cliente = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
-    }
-
-    public function updateState()
-    {
-        $sql = 'UPDATE clientes
-                SET estado_cliente = ?
-                WHERE id_cliente = ?';
-        $params = array($this->id);
-        return Database::executeRow($sql, $params);
     }
 
     public function updateRow()

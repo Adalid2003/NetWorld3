@@ -66,7 +66,7 @@ Public_Page::headerTemplate('Carrito')
 </div>
 
 
- <!--Se manda a llamar al helper del footer-->
 <?php
-include("../../app/helpers/template_footer_public.php");
+// Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
+Public_Page::footerTemplate('cart.js');
 ?>

@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Producto incorrecto';
                     }
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al obtener el pedido';
+                    $result['exception'] = 'Ocurrió un problema al obtener la compra';
                 }
                 break;
             case 'readOrderDetail':
@@ -85,9 +85,9 @@ if (isset($_GET['action'])) {
             case 'finishOrder':
                 if ($carrito->finishOrder()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Pedido finalizado correctamente';
+                    $result['message'] = 'Compra finalizada correctamente';
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al finalizar el pedido';
+                    $result['exception'] = 'Ocurrió un problema al finalizar la Compra';
                 }
                 break;
             default:

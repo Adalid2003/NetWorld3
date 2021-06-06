@@ -1,8 +1,8 @@
 <?php
 /*
-*	Clase para manejar las tablas pedidos y detalle_pedido de la base de datos. Es clase hija de Validator.
+*	Clase para manejar las tablas compra y detalle_compra de la base de datos
 */
-class Pedidos extends Validator
+class Carrito extends Validator
 {
     // Declaración de atributos (propiedades).
     private $id_compra = null;
@@ -90,7 +90,7 @@ class Pedidos extends Validator
     /*
     *   Métodos para obtener valores de los atributos.
     */
-    public function getIdPedido()
+    public function getIdCompra()
     {
         return $this->id_compra;
     }
@@ -127,9 +127,9 @@ class Pedidos extends Validator
     public function createDetail()
     {
         // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO detalle_compra(cantidad_producto, precio_producto, id_compra,id_producto)
+        $sql = 'INSERT INTO detalle_compra(id_producto, precio_producto,cantidad_producto, id_compra)
                 VALUES(?, (SELECT precio_producto FROM productos WHERE id_producto = ?), ?, ?)';
-        $params = array($this->cantidad, $this->producto, $this->id_compra, $this->producto;
+        $params = array($this->producto, $this->producto, $this->cantidad, $this->id_compra;
         return Database::executeRow($sql, $params);
     }
 
@@ -151,7 +151,7 @@ class Pedidos extends Validator
         $date = date('Y-m-d');
         $this->estado = 1;
         $sql = 'UPDATE compra
-                SET estado_compra_cliente = ?, fecha_pedido = ?
+                SET estado_compra_cliente = ?, fecha_compra = ?
                 WHERE id_compra = ?';
         $params = array($this->estado, $date, $_SESSION['id_compra']);
         return Database::executeRow($sql, $params);
@@ -175,4 +175,4 @@ class Pedidos extends Validator
         $params = array($this->id_detalle_compra, $_SESSION['id_compra']);
         return Database::executeRow($sql, $params);
     }
-}
+

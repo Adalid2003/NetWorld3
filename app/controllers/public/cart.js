@@ -4,12 +4,12 @@ const API_CARRITO= '../../app/api/public/carrito.php?action=';
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se llama a la función que obtiene los productos del carrito de compras para llenar la tabla en la vista.
-    readCart();
+    readOrderDetail();
 });
 
-// Función para obtener el detalle del pedido (carrito de compras).
-function readCart() {
-    fetch(API_CARRITO + 'readCart', {
+// Función para obtener el detalle de la compra (carrito de compras).
+function readOrderDetail() {
+    fetch(API_CARRITO + 'readOrderDetail', {
         method: 'get'
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
@@ -86,7 +86,7 @@ document.getElementById('item-form').addEventListener('submit', function (event)
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
                     // Se actualiza la tabla en la vista para mostrar el cambio de la cantidad de producto.
-                    readCart();
+                    readOrderDetail();
                     // Se cierra la caja de dialogo (modal) del formulario.
                     let instance = M.Modal.getInstance(document.getElementById('item-modal'));
                     instance.close();
@@ -107,7 +107,7 @@ document.getElementById('item-form').addEventListener('submit', function (event)
 function finishOrder() {
     swal({
         title: 'Aviso',
-        text: '¿Está seguro de finalizar el pedido?',
+        text: '¿Está seguro de finalizar la compra?',
         icon: 'info',
         buttons: ['No', 'Sí'],
         closeOnClickOutside: false,
@@ -166,7 +166,7 @@ function openDeleteDialog(id) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.status) {
                             // Se cargan nuevamente las filas en la tabla de la vista después de borrar un producto del carrito.
-                            readCart();
+                            readOrderDetail();
                             sweetAlert(1, response.message, null);
                         } else {
                             sweetAlert(2, response.exception, null);

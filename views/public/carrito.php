@@ -3,96 +3,69 @@
 // Se incluye la clase con las plantillas del documento.
 require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
-
+Public_Page::headerTemplate('Carrito')
 ?>
-<title>Carrito de compras</title>
+<!-- Contenedor para mostrar el detalle del carrito de compras -->
 <div class="container">
-    <div class="container center">
-        <h4>Carrito de compras <i class="material-icons">shopping_cart</i></h4>
- <!--Se crea la tabla de productos del carrito-->
-        <div class="row">
-        <div class="col s12 14 offset-14">
-            <div class="card">
-                <div class="card-action white white-text">
-        <div class="row">
-            <div class="col s12">
-                <div class="row">
-                </div>
-            </div>
-        </div>
-    </div>
-    <table class="striped responsive-table">
+    <!-- Título del contenido principal -->
+    <h4>Carrito de compras <i class="material-icons">shopping_cart</i></h4>
+    <!-- Tabla para mostrar el detalle de los productos agregados al carrito de compras -->
+    <table class="striped">
+        <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
         <thead>
             <tr>
-                <th>Imagen</th>
-                <th>Nombre producto</th>
-                <th>Cantidad</th>
-                <th>Precio (USD)</th>
+                <th>PRODUCTO</th>
+                <th>PRECIO (USD$)</th>
+                <th>CANTIDAD</th>
+                <th>SUBTOTAL (USD$)</th>
+                <th class="actions-column">ACCIONES</th>
             </tr>
         </thead>
-
-        <tbody>
-            <a id="scale-demo" href="../../views/public/index_publico.php" class="green btn-floating btn-large scale-transition">
-                <i class="material-icons">shopping_basket</i>
-            </a>
-            <h5>Seguir comprando...</h5>
-            <tr>
-                <td><a class="brand-logo"> <img src="../../resources/img/cards/fibra1.jpg" height="85"></a></td>
-                <td>Cable de conexión de fibra LC OM3 LC de 49.2 ft</td>
-                <td>1</td>
-                <td>$24.98</td>
-                <td>
-                    <a id="scale-demo" href="#" class="red btn-floating btn-large scale-transition">
-                        <i class="material-icons">close</i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td><a class="brand-logo"> <img src="../../resources/img/cards/modem1.jpg" height="85"></a></td>
-                <td>MODEM NEXXT NAXOS800 con configuracion Inalambrica</td>
-                <td>1</td>
-                <td>$200.00</td>
-                <td>
-                    <a id="scale-demo" href="#" class="red btn-floating btn-large scale-transition">
-                        <i class="material-icons">close</i>
-                    </a>
-                </td>
-            </tr>
-
+        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+        <tbody id="tbody-rows">
         </tbody>
     </table>
-            </div>
-        </div>
-        </div>
-    <h5>TOTAL: $224.98</h5>
-    <button class="btn blue">Imprimir comprobante</button>
-     <!--Se crea el espacio para rellenar los datos necesarios del cliente-->
-    <div class="row">
-        <div class="col s12 14 offset-14">
-            <div class="card">
-                <div class="card-action white white-text">
-                    <div class="card-content"></div>
-                    <div class="form-field">
-                        <label for="nombre">Nombre del cliente: </label>
-                        <input type="text" id="name">
-                    </div><br>
-                    <div class="form-field">
-                        <label for="nombre">Dirección: </label>
-                        <input type="text" id="direccion">
-                    </div><br>
-                    <label for="fecha">Fecha de envio: </label>
-                    <input type="date" class="datepicker">  
-                </div><br>
-                </div><br>
-                <div class="form-field center-align">
-                    <button class="btn-large green">Aceptar</button>
-                </div><br>
-            </div>
-        </div>
+    <!-- Fila para mostrar el monto total a pagar -->
+    <div class="row right-align">
+        <p>TOTAL A PAGAR (US$) <b id="pago"></b></p>
+    </div>
+    <!-- Fila para mostrar un botón que finaliza el pedido -->
+    <div class="row right-align">
+        <button type="button" onclick="finishOrder()" class="btn waves-effect blue tooltipped" data-tooltip="Finalizar pedido"><i class="material-icons">payment</i></button>
+    </div>
+    <!-- Fila para mostrar un enlace con la dirección de la página web principal para seguir comprando -->
+    <div class="row right-align">
+        <a href="index_publico.php" class="btn waves-effect indigo tooltipped" data-tooltip="Seguir comprando"><i class="material-icons">store</i></a>
     </div>
 </div>
+
 <h5 class="black-text text-lighten-3 center-align">Nota: RECUERDE que el pago lo realizara en efectivo en el momento que se haga la entrega en la dirección especificada.</h5>
+
+<!-- Componente Modal para mostrar una caja de dialogo -->
+<div id="item-modal" class="modal">
+    <div class="modal-content">
+        <!-- Título para la caja de dialogo -->
+        <h4 class="center-align">Cambiar cantidad</h4>
+        <!-- Formulario para cambiar la cantidad de producto -->
+        <form method="post" id="item-form">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input type="number" id="id_detalle_compra" name="id_detalle_compra" class="hide"/>
+            <div class="row">
+                <div class="input-field col s12 m4 offset-m4">
+                    <i class="material-icons prefix">list</i>
+                    <input type="number" id="cantidad_producto" name="cantidad_producto" min="1" class="validate" required/>
+                    <label for="cantidad_producto">Cantidad</label>
+                </div>
+            </div>
+            <div class="row center-align">
+                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
  <!--Se manda a llamar al helper del footer-->
 <?php
 include("../../app/helpers/template_footer_public.php");

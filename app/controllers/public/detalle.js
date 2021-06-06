@@ -1,6 +1,6 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_CATALOGO = '../../app/api/public/catalogo.php?action=';
-const API_PEDIDOS = '../../app/api/public/pedidos.php?action=';
+const API_CARRITO = '../../app/api/public/carrito.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -55,7 +55,7 @@ document.getElementById('shopping-form').addEventListener('submit', function (ev
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
-    fetch(API_PEDIDOS + 'createDetail', {
+    fetch(API_CARRITO + 'createDetail', {
         method: 'post',
         body: new FormData(document.getElementById('shopping-form'))
     }).then(function (request) {
@@ -64,13 +64,13 @@ document.getElementById('shopping-form').addEventListener('submit', function (ev
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se constata si el cliente ha iniciado sesión.
                 if (response.status) {
-                    sweetAlert(1, response.message, 'cart.php');
+                    sweetAlert(1, response.message, 'carrito.php');
                 } else {
                     // Se verifica si el cliente ha iniciado sesión para mostrar la excepción, de lo contrario se direcciona para que se autentique. 
                     if (response.session) {
                         sweetAlert(2, response.exception, null);
                     } else {
-                        sweetAlert(3, response.exception, 'login.php');
+                        sweetAlert(3, response.exception, 'login_publico.php');
                     }
                 }
             });

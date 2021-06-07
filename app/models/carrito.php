@@ -10,7 +10,7 @@ class Carrito extends Validator
     private $cliente = null;
     private $producto = null;
     private $cantidad = null;
-    private $precio = null;
+    private $precio= null;
     private $estado= null; // Valor por defecto en la base de datos: 0
   
 

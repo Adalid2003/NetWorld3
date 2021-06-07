@@ -110,19 +110,6 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
         <input id="direccion" type="text" name="direccion" class="validate" required />
         <label for="direccion">Dirección</label>
       </div>
-      <div class="col s12 m6">
-                        <p>
-                        <div class="switch">
-                            <span>Estado:</span>
-                            <label>
-                                <i class="material-icons">lock_outline</i>
-                                <input id="estado_producto" type="checkbox" name="estado_producto" checked />
-                                <span class="lever"></span>
-                                <i class="material-icons">lock_open</i>
-                            </label>
-                        </div>
-                        </p>
-                    </div>
     </div>
     <div class="row center-align">
       <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>

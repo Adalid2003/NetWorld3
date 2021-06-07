@@ -13,7 +13,7 @@ function fillTable(dataset) {
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
         // Se establece un icono para el estado del cliente.
-        (row.estado_cliente)? icon = 'lock_open' : icon = 'lock_outline';
+        (row.estado_cliente) ? icon = 'lock_open' : icon = 'lock_outline';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>

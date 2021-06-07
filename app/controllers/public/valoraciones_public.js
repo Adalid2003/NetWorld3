@@ -86,6 +86,7 @@ function openUpdateDialog(id) {
                     document.getElementById('comentario_producto').value = response.dataset.comentario_producto;
                     fillSelect(ENDPOINT_VALORACIONES, 'producto_valoracion', response.dataset.id_producto);
                     fillSelect(ENDPOINT_CLIENTES, 'cliente_valoracion', response.dataset.id_cliente);
+                    // Se captura el estado del comentario 
                     if (response.dataset.estado_comentario) {
                         document.getElementById('estado_comentario').checked = true;
                     } else {
@@ -100,6 +101,7 @@ function openUpdateDialog(id) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });

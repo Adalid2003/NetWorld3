@@ -57,6 +57,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Se captura el estado del comentario 
     }).catch(function (error) {
         console.log(error);
     });

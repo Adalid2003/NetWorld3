@@ -15,7 +15,7 @@ class Carrito extends Validator
   
 
     /*
-    *   Métodos para validar y asignar valores de los atributos.
+    *   //Métodos para validar y asignar valores del tributo.
     */
     public function setIdCompra($value)
     {
@@ -26,7 +26,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setIdDetallecompra($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -36,7 +36,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setCliente($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -46,7 +46,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setProducto($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -56,7 +56,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setCantidad($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -66,7 +66,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setPrecio($value)
     {
         if ($this->validateMoney($value)) {
@@ -76,7 +76,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setEstado($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -86,7 +86,7 @@ class Carrito extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -101,18 +101,24 @@ class Carrito extends Validator
     // Método para verificar si existe un pedido en proceso para seguir comprando, de lo contrario se crea uno.
     public function startOrder()
     {
+        // Se declara el estado inicial
         $this->estado = 0;
-
+        // Se declara la consulta sql para seleccionar para su ingreso
         $sql = 'SELECT id_compra
                 FROM compra
                 WHERE estado_compra_cliente = ? AND id_cliente = ?';
+        // Se obtiene el id del cliente para la sesión
         $params = array($this->estado, $_SESSION['id_cliente']);
         if ($data = Database::getRow($sql, $params)) {
+            // Se obtiene el id de la compra
             $this->id_compra = $data['id_compra'];
+            // Retorna el velor verdadero
             return true;
         } else {
+            // Se declara la consulta sql para su ingresar los valores
             $sql = 'INSERT INTO compra(estado_compra_cliente, id_cliente)
                     VALUES(?, ?)';
+            // Se obtiene el id del cliente para la sesión
             $params = array($this->estado, $_SESSION['id_cliente']);
             // Se obtiene el ultimo valor insertado en la llave primaria de la tabla compra.
             if ($this->id_compra = Database::getLastRow($sql, $params)) {

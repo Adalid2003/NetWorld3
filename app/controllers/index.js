@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Se captura el estado del comentario 
     }).catch(function (error) {
         console.log(error);
     });
@@ -37,6 +38,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
+    // Se obitiene el recurso fetch
     fetch(API_USUARIOS + 'logIn', {
         method: 'post',
         body: new FormData(document.getElementById('session-form'))
@@ -54,6 +56,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Se captura el estado del comentario 
     }).catch(function (error) {
         console.log(error);
     });

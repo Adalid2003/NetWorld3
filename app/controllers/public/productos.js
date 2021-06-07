@@ -17,7 +17,7 @@ function readProductosCategoria(id, categoria) {
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
     data.append('id_categoria', id);
-
+// Se obtiene el recurso fetch
     fetch(API_CATALOGO + 'readProductosCategoria', {
         method: 'post',
         body: data
@@ -64,6 +64,7 @@ function readProductosCategoria(id, categoria) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });

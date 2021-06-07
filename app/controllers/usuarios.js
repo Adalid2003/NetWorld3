@@ -85,6 +85,7 @@ function openUpdateDialog(id) {
     const data = new FormData();
     data.append('id_usuario', id);
 
+    // Se obtienen el recurso fetch
     fetch(API_USUARIOS + 'readOne', {
         method: 'post',
         body: data
@@ -111,6 +112,7 @@ function openUpdateDialog(id) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Se captura el estado del comentario 
     }).catch(function (error) {
         console.log(error);
     });

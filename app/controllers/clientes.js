@@ -121,6 +121,7 @@ function openUpdateDialog(id) {
                     document.getElementById('correo').value = response.dataset.correo_cliente;
                     document.getElementById('dui_c').value = response.dataset.dui_cliente;
                     document.getElementById('telefono').value = response.dataset.telefono_cliente;
+                    // Se captura el estado del cliente
                     if (response.dataset.estado_cliente) {
                         document.getElementById('estado_cliente').checked = true;
                     } else {

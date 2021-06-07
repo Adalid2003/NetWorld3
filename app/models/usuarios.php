@@ -29,7 +29,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setNombres($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -39,7 +39,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setApellidos($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -49,7 +49,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setCorreo($value)
     {
         if ($this->validateEmail($value)) {
@@ -59,7 +59,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setUsuario($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -69,7 +69,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setClave($value)
     {
         if ($this->validatePassword($value)) {
@@ -79,7 +79,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setImagen($value)
     {
         if ($this->validateImageFile($value, 500, 500)) {
@@ -89,7 +89,7 @@ class Usuarios extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setIdU($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -99,6 +99,7 @@ class Usuarios extends Validator
             return false;
         }
     }
+    //Métodos para validar y asignar valores del tributo.
     public function setDireccion($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -108,6 +109,7 @@ class Usuarios extends Validator
             return false;
         }
     }
+    //Métodos para validar y asignar valores del tributo.
     public function setDui($value)
     {
         if ($this->validateDUI($value)) {
@@ -125,50 +127,52 @@ class Usuarios extends Validator
     {
         return $this->id;
     }
+    //Métodos para validar y asignar valores del tributo.
     public function getTipoU()
     {
         return $this->id_tipoU;
     }
+    //Métodos para validar y asignar valores del tributo.
     public function getImagenU()
     {
         return $this->imagenU;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getDireccion()
     {
         return $this->direccion;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getNombres()
     {
         return $this->nombres;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getApellidos()
     {
         return $this->apellidos;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getCorreo()
     {
         return $this->correo;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getUsuario()
     {
         return $this->usuario;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getClave()
     {
         return $this->clave;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getDui()
     {
         return $this->dui;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getRuta()
     {
         return $this->ruta;
@@ -179,6 +183,7 @@ class Usuarios extends Validator
     */
     public function checkUser($usuario)
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_usuario FROM usuarios WHERE apodo_usuario = ?';
         $params = array($usuario);
         if ($data = Database::getRow($sql, $params)) {
@@ -192,6 +197,7 @@ class Usuarios extends Validator
 
     public function checkPassword($clave)
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT clave FROM usuarios WHERE id_usuario= ?';
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
@@ -206,6 +212,7 @@ class Usuarios extends Validator
     public function changePassword()
     {
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE usuarios SET clave = ? WHERE id_usuario = ?';
         $params = array($hash, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
@@ -213,6 +220,7 @@ class Usuarios extends Validator
 
     public function readProfile()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT  id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
         FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
                 WHERE id_usuario = ?';
@@ -222,6 +230,7 @@ class Usuarios extends Validator
 
     public function editProfile()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE usuarios
                 SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?, apodo_usuario = ?
                 WHERE id_usuario = ?';
@@ -234,6 +243,7 @@ class Usuarios extends Validator
     */
     public function searchRows($value)
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT  id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
                 WHERE apellidos_usuario ILIKE ? OR nombre_usuario ILIKE ?
@@ -246,6 +256,7 @@ class Usuarios extends Validator
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'INSERT INTO usuarios(nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = array($this->nombres, $hash, $this->dui, $this->direccion, $this->id_tipoU, $this->imagenU, $this->correo, $this->usuario, $this->apellidos);
@@ -254,6 +265,7 @@ class Usuarios extends Validator
 
     public function readAll()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios INNER JOIN tipo_usuario USING(id_tipo_usuario)
                 ORDER BY apellidos_usuario';
@@ -263,6 +275,7 @@ class Usuarios extends Validator
 
     public function readAll2()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_tipo_usuario, tipo_usuario from tipo_usuario';
         $params = null;
         return Database::getRows($sql, $params);
@@ -270,6 +283,7 @@ class Usuarios extends Validator
 
     public function readOne()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_usuario, nombre_usuario, clave, dui_usuario, direccion, id_tipo_usuario, imagen_usuario, correo, apodo_usuario, apellidos_usuario
                 FROM usuarios
                 WHERE id_usuario = ?';
@@ -280,6 +294,7 @@ class Usuarios extends Validator
     public function updateRow($current_image)
     {
         ($this->imagenU) ? $this->deleteFile($this->getRuta(), $current_image) : $this->imagenU = $current_image;
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE usuarios 
                 SET nombre_usuario = ?, apellidos_usuario = ?, correo = ?, id_tipo_usuario = ?, dui_usuario= ?, imagen_usuario = ?, direccion = ?
                 WHERE id_usuario = ?';
@@ -289,6 +304,7 @@ class Usuarios extends Validator
 
     public function deleteRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'DELETE FROM usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);

@@ -88,6 +88,7 @@ function openUpdateDialog(id) {
                     document.getElementById('id_compra').value = response.dataset.id_compra;
                     document.getElementById('fecha_compra').value = response.dataset.fecha_compra;
                     fillSelect(ENDPOINT_CLIENTES, 'cliente_compra', response.dataset.id_cliente);
+                    // Se captura el estado de compra 
                     if (response.dataset.estado_compra) {
                         document.getElementById('estado_compra').checked = true;
                     } else {

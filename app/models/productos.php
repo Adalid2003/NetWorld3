@@ -26,7 +26,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setNombre($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -36,7 +36,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setDescripcion($value)
     {
         if ($this->validateString($value, 1, 250)) {
@@ -46,7 +46,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setPrecio($value)
     {
         if ($this->validateMoney($value)) {
@@ -56,7 +56,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setImagen($file)
     {
         if ($this->validateImageFile($file, 500, 500)) {
@@ -66,7 +66,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setCategoria($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -76,7 +76,7 @@ class Productos extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setEstado($value)
     {
         if ($this->validateBoolean($value)) {
@@ -90,41 +90,42 @@ class Productos extends Validator
     /*
     *   Métodos para obtener valores de los atributos.
     */
+//Método que obtiene los valores del tributo.
     public function getId()
     {
         return $this->id;
     }
-
+//Método que obtiene los valores del tributo.
     public function getNombre()
     {
         return $this->nombre;
     }
-
+//Método que obtiene los valores del tributo.
     public function getDescripcion()
     {
         return $this->descripcion;
     }
-
+//Método que obtiene los valores del tributo.
     public function getPrecio()
     {
         return $this->precio;
     }
-
+//Método que obtiene los valores del tributo.
     public function getImagen()
     {
         return $this->imagen;
     }
-
+//Método que obtiene los valores del tributo.
     public function getCategoria()
     {
         return $this->categoria;
     }
-
+//Método que obtiene los valores del tributo.
     public function getEstado()
     {
         return $this->estado;
     }
-
+//Método que obtiene los valores del tributo.
     public function getRuta()
     {
         return $this->ruta;
@@ -133,6 +134,7 @@ class Productos extends Validator
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
+        // Se declara la funcion
     public function searchRows($value)
     {
         $sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion, precio_producto, nombre_categoria, estado_producto
@@ -142,48 +144,51 @@ class Productos extends Validator
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
-
+    // Se declara la funcion
     public function createRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'INSERT INTO productos(nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria, estado_producto, id_usuario)
                 VALUES(?, ?, ?, ?, ?, ?, ?)';
         $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->categoria, $this->estado, $_SESSION['id_usuario']);
         return Database::executeRow($sql, $params);
     }
-
+    // Se declara la funcion
     public function readAll()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion, precio_producto, nombre_categoria, estado_producto
                 FROM productos INNER JOIN categorias USING(id_categoria)
                 ORDER BY nombre_producto';
         $params = null;
         return Database::getRows($sql, $params);
     }
-
-    
+        // Se declara la funcion
     public function readOne()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_producto, nombre_producto, descripcion, precio_producto, imagen_producto, id_categoria, estado_producto
                 FROM productos
                 WHERE id_producto = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-
+    // Se declara la funcion
     public function updateRow($current_image)
     {
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
         ($this->imagen) ? $this->deleteFile($this->getRuta(), $current_image) : $this->imagen = $current_image;
-
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE productos
                 SET imagen_producto = ?, nombre_producto = ?, descripcion = ?, precio_producto = ?, estado_producto = ?, id_categoria = ?
                 WHERE id_producto = ?';
         $params = array($this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->estado, $this->categoria, $this->id);
         return Database::executeRow($sql, $params);
     }
-
+    // Se declara la funcion
     public function deleteRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'DELETE FROM productos
                 WHERE id_producto = ?';
         $params = array($this->id);
@@ -195,6 +200,7 @@ class Productos extends Validator
     */
     public function cantidadProductosCategoria()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
                 FROM productos INNER JOIN categorias USING(id_categoria)
                 GROUP BY nombre_categoria ORDER BY cantidad DESC';

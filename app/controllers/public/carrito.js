@@ -105,6 +105,7 @@ document.getElementById('item-form').addEventListener('submit', function (event)
 
 // Función para mostrar un mensaje de confirmación al momento de finalizar el pedido.
 function finishOrder() {
+    // Se diseña la notificación
     swal({
         title: 'Aviso',
         text: '¿Está seguro de finalizar el pedido?',
@@ -134,6 +135,7 @@ function finishOrder() {
             }).catch(function (error) {
                 console.log(error);
             });
+            // Se notifica que puede continuar con la sesión
         } else {
             sweetAlert(4, 'Puede seguir comprando', null);
         }
@@ -142,6 +144,7 @@ function finishOrder() {
 
 // Función para mostrar un mensaje de confirmación al momento de eliminar un producto del carrito.
 function openDeleteDialog(id) {
+    // Se diseña la notificación
     swal({
         title: 'Advertencia',
         text: '¿Está seguro de remover el producto?',

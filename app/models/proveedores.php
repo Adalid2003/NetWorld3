@@ -22,6 +22,8 @@ class proveedores extends Validator
             return false;
         }
     }
+//Métodos para validar y asignar valores del tributo.
+ 
     public function setNombre_proveedor($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -31,6 +33,8 @@ class proveedores extends Validator
             return false;
         }
     }
+    //Métodos para validar y asignar valores del tributo.
+
     public function setDireccion_proveedor($value)
     {
         if ($this->validateAlphanumeric($value, 1, 50)) {
@@ -59,17 +63,17 @@ class proveedores extends Validator
     {
         return $this->id;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getNombre_proveedor()
     {
         return $this->Nombre_proveedor;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getTelefono_proveedor()
     {
         return $this->Telefono_proveedor;
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function getDireccion_proveedor()
     {
         return $this->Direccion_proveedor;
@@ -80,6 +84,7 @@ class proveedores extends Validator
     */
     public function searchRows($value)
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_proveedor,nombre_proveedor,telefono_prov,direccion_prov
                 FROM proveedores
                 WHERE nombre_proveeedor ILIKE ? 
@@ -89,6 +94,7 @@ class proveedores extends Validator
     }
     public function createRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'INSERT INTO proveedores(nombre_proveedor, telefono_prov, direccion_prov)
                 VALUES(?, ?, ?)';
         $params = array($this->Nombre_proveedor, $this->Telefono_proveedor, $this->Direccion_proveedor);
@@ -96,6 +102,7 @@ class proveedores extends Validator
     }
     public function readAll()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_proveedor,nombre_proveedor,telefono_prov,direccion_prov
                 FROM proveedores
                 ORDER BY nombre_proveedor';
@@ -104,6 +111,7 @@ class proveedores extends Validator
     }
     public function readOne()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT nombre_proveedor, telefono_prov,direccion_prov
                 FROM proveedores
                 WHERE id_proveedor = ?';
@@ -112,8 +120,7 @@ class proveedores extends Validator
     }
     public function updateRow()
     {
-        
-
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE proveedores
                 SET nombre_proveedor = ?, telefono_prov = ?, direccion_prov = ?
                 WHERE id_proveedor = ?';
@@ -123,6 +130,7 @@ class proveedores extends Validator
 
     public function deleteRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'DELETE FROM proveedores
                 WHERE id_proveedores = ?';
         $params = array($this->id);

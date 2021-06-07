@@ -87,6 +87,7 @@ function openUpdateDialog(id) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Se captura el estado del comentario 
     }).catch(function (error) {
         console.log(error);
     });

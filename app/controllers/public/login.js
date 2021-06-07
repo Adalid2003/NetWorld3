@@ -23,6 +23,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });

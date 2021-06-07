@@ -62,6 +62,7 @@ document.getElementById('register-form').addEventListener('submit', function (ev
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });

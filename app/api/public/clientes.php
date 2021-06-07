@@ -15,13 +15,18 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            // Se crea un caso para cerrar sesión
             case 'logOut':
                 if (session_destroy()) {
+                    // Verifica que resultado del estado sea 1 para seguir con la acción
                     $result['status'] = 1;
+                    // En casi que el estado sea igual a 1 se lleva a cabo la acción
                     $result['message'] = 'Sesión eliminada correctamente';
+                    //En caso que no sea 1, notifica el error
                 } else {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
+                // Se finaliza el caso
                 break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
@@ -29,6 +34,7 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
+            // Se crea un caso para registrarse
             case 'register':
                 //print_r($_POST);
                 $_POST = $cliente->validateForm($_POST);
@@ -55,12 +61,13 @@ if (isset($_GET['action'])) {
                             'verify_peer_name' => false
                         )
                     );
-
+                    // Se declara la url 
                     $url = 'https://www.google.com/recaptcha/api/siteverify';
                     $context  = stream_context_create($options);
                     $response = file_get_contents($url, false, $context);
                     $captcha = json_decode($response, true);
 
+                    // Se declara una dacena de if con los datos de la base de datos uniendolos con el model
                     if ($captcha['success']) {
                         if ($cliente->setNombres($_POST['nombres'])) {
                             if ($cliente->setApellidos($_POST['apellidos'])) {
@@ -72,9 +79,13 @@ if (isset($_GET['action'])) {
                                                     if ($_POST['clave1'] == $_POST['clave2']) {
                                                         if($cliente->setEstado(true)){
                                                         if ($cliente->setClave($_POST['clave1'])) {
+                                                            // Se crea la fila
                                                             if ($cliente->createRow()) {
+                                                                // Verifica si el estado es 1 
                                                                 $result['status'] = 1;
+                                                                // En caso de que sea 1 se lleva a cabo la acción
                                                                 $result['message'] = 'Cliente registrado correctamente';
+                                                                // En caso de no sea uno se notifican los errores
                                                             } else {
                                                                 $result['exception'] = Database::getException();
                                                             }
@@ -108,33 +119,48 @@ if (isset($_GET['action'])) {
                         } else {
                             $result['exception'] = 'Nombres incorrectos';
                         }
+                        // Se valida el el captcha que valida si no es un robot
                     } else {
                         $result['recaptcha'] = 1;
                         $result['exception'] = 'No eres un humano';
                     }
+                    // En caso de un error se notifica 
                 } else {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
+            // Se crea un caso para iniciar sesión
             case 'logIn':
+                //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);
+                //Captura el usuario de la base de datos
                 if ($cliente->checkUser($_POST['usuario'])) {
+                    // Se obtiene el estado
                     if ($cliente->getEstado()) {
+                        // Se captura la clave 
                         if ($cliente->checkPassword($_POST['clave'])) {
+                            // Se captura el id del cliente
                             $_SESSION['id_cliente'] = $cliente->getId();
+                            // Se captura el correo del cliente
                             $_SESSION['correo_cliente'] = $cliente->getCorreo();
+                            // Se declara que el estado es uno
                             $result['status'] = 1;
+                            // En caso que sea uno se lleva a cabo la acción de forma exitosa
                             $result['message'] = 'Autenticación correcta';
+                            // En caso que no sea uno se infroma el error
                         } else {
                             if (Database::getException()) {
                                 $result['exception'] = Database::getException();
+                                //Se notifica el error
                             } else {
                                 $result['exception'] = 'Clave incorrecta';
                             }
+                            // Se notifica que la cuenta se desactivo 
                         }
                     } else {
                         $result['exception'] = 'La cuenta ha sido desactivada';
                     }
+                    // Se notifica que el alias es incorrecto
                 } else {
                     if (Database::getException()) {
                         $result['exception'] = Database::getException();
@@ -142,6 +168,7 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Alias incorrecto';
                     }
                 }
+                // Se finaliza el caso
                 break;
             default:
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
@@ -151,6 +178,7 @@ if (isset($_GET['action'])) {
     header('content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
     print(json_encode($result));
+    // En caso que ocurra un error, no se imprime el resultado en formato JSON
 } else {
     print(json_encode('Recurso no disponible'));
 }

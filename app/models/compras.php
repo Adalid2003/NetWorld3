@@ -21,7 +21,7 @@ class Compras extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setFecha($value)
     {
         if ($this->validateDate($value)) {
@@ -31,7 +31,7 @@ class Compras extends Validator
             return false;
         }
     }
-
+//Métodos para validar y asignar valores del tributo.
     public function setCliente($value)
     {
         if ($this->validateNaturalNumber($value)) {
@@ -41,7 +41,7 @@ class Compras extends Validator
             return false;
         }
     }
-    
+//Métodos para validar y asignar valores del tributo.  
     public function setEstado($value)
     {
         if ($this->validateBoolean($value)) {
@@ -54,21 +54,22 @@ class Compras extends Validator
     /*
     *   Métodos para obtener valores de los atributos.
     */
+//Método que obtiene los valores del tributo.
     public function getId()
     {
         return $this->id;
     }
-
+//Método que obtiene los valores del tributo.
     public function getfecha_compra()
     {
         return $this->fecha_compra;
     }
-
+//Método que obtiene los valores del tributo.
     public function getIdC()
     {
         return $this->idC;
     }
-
+//Método que obtiene los valores del tributo.
     public function getestado_compra()
     {
         return $this->estado_compra;
@@ -76,8 +77,10 @@ class Compras extends Validator
      /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, delete).
     */
+    // Se declara la funcion
     public function searchRows($value)
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_compra ,fecha_compra , id_cliente, estado_compra,nombre_cliente
                  FROM compra INNER JOIN clientes USING(id_cliente)
                 WHERE nombre_cliente ILIKE ?
@@ -85,47 +88,57 @@ class Compras extends Validator
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
+    // Se declara la funcion
     public function createRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'INSERT INTO compra(fecha_compra, id_cliente, estado_compra)
                 VALUES(?, ?, ?)';
         $params = array($this->fecha_compra, $this->idC, $this->estado_compra);
         return Database::executeRow($sql, $params);
     }
+    // Se declara la funcion
     public function readAll()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_compra,fecha_compra, nombre_cliente,estado_compra
                 FROM compra INNER JOIN clientes USING(id_cliente)
                 ORDER BY id_compra';
         $params = null;
         return Database::getRows($sql, $params);
     }
-
+    // Se declara la funcion
     public function readAll2()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT * from clientes';
         $params = null;
         return Database::getRows($sql, $params);
     }
+    // Se declara la funcion
     public function readOne()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT id_compra,fecha_compra, id_cliente,estado_compra
                 FROM compra
                 WHERE id_compra = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-
+    // Se declara la funcion
     public function updateRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE compra
                 SET fecha_compra = ?, id_cliente = ?, estado_compra = ?
                 WHERE id_compra = ?';
         $params = array($this->fecha_compra, $this->idC, $this->estado_compra, $this->id);
         return Database::executeRow($sql, $params);
     }
+    // Se declara la funcion
     public function deleteRow()
     {
+        // Se hace la consullta para llevar a cabo la acción
         $sql = 'DELETE FROM compra
                 WHERE id_compra= ?';
         $params = array($this->id);

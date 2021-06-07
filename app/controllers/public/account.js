@@ -8,6 +8,7 @@ const API = '../../app/api/public/clientes.php?action=';
 
 // Función para mostrar un mensaje de confirmación al momento de cerrar sesión.
 function logOut() {
+    // Se diseña la notificación
     swal({
         title: 'Advertencia',
         text: '¿Está seguro de cerrar la sesión?',
@@ -26,7 +27,7 @@ function logOut() {
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.status) {
-                            sweetAlert(1, response.message, 'index_publico.php');
+                            sweetAlert(1, response.message, 'index_publico.php'); 
                         } else {
                             sweetAlert(2, response.exception, null);
                         }
@@ -37,6 +38,7 @@ function logOut() {
             }).catch(function (error) {
                 console.log(error);
             });
+            // Se notifica que puede continuar con la sesión
         } else {
             sweetAlert(4, 'Puede continuar con la sesión', null);
         }

@@ -45,6 +45,7 @@ function readOneProducto(id) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });
@@ -77,6 +78,7 @@ document.getElementById('shopping-form').addEventListener('submit', function (ev
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });
@@ -184,6 +186,7 @@ function openUpdateDialog(id) {
         } else {
             console.log(request.status + ' ' + request.statusText);
         }
+        // Lanza el error de la consola
     }).catch(function (error) {
         console.log(error);
     });
@@ -201,6 +204,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     } else {
         action = 'create';
     }
+    // Se guarda el modal
     saveRow(API_VALORACIONES, action, 'save-form', 'save-modal');
 });
 

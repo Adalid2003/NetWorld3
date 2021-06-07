@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Se inicailiza el menú
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);

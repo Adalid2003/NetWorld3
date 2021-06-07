@@ -7,7 +7,7 @@ class Database{
 
     private static function connect(){
         $server = 'localhost';
-        $database = 'Networld31';
+        $database = 'NetWorld31';
         $username = 'postgres';
         $password = 'rojo09';
 

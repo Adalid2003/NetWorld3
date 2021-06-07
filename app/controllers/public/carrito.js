@@ -1,5 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_PEDIDOS = '../../app/api/public/pedidos.php?action=';
+const API_CARRITO= '../../app/api/public/carrito.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Función para obtener el detalle del pedido (carrito de compras).
 function readOrderDetail() {
-    fetch(API_PEDIDOS + 'readOrderDetail', {
+    fetch(API_CARRITO + 'readOrderDetail', {
         method: 'get'
     }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
@@ -35,8 +35,8 @@ function readOrderDetail() {
                                 <td>${row.cantidad_producto}</td>
                                 <td>${subtotal.toFixed(2)}</td>
                                 <td>
-                                    <a href="#" onclick="openUpdateDialog(${row.id_detalle}, ${row.cantidad_producto})" class="btn waves-effect blue tooltipped" data-tooltip="Cambiar"><i class="material-icons">exposure</i></a>
-                                    <a href="#" onclick="openDeleteDialog(${row.id_detalle})" class="btn waves-effect red tooltipped" data-tooltip="Remover"><i class="material-icons">remove_shopping_cart</i></a>
+                                    <a href="#" onclick="openUpdateDialog(${row.id_detalle_compra}, ${row.cantidad_producto})" class="btn waves-effect blue tooltipped" data-tooltip="Cambiar"><i class="material-icons">exposure</i></a>
+                                    <a href="#" onclick="openDeleteDialog(${row.id_detalle_compra})" class="btn waves-effect red tooltipped" data-tooltip="Remover"><i class="material-icons">remove_shopping_cart</i></a>
                                 </td>
                             </tr>
                         `;
@@ -48,7 +48,7 @@ function readOrderDetail() {
                     // Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
                     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
                 } else {
-                    sweetAlert(4, response.exception, 'index.php');
+                    sweetAlert(4, response.exception, 'index_publico.php');
                 }
             });
         } else {
@@ -65,7 +65,7 @@ function openUpdateDialog(id, quantity) {
     let instance = M.Modal.getInstance(document.getElementById('item-modal'));
     instance.open();
     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-    document.getElementById('id_detalle').value = id;
+    document.getElementById('id_detalle_compra').value = id;
     document.getElementById('cantidad_producto').value = quantity;
     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
     M.updateTextFields();
@@ -76,7 +76,7 @@ document.getElementById('item-form').addEventListener('submit', function (event)
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
-    fetch(API_PEDIDOS + 'updateDetail', {
+    fetch(API_CARRITO + 'updateDetail', {
         method: 'post',
         body: new FormData(document.getElementById('item-form'))
     }).then(function (request) {
@@ -115,7 +115,7 @@ function finishOrder() {
     }).then(function (value) {
         // Se verifica si fue cliqueado el botón Sí para realizar la petición respectiva, de lo contrario se muestra un mensaje.
         if (value) {
-            fetch(API_PEDIDOS + 'finishOrder', {
+            fetch(API_CARRITO + 'finishOrder', {
                 method: 'get'
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
@@ -123,7 +123,7 @@ function finishOrder() {
                     request.json().then(function (response) {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.status) {
-                            sweetAlert(1, response.message, 'index.php');
+                            sweetAlert(1, response.message, 'index_publico.php');
                         } else {
                             sweetAlert(2, response.exception, null);
                         }
@@ -154,9 +154,9 @@ function openDeleteDialog(id) {
         if (value) {
             // Se define un objeto con los datos del registro seleccionado.
             const data = new FormData();
-            data.append('id_detalle', id);
+            data.append('id_detalle_compra', id);
 
-            fetch(API_PEDIDOS + 'deleteDetail', {
+            fetch(API_CARRITO + 'deleteDetail', {
                 method: 'post',
                 body: data
             }).then(function (request) {

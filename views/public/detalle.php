@@ -133,7 +133,10 @@ Public_Page::headerTemplate('Detalles del producto');
 </div>
 </div>
 
+
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
 Public_Page::footerTemplate('detail.js');
 ?>
+
+<script type="text/javascript" src="../../app/controllers/public/valoraciones_public.js"></script>

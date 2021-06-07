@@ -15,7 +15,7 @@ function fillTable(dataset) {
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
     dataset.map(function (row) {
         // Se establece un icono para el estado del producto.
-        (row.estado_comentario) ? icon = 'check' : icon = 'block';
+        (row.estado_comentario) ? icon = '' : icon = '';
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
@@ -23,11 +23,9 @@ function fillTable(dataset) {
                 <td>${row.nombre_producto}</td>
                 <td>${row.calificacion_producto}</td>
                 <td>${row.comentario_producto}</td>
-                <td><i class="material-icons">${icon}</i></td>
+                <td><i class="material-icons ">${icon}</i></td>
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.id_valoracion})" class="btn waves-effect  green darken-1  tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.id_valoracion})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                    <a href="../../app/reports/dashboard/productos_categoria.php?id=${row.id_valoracion}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos"><i class="material-icons">assignment</i></a>
+                    
                 </td>
             </tr>
         `;
@@ -41,12 +39,9 @@ function fillTable(dataset) {
 }
 
 // Método manejador de eventos que se ejecuta cuando se envía el formulario de buscar.
-document.getElementById('search-form').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se llama a la función que realiza la búsqueda. Se encuentra en el archivo components.js
-    searchRows(API_VALORACIONES, 'search-form');
-});
+
+
 
 // Función para preparar el formulario al momento de insertar un registro.
 function openCreateDialog() {

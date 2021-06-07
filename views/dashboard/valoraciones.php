@@ -25,9 +25,7 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
     </div>
 </div>
 
-<div class="input-field col s6 m4">
-    <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1  tooltipped" data-tooltip="Agregar"><i class="material-icons">add</i></a>
-</div>
+
 
 <!-- Tabla para mostrar los registros existentes -->
 <table class="striped responsive-table">
@@ -57,20 +55,20 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
             <input class="hide" type="number" id="id_valoracion" name="id_valoracion" />
             <div class="row">
-                <div class="input-field col s12 m6">
+                <div class="hide">
                     <input id="calificacion_producto" type="number" name="calificacion_producto" class="validate" max="10" min="0" step="any" />
                     <label for="calificacion_producto">Calificación</label>
                 </div>
-                <div class="input-field col s6">
+                <div class="hide">
                     <input id="comentario_producto" type="text" name="comentario_producto" class="validate">
                     <label for="comentario_producto">Comentario</label>
                 </div>
-                    <div class="input-field col s6">
+                    <div class="hide">
                     <select id="producto_valoracion" name="producto_valoracion">
                     </select>
                     <label>Producto</label>
                 </div>
-                <div class="input-field col s6">
+                <div class="hide">
                     <select id="cliente_valoracion" name="cliente_valoracion">
                     </select>
                     <label>Cliente</label>
@@ -99,5 +97,5 @@ Dashboard_Page::headerTemplate('Administrar valoraciones');
 
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
-Dashboard_Page::footerTemplate('valoraciones.js');
+Dashboard_Page::footerTemplate('valoracionesD.js');
 ?>

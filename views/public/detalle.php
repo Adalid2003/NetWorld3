@@ -39,6 +39,7 @@ Public_Page::headerTemplate('Detalles del producto');
                                     <button type="submit" class="btn waves-effect waves-light blue tooltipped"
                                         data-tooltip="Agregar al carrito"><i
                                             class="material-icons">add_shopping_cart</i></button>
+                                            
                                     <a href="#" onclick="openCreateDialog()"
                                         class="btn waves-effect waves-light blue tooltipped"
                                         data-tooltip="Agregar valoracion"><i class="material-icons">star_border</i></a>
@@ -46,6 +47,7 @@ Public_Page::headerTemplate('Detalles del producto');
 
                             </div>
                     </div>
+                    
                     </form>
 
                     <div>

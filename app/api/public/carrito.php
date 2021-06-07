@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     }
                 } else {
                     $result['exception'] = 'Ocurrió un problema al obtener la compra';
-                    print_r($_result);
+                    //print_r($_result);
                 }
                 break;
             case 'readOrderDetail':

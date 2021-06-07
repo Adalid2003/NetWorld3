@@ -68,5 +68,5 @@ Public_Page::headerTemplate('Carrito')
 
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
-Public_Page::footerTemplate('cart.js');
+Public_Page::footerTemplate('carrito.js');
 ?>

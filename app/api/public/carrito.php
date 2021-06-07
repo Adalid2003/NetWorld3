@@ -19,6 +19,7 @@ if (isset($_GET['action'])) {
             case 'createDetail':
                 if ($carrito->startOrder()) {
                     $_POST = $carrito->validateForm($_POST);
+                    print_r($_POST);
                     if ($carrito->setProducto($_POST['id_producto'])) {
                         if ($carrito->setCantidad($_POST['cantidad_producto'])) {
                             if ($carrito->createDetail()) {
@@ -35,6 +36,7 @@ if (isset($_GET['action'])) {
                     }
                 } else {
                     $result['exception'] = 'Ocurrió un problema al obtener la compra';
+                    print_r($_result);
                 }
                 break;
             case 'readOrderDetail':

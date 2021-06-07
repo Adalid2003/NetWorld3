@@ -129,7 +129,7 @@ class Carrito extends Validator
         // Se realiza una subconsulta para obtener el precio del producto.
         $sql = 'INSERT INTO detalle_compra(id_producto, precio_producto,cantidad_producto, id_compra)
                 VALUES(?, (SELECT precio_producto FROM productos WHERE id_producto = ?), ?, ?)';
-        $params = array($this->producto, $this->producto, $this->cantidad, $this->id_compra;
+        $params = array($this->producto, $this->producto, $this->cantidad, $this->id_compra);
         return Database::executeRow($sql, $params);
     }
 
@@ -176,3 +176,4 @@ class Carrito extends Validator
         return Database::executeRow($sql, $params);
     }
 
+}

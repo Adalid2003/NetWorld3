@@ -58,6 +58,7 @@ if (isset($_GET['action'])) {
                                     if ($clientes->setDireccion($_POST['direccion'])) {
                                         if ($clientes->setCorreo($_POST['correo'])) {
                                             if ($_POST['clave1'] == $_POST['clave2']) {
+                                                if ($clientes->setEstado(isset($_POST['estado_cliente']) ? 1 : 0)) {
                                                 if ($clientes->setClave($_POST['clave1'])) {
                                                     if ($clientes->createRow()) {
                                                         $result['status'] = 1;
@@ -68,8 +69,12 @@ if (isset($_GET['action'])) {
                                                 } else {
                                                     $result['exception'] = 'Calificación incorrecto';
                                                 }
-                                            } else {
+                                            }
+                                            else{
                                                 $result['exception'] = 'Estado incorrecto';
+                                            }
+                                         } else {
+                                            $result['exception'] = 'La contraseña no coincide';
                                             }
                                         } else {
                                             $result['exception'] = 'DUI incorrecto';
@@ -104,6 +109,7 @@ if (isset($_GET['action'])) {
                                     if ($clientes->setTelefono($_POST['telefono'])) {
                                         if ($clientes->setNacimiento($_POST['fecha_nacimiento'])) {
                                             if ($clientes->setDireccion($_POST['direccion'])) {
+                                                if ($clientes->setEstado(isset($_POST['estado_cliente']) ? 1 : 0)) {
                                                 if ($clientes->setCorreo($_POST['correo'])) {
                                                     if ($clientes->updateRow()) {
                                                         $result['status'] = 1;
@@ -114,7 +120,10 @@ if (isset($_GET['action'])) {
                                                 } else {
                                                     $result['exception'] = 'Correo incorrecto';
                                                 }
-                                            } else {
+                                            }else{
+                                                $result['exception'] = 'Estado incorrecto';
+                                            } 
+                                        }else {
                                                 $result['exception'] = 'Direccion incorrecta';
                                             }
                                         } else {

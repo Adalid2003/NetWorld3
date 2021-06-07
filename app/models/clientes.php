@@ -235,15 +235,15 @@ class Clientes extends Validator
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, clave_cliente)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->dui, $this->telefono, $this->nacimiento, $this->direccion, $hash);
+        $sql = 'INSERT INTO clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, estado_cliente, clave_cliente)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?,?)';
+        $params = array($this->nombres, $this->apellidos, $this->correo, $this->dui, $this->telefono, $this->nacimiento, $this->direccion, $this->estado, $hash);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, estado_cliente
                 FROM clientes
                 ORDER BY apellido_cliente';
         $params = null;
@@ -252,28 +252,19 @@ class Clientes extends Validator
 
     public function readOne()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, fecha_nacimiento_cliente, direccion_cliente, estado_cliente
                 FROM clientes
                 WHERE id_cliente = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
-    public function updateState()
-    {
-        $sql = 'UPDATE clientes
-                SET estado_cliente = ?
-                WHERE id_cliente = ?';
-        $params = array($this->id);
-        return Database::executeRow($sql, $params);
-    }
-
     public function updateRow()
     {
         $sql = 'UPDATE clientes
-                SET nombre_cliente = ?, apellido_cliente = ?, correo_cliente = ?, dui_cliente = ?, telefono_cliente = ?, fecha_nacimiento_cliente = ?, direccion_cliente = ?
+                SET nombre_cliente = ?, apellido_cliente = ?, correo_cliente = ?, dui_cliente = ?, telefono_cliente = ?, fecha_nacimiento_cliente = ?, direccion_cliente = ?, estado_cliente = ?
                 WHERE id_cliente = ?';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->dui, $this->telefono, $this->nacimiento, $this->direccion, $this->id);
+        $params = array($this->nombres, $this->apellidos, $this->correo, $this->dui, $this->telefono, $this->nacimiento, $this->direccion, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
 

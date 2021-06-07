@@ -42,6 +42,7 @@ Dashboard_Page::headerTemplate('Administrar clientes');
             <th>DUI</th>
             <th>FECHA DE NACIMIENTO</th>
             <th>ESTADO</th>
+            <th>ACCIÓN</th>
         </tr>
     </thead>
     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
@@ -104,11 +105,25 @@ Dashboard_Page::headerTemplate('Administrar clientes');
                     <input id="telefono" type="text" name="telefono" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required />
                     <label for="telefono">Telefono</label>
                 </div>
+                <div class="col s12 m6">
+                <p>
+                <div class="switch">
+                    <span>Estado:</span>
+                    <label>
+                        <i class="material-icons">lock_outline</i>
+                        <input id="estado_cliente" type="checkbox" name="estado_cliente" checked />
+                        <span class="lever"></span>
+                        <i class="material-icons">lock_open</i>
+                    </label>
+                </div>
+                </p>
+            </div>
             </div>
             <div class="row center-align">
-                    <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
-                    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
-                </div>
+                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+            </div>
+            
         </form>
     </div>
 </div>

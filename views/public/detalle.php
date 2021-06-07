@@ -35,6 +35,10 @@ Public_Page::headerTemplate('Detalles del producto');
                             </div>
                             <div class="input-field col s12 m6">
                                 <button type="submit" class="btn waves-effect waves-light blue tooltipped" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></button>
+                                <button type="submit" class="btn waves-effect waves-light blue tooltipped" data-tooltip="Realizar una valoración del producto"><i class="material-icons">star_border</i></button>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                
                             </div>
                         </div>
                     </form>

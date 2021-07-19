@@ -17,6 +17,7 @@ Dashboard_Page::headerTemplate('Administrar compras');
                     </div>
                     <div class="input-field col s6 m4 right-align">
                         <button type="submit" class="btn waves-effect   light-blue darken-4 waves-light btn-medium" data-tooltip="Buscar"><i class="material-icons"></i>Buscar</button>
+                        <a href="../../app/reports/dashboard/compras.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos por categoría"><i class="material-icons">assignment</i></a>
                     </div>
             </form>
         </div>

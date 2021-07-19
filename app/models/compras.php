@@ -145,6 +145,15 @@ class Compras extends Validator
         return Database::executeRow($sql, $params);
     }
 
+    public function readCompraFecha()
+    {
+        $sql = 'SELECT id_compra, fecha_compra, id_cliente, estado_compra, estado_compra_cliente, nombre_cliente
+                FROM compra INNER JOIN clientes USING(id_cliente)
+                WHERE id_compra = ? AND estado_compra = 1
+                ORDER BY fecha_compra desc';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 
 
 }

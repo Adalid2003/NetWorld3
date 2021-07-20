@@ -286,4 +286,12 @@ class Clientes extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+    public function cantidadComprasClientes()
+    {
+        $sql = 'SELECT nombre_cliente, COUNT(id_compra) cantidad
+        FROM compra INNER JOIN clientes USING(id_cliente)
+        GROUP BY nombre_cliente ORDER BY cantidad DESC LIMIT 10';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }

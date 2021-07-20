@@ -195,7 +195,7 @@ if (isset($_GET['action'])) {
                 break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
-        }
+            }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.

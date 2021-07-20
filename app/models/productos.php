@@ -206,17 +206,4 @@ class Productos extends Validator
                 GROUP BY nombre_categoria ORDER BY cantidad DESC';
         $params = null;
         return Database::getRows($sql, $params);
-    }
-
-    public function readPrecioProducto()
-    {
-        // Se hace la consullta para llevar a cabo la acción
-        $sql = 'SELECT id_producto, nombre_producto, id_categoria, descripcion, precio_producto, nombre_categoria
-                FROM productos INNER JOIN categorias USING(id_categoria) 
-                where id_producto = ?
-                ORDER BY precio_producto asc';
-        $params = array($this->id);
-        return Database::getRows($sql, $params);
-    }
-    
-}
+    }}

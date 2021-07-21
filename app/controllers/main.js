@@ -45,7 +45,7 @@ function graficaBarrasCompras() {
                         cantidad.push(row.cantidad);
                     });
                     // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
-                    barGraph('chart1', clientes, cantidad, 'Cantidad de compras', 'Top 10 de clientes con más compras');
+                    barGraph('chart1', clientes, cantidad, 'Cantidad de compras', 'Top 10 de los clientes con más compras');
                 } else {
                     document.getElementById('chart1').remove();
                 }

@@ -15,6 +15,7 @@ class Usuarios extends Validator
     private $imagenU = null;
     private $id_tipoU = null;
     private $dui = null;
+    private $tipo_usuario = null;
     private $ruta = '../../../resources/img/users/';
 
     /*
@@ -131,6 +132,11 @@ class Usuarios extends Validator
     public function getTipoU()
     {
         return $this->id_tipoU;
+    }
+
+    public function getTipousuario()
+    {
+        return $this->tipo_usuario;
     }
     //Métodos para validar y asignar valores del tributo.
     public function getImagenU()
@@ -281,6 +287,20 @@ class Usuarios extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function readAll3()
+    {
+        // Se hace la consullta para llevar a cabo la acción
+        $sql = 'SELECT id_tipo_usuario, tipo_usuario
+        FROM tipo_usuario order by tipo_usuario ';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+
+    
+
+
+
     public function readOne()
     {
         // Se hace la consullta para llevar a cabo la acción
@@ -309,5 +329,13 @@ class Usuarios extends Validator
                 WHERE id_usuario = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readUsuariotipo()
+    {
+        $sql = 'SELECT apodo_usuario, tipo_usuario, t.id_tipo_usuario
+        FROM usuarios u, tipo_usuario t where t.id_tipo_usuario=u.id_tipo_usuario and t.id_tipo_usuario=?';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
     }
 }

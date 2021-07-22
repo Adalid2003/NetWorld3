@@ -79,7 +79,7 @@ function graficaPastelCategorias() {
                         cantidad.push(row.cantidad);
                     });
                     // Se llama a la función que genera y muestra una gráfica de pastel en porcentajes. Se encuentra en el archivo components.js
-                    pieGraph('chart2', categorias, cantidad, 'Porcentaje de productos por categoría');
+                    pieGraph('chart2', categorias, cantidad, 'Porcentajes de productos por categoría');
                 } else {
                     document.getElementById('chart2').remove();
                 }

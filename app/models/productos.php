@@ -207,7 +207,6 @@ class Productos extends Validator
         $params = null;
         return Database::getRows($sql, $params);
     }
-
     public function readPrecioProducto()
     {
         // Se hace la consullta para llevar a cabo la acción
@@ -218,5 +217,4 @@ class Productos extends Validator
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
-    
 }

@@ -28,23 +28,33 @@ if ($dataUsuarios = $usuario->readAll3()) {
                 // Se establece la fuente para los encabezados.
                 $pdf->SetFont('Times', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
-                $pdf->Cell(80, 10, utf8_decode('Nombre del Usuario'), 1, 0, 'C', 1);
+                $pdf->Cell(40, 10, utf8_decode('Usuario'), 1, 0, 'C', 1);
+                $pdf->Cell(40, 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, utf8_decode('Apellidos'), 1, 0, 'C', 1);
+                $pdf->Cell(46, 10, utf8_decode('Correo del Usuario'), 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, utf8_decode('Dui del Usuario'), 1, 1, 'C', 1);
+                
+                
                 // Se establece la fuente para los datos de los productos.
                 $pdf->SetFont('Times', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataUsuarioss as $rowUsuario) {
                     // Se imprimen las celdas con los datos de los productos.
-                    $pdf->Cell(106, 10, utf8_decode($rowUsuario['apodo_usuario']), 1, 1);
+                    $pdf->Cell(40, 10, utf8_decode($rowUsuario['apodo_usuario']), 1, 0);
+                    $pdf->Cell(40, 10, utf8_decode($rowUsuario['nombre_usuario']), 1, 0);
+                    $pdf->Cell(30, 10, utf8_decode($rowUsuario['apellidos_usuario']), 1, 0);
+                    $pdf->Cell(46, 10, utf8_decode($rowUsuario['correo']), 1, 0);
+                    $pdf->Cell(30, 10, utf8_decode($rowUsuario['dui_usuario']), 1, 1);
                 }
             } else {
-                $pdf->Cell(0, 10, utf8_decode('No Usuarios con este tipo de usuarios'), 1, 1);
+                $pdf->Cell(0, 10, utf8_decode('No Usuarios con este tipo de usuarios'), 1, 0);
             }
         } else {
-            $pdf->Cell(0, 10, utf8_decode('Usuario incorrecto o Inexistente'), 1, 1);
+            $pdf->Cell(0, 10, utf8_decode('Usuario incorrecto o Inexistente'), 1, 0);
         }
     }
 } else {
-    $pdf->Cell(0, 10, utf8_decode('No hay Usuarios para mostrar'), 1, 1);
+    $pdf->Cell(0, 10, utf8_decode('No hay Usuarios para mostrar'), 1, 0);
 }
 
 // Se envía el documento al navegador y se llama al método Footer()

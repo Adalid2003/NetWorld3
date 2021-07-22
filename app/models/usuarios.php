@@ -333,7 +333,7 @@ class Usuarios extends Validator
 
     public function readUsuariotipo()
     {
-        $sql = 'SELECT apodo_usuario, tipo_usuario, t.id_tipo_usuario
+        $sql = 'SELECT apodo_usuario, tipo_usuario, t.id_tipo_usuario,correo,nombre_usuario,apellidos_usuario,dui_usuario
         FROM usuarios u, tipo_usuario t where t.id_tipo_usuario=u.id_tipo_usuario and t.id_tipo_usuario=?';
         $params = array($this->id);
         return Database::getRows($sql, $params);

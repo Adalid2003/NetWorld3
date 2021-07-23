@@ -217,4 +217,15 @@ class Productos extends Validator
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    public function Productosmasvendidos()
+    {
+        // Se hace la consullta para llevar a cabo la acción
+        $sql = 'SELECT nombre_producto, COUNT(id_detalle_compra) cantidad_producto
+		FROM productos INNER JOIN detalle_compra USING(id_producto)
+		GROUP BY nombre_producto ORDER BY cantidad_producto DESC LIMIT 10';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
 }

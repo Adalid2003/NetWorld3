@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Se llaman a la funciones que muestran las gráficas en la página web.
     graficaBarrasCompras();
     graficaPastelCategorias();
+    graficaLineaProductos();
 });
 
 // Función para mostrar la cantidad de productos por categoría en una gráfica de barras.
@@ -67,6 +68,7 @@ function graficaPastelCategorias() {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
         if (request.ok) {
             request.json().then(function (response) {
+                console.log(response)
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
                 if (response.status) {
                     // Se declaran los arreglos para guardar los datos por gráficar.
@@ -91,4 +93,41 @@ function graficaPastelCategorias() {
     }).catch(function (error) {
         console.log(error);
     });
+
+}
+
+// Función para mostrar el top 10 de productos mas vendidos en una gráfica de linea.
+function graficaLineaProductos() {
+    fetch(API_PRODUCTOS + 'ProductosMasvendidos', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos por gráficar.
+                    let producto = [];
+                    let cantidadproducto = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se asignan los datos a los arreglos.
+                        producto.push(row.nombre_producto);
+                        cantidadproducto.push(row.cantidad_producto);
+                    });
+                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    lineGraph('chart3', producto, cantidadproducto,'Cantidad de productos', 'Top 10 de productos más vendidos');
+
+                } else {
+                    document.getElementById('chart3').remove();
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+        // Se captura el estado del comentario 
+    }).catch(function (error) {
+        console.log(error);
+    });
+
 }

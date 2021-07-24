@@ -27,6 +27,7 @@ Dashboard_Page::headerTemplate('Administrar categorías');
 
 <div class="input-field col s6 m4">
     <a href="#" onclick="openCreateDialog()" class="btn waves-effect cyan darken-1  tooltipped" data-tooltip="Agregar"><i class="material-icons">add</i></a>
+    <a href="../../app/reports/dashboard/categorias.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de cantidad de productos por categoria"><i class="material-icons">assignment</i></a>
 </div>
 
 <!-- Tabla para mostrar los registros existentes -->

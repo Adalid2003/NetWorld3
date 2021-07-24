@@ -162,4 +162,13 @@ class Categorias extends Validator
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    public function readCategoriarpt()
+    {
+        $sql = 'SELECT nombre_categoria, count(id_producto) cantidad from productos inner join categorias using(id_categoria)
+        GROUP BY nombre_categoria ORDER BY cantidad asc';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
 }

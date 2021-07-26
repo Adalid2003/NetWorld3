@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
                 if ($carrito->startOrder()) {
                     //Se valida el formulario una vez que la orden se incie
                     $_POST = $carrito->validateForm($_POST);
-                    print_r($_POST);
+                    //print_r($_POST);
                     // Se captura el id del producto
                     if ($carrito->setProducto($_POST['id_producto'])) {
                         // Se captura la cantidad de producto de la base de datos
@@ -46,7 +46,7 @@ if (isset($_GET['action'])) {
                     }
                     // En caso que ocurra un problema para obtener la compra, se notifica
                 } else {
-                    $result['exception'] = 'Ocurrió un problema al obtener la compra';
+                    $result['exception'] = Database::getException();
                     //print_r($_result);
                 }
                 break;

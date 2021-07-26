@@ -5,7 +5,7 @@ require('../../models/compras.php');
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
-$pdf->startReport('Compras por fecha');
+$pdf->startReport('Compras finalizadas por fecha');
 
 // Se instancia el módelo Categorías para obtener los datos.
 $compra = new Compras;

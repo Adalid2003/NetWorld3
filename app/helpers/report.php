@@ -57,7 +57,8 @@ class Report extends FPDF
         $this->Cell(20);
         $this->SetFont('Arial', '', 10);
         $this->Cell(166, 10, 'Fecha/Hora: '.date('d-m-Y H:i:s'), 0, 1, 'C');
-        
+        $this->Cell(20);
+        $this->Cell(166, 10, 'Usuario: '.$_SESSION['apodo_usuario'], 0, 1, 'C');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->Ln(10);
     }

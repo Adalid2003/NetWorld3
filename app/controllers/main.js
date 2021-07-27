@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
     graficaBarrasCompras();
     graficaPastelCategorias();
     graficaLineaProductos();
+    graficaProductoscaros();
+    graficaComprasRecientes();
+
 });
 
 // Función para mostrar la cantidad de productos por categoría en una gráfica de barras.
@@ -135,7 +138,7 @@ function graficaLineaProductos() {
 }
 
 // Función para mostrar los prodcutos mas caros en una gráfica de linea.
-function graficaLineaProductos() {
+function graficaProductoscaros() {
     fetch(API_PRODUCTOS + 'productosMasCaros', {
         method: 'get'
     }).then(function (request) {
@@ -171,7 +174,7 @@ function graficaLineaProductos() {
 }
 
 // Función para mostrar los prodcutos mas caros en una gráfica de linea.
-function graficaLineaProductos() {
+function graficaComprasRecientes() {
     fetch(API_COMPRAS + 'comprasMasRecientes', {
         method: 'get'
     }).then(function (request) {

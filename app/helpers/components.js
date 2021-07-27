@@ -339,6 +339,49 @@ function pieGraph(canvas, legends, values, title) {
         }
     });
 }
+function lineGraph(canvas,xAxis,yAxis,legend,title) {
+    //Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos
+    for (i = 0; i < xAxis.length; i++) {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = document.getElementById(canvas).getContext('2d');
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [{
+               fill: false,
+                label: legend,
+                data: yAxis,
+                borderColor: '#000000',
+                borderWidht: 1,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: title
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+   }
 
 //Grafico polar
 function polarGraph(canvas,xAxis,yAxis,legend,title) {

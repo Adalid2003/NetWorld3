@@ -46,6 +46,7 @@ if ($dataUsuarios = $usuario->readAll3()) {
                     $pdf->Cell(46, 10, utf8_decode($rowUsuario['correo']), 1, 0);
                     $pdf->Cell(30, 10, utf8_decode($rowUsuario['dui_usuario']), 1, 1);
                 }
+                // Se imprimen los mensajes de errores
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No Usuarios con este tipo de usuarios'), 1, 0);
             }

@@ -38,6 +38,7 @@ if ($dataCompras = $compra->readAll()) {
                     $pdf->Cell(46, 10, $rowCompras['id_compra'], 1, 0);
                     $pdf->Cell(140, 10, utf8_decode($rowCompras['nombre_cliente']), 1, 1);
                 }
+                // Se imprimen los mensajes de errores
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay compras realizadas en esta fecha'), 1, 1);
             }

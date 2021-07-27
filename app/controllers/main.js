@@ -193,7 +193,7 @@ function graficaComprasRecientes() {
                         cantidad.push(row.cantidad)
                     });
                     // Se llama a la función que genera y muestra una grafica de area polar . Se encuentra en el archivo components.js
-                    scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Compras por fecha');
+                    scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Cantidad de compras por dia');
 
                 } else {
                     document.getElementById('chart5').remove();

@@ -21,17 +21,17 @@ Dashboard_Page::headerTemplate('Bienvenido');
         <canvas id="chart2"></canvas>
     </div>
 
-    <div class="col s12 m6">
+    <div class="align-content: flex-start s12 m6">
         <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
         <canvas id="chart3"></canvas>
     </div>
 
     <div class="col s12 m6">
-        <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
+        <!-- Se muestra una gráfica de rosquilla con los productos mas caros-->
         <canvas id="chart4"></canvas>
     </div>
     <div class="col s12 m6">
-        <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
+        <!-- Se muestra una gráfica de area polar con las compras mas recientes -->
         <canvas id="chart5"></canvas>
     </div>
 </div>

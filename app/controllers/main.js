@@ -137,7 +137,7 @@ function graficaLineaProductos() {
 
 }
 
-// Función para mostrar los prodcutos mas caros en una gráfica de linea.
+// Función para mostrar los prodcuctos mas caros en una gráfica de rosquilla.
 function graficaProductoscaros() {
     fetch(API_PRODUCTOS + 'productosMasCaros', {
         method: 'get'
@@ -156,7 +156,7 @@ function graficaProductoscaros() {
                         nombre_producto.push(row.nombre_producto);
                         precio.push(row.precio_producto);
                     });
-                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    // Se llama a la función que genera y muestra una gráfica de rosquilla . Se encuentra en el archivo components.js
                     polarGraph('chart4', nombre_producto, precio,'Cantidad de productos', 'Productos más caros');
 
                 } else {
@@ -173,7 +173,7 @@ function graficaProductoscaros() {
 
 }
 
-// Función para mostrar los prodcutos mas caros en una gráfica de linea.
+// Función para mostrar las compras mas recientes en un grafico de area polar.
 function graficaComprasRecientes() {
     fetch(API_COMPRAS + 'comprasMasRecientes', {
         method: 'get'
@@ -192,7 +192,7 @@ function graficaComprasRecientes() {
                         fecha_compra.push(row.fecha_compra);
                         cantidad.push(row.cantidad)
                     });
-                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    // Se llama a la función que genera y muestra una grafica de area polar . Se encuentra en el archivo components.js
                     scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Compras por fecha');
 
                 } else {

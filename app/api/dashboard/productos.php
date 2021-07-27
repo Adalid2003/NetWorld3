@@ -204,6 +204,17 @@ if (isset($_GET['action'])) {
                         }
                     }
                     break;
+                    case 'productosMasCaros':
+                        if ($result['dataset'] = $producto->productosMasCaros()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'No hay datos disponibles';
+                            }
+                        }
+                        break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
             }

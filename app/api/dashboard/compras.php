@@ -152,6 +152,18 @@ if (isset($_GET['action'])) {
                                     $result['exception'] = 'Compra incorrecta';
                                 }
                                 break;
+                                case 'comprasMasRecientes':
+                                    if ($result['dataset'] = $compras->comprasMasRecientes()) {
+                                        $result['status'] = 1;
+                                    } else {
+                                        if (Database::getException()) {
+                                            $result['exception'] = Database::getException();
+                                        } else {
+                                            $result['exception'] = 'No hay cliente registrado';
+                                        }
+                                    }
+                                    break;
+                
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
             }

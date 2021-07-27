@@ -1,6 +1,8 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
 const API_PRODUCTOS = '../../app/api/dashboard/productos.php?action=';
 const API_CLIENTES = '../../app/api/dashboard/clientes.php?action=';
+const API_COMPRAS = '../../app/api/dashboard/compras.php?action=';
+
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -120,6 +122,78 @@ function graficaLineaProductos() {
 
                 } else {
                     document.getElementById('chart3').remove();
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+        // Se captura el estado del comentario 
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+}
+
+// Función para mostrar los prodcutos mas caros en una gráfica de linea.
+function graficaLineaProductos() {
+    fetch(API_PRODUCTOS + 'productosMasCaros', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos por gráficar.
+                    let nombre_producto = [];
+                    let precio = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se asignan los datos a los arreglos.
+                        nombre_producto.push(row.nombre_producto);
+                        precio.push(row.precio_producto);
+                    });
+                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    polarGraph('chart4', nombre_producto, precio,'Cantidad de productos', 'Productos más caros');
+
+                } else {
+                    document.getElementById('chart4').remove();
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+        // Se captura el estado del comentario 
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+}
+
+// Función para mostrar los prodcutos mas caros en una gráfica de linea.
+function graficaLineaProductos() {
+    fetch(API_COMPRAS + 'comprasMasRecientes', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos por gráficar.
+                    let fecha_compra = [];
+                    let cantidad = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se asignan los datos a los arreglos.
+                        fecha_compra.push(row.fecha_compra);
+                        cantidad.push(row.cantidad)
+                    });
+                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Compras por fecha');
+
+                } else {
+                    document.getElementById('chart5').remove();
                 }
             });
         } else {

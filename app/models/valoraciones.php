@@ -171,6 +171,13 @@ class Valoraciones extends Validator
         return Database::executeRow($sql, $params);
     }
 
+    public function valoracionPorProducto()
+    {
+        $sql = 'SELECT nombre_producto, comentario_producto from valoraciones INNER JOIN productos USING(id_producto)';
+        $params = null;
+        return Database::executeRow($sql, $params);
+    }
+
 
 
 

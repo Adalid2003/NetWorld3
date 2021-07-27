@@ -155,5 +155,12 @@ class Compras extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function comprasMasRecientes()
+    {
+        $sql = 'SELECT fecha_compra, count(id_compra) cantidad from compra group by fecha_compra';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
 
 }

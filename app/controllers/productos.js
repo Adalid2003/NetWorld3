@@ -26,7 +26,6 @@ function fillTable(dataset) {
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.id_producto})" class="btn waves-effect  green darken-1  tooltipped" data-tooltip="Actualizar"><i class="material-icons">sync</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.id_producto})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                    <a href="../../app/reports/dashboard/productos_categoria.php?id=${row.id_categoria}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
         `;

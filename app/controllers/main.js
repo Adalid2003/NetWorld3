@@ -201,7 +201,7 @@ function graficaComprasRecientes() {
                     });
                     // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
                     scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Cantidad de compras por día');
-                // Si no se cumple, se borra la gráfica y no la muestra
+                //Si no se cumple, se borra la gráfica y no la muestra
                 } else {
                     document.getElementById('chart5').remove();
                 }

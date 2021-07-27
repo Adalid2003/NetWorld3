@@ -30,12 +30,10 @@ Dashboard_Page::headerTemplate('Bienvenido');
         <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
         <canvas id="chart4"></canvas>
     </div>
-
     <div class="col s12 m6">
         <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
         <canvas id="chart5"></canvas>
     </div>
-    
 </div>
 
 <!-- Importación del archivo para generar gráficas en tiempo real. Para más información https://www.chartjs.org/ -->

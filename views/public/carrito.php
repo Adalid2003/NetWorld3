@@ -8,9 +8,9 @@ Public_Page::headerTemplate('Carrito')
 <!-- Contenedor para mostrar el detalle del carrito de compras -->
 <div class="container">
     <!-- Título del contenido principal -->
-    <h4>Carrito de compras <i class="material-icons">shopping_cart</i></h4>
+    <h4 align="center">Carrito de compras <i class="material-icons">shopping_cart</i></h4>
     <!-- Tabla para mostrar el detalle de los productos agregados al carrito de compras -->
-    <table class="striped">
+    <table class="striped responsive-table">
         <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
         <thead>
             <tr>

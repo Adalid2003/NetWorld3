@@ -27,12 +27,12 @@ Dashboard_Page::headerTemplate('Bienvenido');
     </div>
 
     <div class="col s12 m6">
-        <!-- Se muestra una gráfica de rosquilla con los productos mas caros-->
+        <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
         <canvas id="chart4"></canvas>
     </div>
 
     <div class="col s12 m6">
-        <!-- Se muestra una gráfica de area polar con las compras mas recientes -->
+        <!-- Se muestra una gráfica de linea con los productos mas vendidos -->
         <canvas id="chart5"></canvas>
     </div>
     

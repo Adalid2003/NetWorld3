@@ -230,7 +230,6 @@ class Productos extends Validator
 
     public function productosMasCaros()
     {
-         // Se hace la consullta para llevar a cabo la acción
         $sql = 'SELECT nombre_producto, precio_producto from productos order by precio_producto desc';
         $params = null;
         return Database::getRows($sql, $params);

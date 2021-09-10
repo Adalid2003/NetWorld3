@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Función para mostrar la cantidad de productos por categoría en una gráfica de barras.
 function graficaBarrasCompras() {
+    // Se relaciona la api con la gráfica
     fetch(API_CLIENTES + 'cantidadComprasClientes', {
         method: 'get'
     }).then(function (request) {
@@ -52,6 +53,7 @@ function graficaBarrasCompras() {
                     });
                     // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
                     barGraph('chart1', clientes, cantidad, 'Cantidad de compras', 'Top 10 de los clientes con más compras');
+                // Si no se cumple, se borra la gráfica y no la muestra
                 } else {
                     document.getElementById('chart1').remove();
                 }
@@ -67,6 +69,7 @@ function graficaBarrasCompras() {
 
 // Función para mostrar la cantidad de productos por categoría en una gráfica de pastel.
 function graficaPastelCategorias() {
+    // Se relaciona la api con la gráfica
     fetch(API_PRODUCTOS + 'cantidadProductosCategoria', {
         method: 'get'
     }).then(function (request) {
@@ -87,6 +90,7 @@ function graficaPastelCategorias() {
                     });
                     // Se llama a la función que genera y muestra una gráfica de pastel en porcentajes. Se encuentra en el archivo components.js
                     pieGraph('chart2', categorias, cantidad, 'Porcentajes de productos por categoría');
+                // Si no se cumple, se borra la gráfica y no la muestra    
                 } else {
                     document.getElementById('chart2').remove();
                 }
@@ -103,6 +107,7 @@ function graficaPastelCategorias() {
 
 // Función para mostrar el top 10 de productos mas vendidos en una gráfica de linea.
 function graficaLineaProductos() {
+    // Se relaciona la api con la gráfica
     fetch(API_PRODUCTOS + 'ProductosMasvendidos', {
         method: 'get'
     }).then(function (request) {
@@ -122,7 +127,7 @@ function graficaLineaProductos() {
                     });
                     // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
                     lineGraph('chart3', producto, cantidadproducto,'Cantidad de productos', 'Top 10 de productos más vendidos');
-
+                // Si no se cumple, se borra la gráfica y no la muestra
                 } else {
                     document.getElementById('chart3').remove();
                 }
@@ -137,8 +142,9 @@ function graficaLineaProductos() {
 
 }
 
-// Función para mostrar los prodcuctos mas caros en una gráfica de rosquilla.
+// Función para mostrar los prodcutos mas caros en una gráfica de linea.
 function graficaProductoscaros() {
+    // Se relaciona la api con la gráfica
     fetch(API_PRODUCTOS + 'productosMasCaros', {
         method: 'get'
     }).then(function (request) {
@@ -156,9 +162,9 @@ function graficaProductoscaros() {
                         nombre_producto.push(row.nombre_producto);
                         precio.push(row.precio_producto);
                     });
-                    // Se llama a la función que genera y muestra una gráfica de rosquilla . Se encuentra en el archivo components.js
-                    polarGraph('chart4', nombre_producto, precio,'Cantidad de productos', 'Productos más caros');
-
+                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    polarGraph('chart4', nombre_producto, precio,'Cantidad de productos', 'Porcentajes de productos más caros');
+                // Si no se cumple, se borra la gráfica y no la muestra
                 } else {
                     document.getElementById('chart4').remove();
                 }
@@ -173,8 +179,9 @@ function graficaProductoscaros() {
 
 }
 
-// Función para mostrar las compras mas recientes en un grafico de area polar.
+// Función para mostrar los prodcutos mas caros en una gráfica de linea.
 function graficaComprasRecientes() {
+    // Se relaciona la api con la gráfica
     fetch(API_COMPRAS + 'comprasMasRecientes', {
         method: 'get'
     }).then(function (request) {
@@ -192,9 +199,9 @@ function graficaComprasRecientes() {
                         fecha_compra.push(row.fecha_compra);
                         cantidad.push(row.cantidad)
                     });
-                    // Se llama a la función que genera y muestra una grafica de area polar . Se encuentra en el archivo components.js
-                    scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Compras por fecha');
-
+                    // Se llama a la función que genera y muestra una gráfica de linea . Se encuentra en el archivo components.js
+                    scatterGraph('chart5', fecha_compra, cantidad,'Cantidad de compras', 'Cantidad de compras por día');
+                //Si no se cumple, se borra la gráfica y no la muestra
                 } else {
                     document.getElementById('chart5').remove();
                 }

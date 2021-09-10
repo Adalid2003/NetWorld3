@@ -129,7 +129,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
-            // Se crea un caso para iniciar sesión
+        
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);

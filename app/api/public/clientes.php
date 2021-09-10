@@ -41,7 +41,7 @@ if (isset($_GET['action'])) {
                 // Se sanea el valor del token para evitar datos maliciosos.
                 $token = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
                 if ($token) {
-                    $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
+                    $secretKey = '6Ldd0lQcAAAAAJpU_cCIAJQtms77ld_vreWetDnA';
                     $ip = $_SERVER['REMOTE_ADDR'];
 
                     $data = array(

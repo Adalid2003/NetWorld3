@@ -22,12 +22,12 @@ Public_Page::headerTemplate('Iniciar sesión');
         <div class="row">
             <div class="input-field col s12 m4 offset-m4">
                 <i class="material-icons prefix">email</i>
-                <input type="email" id="usuario" name="usuario" class="validate" required/>
+                <input type="email" id="usuario" name="usuario" class="validate" autocomplete="off" required/>
                 <label for="usuario">Correo electrónico</label>
             </div>
             <div class="input-field col s12 m4 offset-m4">
                 <i class="material-icons prefix">security</i>
-                <input type="password" id="clave" name="clave" class="validate" required/>
+                <input type="password" id="clave" name="clave" class="validate"  autocomplete="off"required/>
                 <label for="clave">Clave</label>
             </div>
         </div>

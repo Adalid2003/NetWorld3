@@ -155,7 +155,7 @@ if (isset($_GET['action'])) {
                             } else {
                                 $result['exception'] = 'Clave incorrecta';
                             }
-                            // Se notifica que la cuenta se desactivo 
+                            // Se notifica que la cuenta se desactiva
                         }
                     } else {
                         $result['exception'] = 'La cuenta ha sido desactivada';

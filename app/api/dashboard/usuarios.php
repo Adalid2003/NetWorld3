@@ -96,6 +96,17 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                case 'readHistorial':
+                    if ($result['dataset'] = $usuario->readHistorial()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay sesiones iniciadas para este usuario';
+                        }
+                    }
+                    break;
             case 'readAll2':
                 if ($result['dataset'] = $usuario->readAll2()) {
                     $result['status'] = 1;
@@ -367,6 +378,7 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'Autenticación correcta';
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
+                        $usuario->createHistorial();
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
@@ -382,6 +394,16 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                case 'recuperarContra':
+                    $_POST = $cliente->validateForm($_POST);
+                    if ($cliente->setCorreo($_POST['correo_rec'])) {
+                        if ($clientes->enviarEmail()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Codigo enviado exitosamente';
+                        } else {
+                            $result['exception'] = 'Error al enviar su codigo de recuperación';
+                        }
+                    }
             default:
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
         }

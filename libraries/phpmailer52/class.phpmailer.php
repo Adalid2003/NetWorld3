@@ -1755,7 +1755,7 @@ class PHPMailer
      * @return boolean
      * @access public
      */
-    public function setLanguage($langcode = 'en', $lang_path = '')
+    public function setLanguage($langcode = 'es', $lang_path = '')
     {
         // Backwards compatibility for renamed language codes
         $renamed_langcodes = array(
@@ -3327,7 +3327,7 @@ class PHPMailer
     protected function lang($key)
     {
         if (count($this->language) < 1) {
-            $this->setLanguage('en'); // set the default language
+            $this->setLanguage('es'); // set the default language
         }
 
         if (array_key_exists($key, $this->language)) {

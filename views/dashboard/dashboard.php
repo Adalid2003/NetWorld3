@@ -1,6 +1,20 @@
  <!-- Se manda a llamar al helper del header  -->
 <?php
 include("../../app/helpers/dashboard_template.php");
+$TimeOutMinutes = 5; // This is your TimeOut period in minutes
+$LogOff_URL = "inactividad.php"; // If timed out, it will be redirected to this page
+
+$TimeOutSeconds = $TimeOutMinutes * 60; // TimeOut in Seconds
+if (isset($_SESSION['SessionStartTime'])) {
+$InActiveTime = time() - $_SESSION['SessionStartTime'];
+if ($InActiveTime >= $TimeOutSeconds) {
+
+    session_destroy();
+    //header("Location: $LogOff_URL");
+
+}
+}
+     $_SESSION['SessionStartTime'] = time();
 ?>
 <title>Dashboard</title>
 <h5 class="black-text text-lighten-3 center-align">Bienvenido al dashboard de NetWorld SV</h5>

@@ -7,6 +7,7 @@ require_once('../../models/clientes.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+
     
     // Se instancia la clase correspondiente.
     $cliente = new Clientes;
@@ -18,16 +19,9 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             // Se crea un caso para cerrar sesión
             case 'logOut':
-                if (session_destroy()) {
-                    // Verifica que resultado del estado sea 1 para seguir con la acción
-                    $result['status'] = 1;
-                    // En casi que el estado sea igual a 1 se lleva a cabo la acción
-                    $result['message'] = 'Sesión eliminada correctamente';
-                    //En caso que no sea 1, notifica el error
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
-                }
-                // Se finaliza el caso
+                unset($_SESSION['id_cliente']);
+                $result['status'] = 1;
+                $result['message'] = 'Sesión eliminada correctamente';
                 break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';

@@ -73,7 +73,7 @@ Public_Page::headerTemplate('Registrar Cliente');
 </form>
 
 <!-- Importación del archivo para que funcione el reCAPTCHA. Para más información https://developers.google.com/recaptcha/docs/v3 -->
-        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6Ldd0lQcAAAAAFGZGJYJL-4Hguo1C9miOWRfJUn-"></script>
+        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6Lc0iFscAAAAAFL-xNPHJsi3kNwjQc-MtOeE7bWK"></script>
 
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.

@@ -4,20 +4,6 @@
 require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Routers');
-$TimeOutMinutes = 5; // This is your TimeOut period in minutes
-$LogOff_URL = "inactividad.php"; // If timed out, it will be redirected to this page
-
-$TimeOutSeconds = $TimeOutMinutes * 60; // TimeOut in Seconds
-if (isset($_SESSION['SessionStartTime'])) {
-$InActiveTime = time() - $_SESSION['SessionStartTime'];
-if ($InActiveTime >= $TimeOutSeconds) {
-
-    session_destroy();
-    //header("Location: $LogOff_URL");
-
-}
-}
-     $_SESSION['SessionStartTime'] = time();
 ?>
 <H1 class="black-text text-lighten-3" align="center"> Routers</H1>
 <!-- NAVBAR DE CATEGORIAS -->

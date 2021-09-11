@@ -2,20 +2,6 @@
 <?php
 require_once("../../app/helpers/dashboard_template.php");
 Dashboard_Page::headerTemplate('Administrar compras');
-$TimeOutMinutes = 5; // This is your TimeOut period in minutes
-$LogOff_URL = "inactividad.php"; // If timed out, it will be redirected to this page
-
-$TimeOutSeconds = $TimeOutMinutes * 60; // TimeOut in Seconds
-if (isset($_SESSION['SessionStartTime'])) {
-$InActiveTime = time() - $_SESSION['SessionStartTime'];
-if ($InActiveTime >= $TimeOutSeconds) {
-
-    session_destroy();
-    //header("Location: $LogOff_URL");
-
-}
-}
-     $_SESSION['SessionStartTime'] = time();
 ?>
 <div class="container">
     <div class="container center">

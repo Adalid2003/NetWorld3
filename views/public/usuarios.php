@@ -5,6 +5,7 @@ require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Usuarios');
 ?>
+
  <!--Se crean las cartas y el formulario-->
 <div class="row">
             <div class="col s12 14 offset-14">

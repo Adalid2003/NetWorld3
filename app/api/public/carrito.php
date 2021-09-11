@@ -7,19 +7,9 @@ require_once('../../models/carrito.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    //Comprobamos si esta definida la sesión 'tiempo'.
-    $TimeOutMinutes = 0.1; // This is your TimeOut period in minutes
-$LogOff_URL = "index.php"; // If timed out, it will be redirected to this page
 
-$TimeOutSeconds = $TimeOutMinutes * 60; // TimeOut in Seconds
-if (isset($_SESSION['SessionStartTime'])) {
-    $InActiveTime = time() - $_SESSION['SessionStartTime'];
-    if ($InActiveTime >= $TimeOutSeconds) {
-        session_destroy();
-        header("Location: $LogOff_URL");
-    }
-}
-$_SESSION['SessionStartTime'] = time();
+   
+    //Comprobamos si esta definida la sesión 'tiempo'.
     // Se instancia la clase correspondiente.
     $carrito = new carrito;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.

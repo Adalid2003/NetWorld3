@@ -2,6 +2,7 @@
 <?php
 include("../../app/helpers/dashboard_template.php");
 ?>
+
 <title>Reportes</title>
 <h5 class="black-text text-lighten-3 center-align">Reportes de NetWorld SV</h5>
  <!--Se crean las cartas-->

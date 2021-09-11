@@ -7,6 +7,7 @@ require_once('../../models/usuarios.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+   //Comprobamos si esta definida la sesión 'tiempo'.
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -26,6 +27,33 @@ if (isset($_GET['action'])) {
         $_SESSION['tiempo'] = time(); //Si hay actividad seteamos el valor al tiempo actual
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+        
+        case 'inactividad':
+        
+            if(isset($_SESSION['tiempo']) ) {
+
+                //Tiempo en segundos para dar vida a la sesión.
+                $inactivo = 30;//20min en este caso.
+        
+                //Calculamos tiempo de vida inactivo.
+                $vida_session = time() - $_SESSION['tiempo'];
+        
+                    //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
+                    if($vida_session > $inactivo)
+                    {
+                        //Removemos sesión.
+                        session_unset();
+                        //Destruimos sesión.
+                        session_destroy();              
+                        //Redirigimos pagina.
+                        header("Location: index.php");
+        
+                        exit();
+                    }
+        
+            }
+            $_SESSION['tiempo'] = time();
+                break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;

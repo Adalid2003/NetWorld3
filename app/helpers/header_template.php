@@ -8,6 +8,7 @@ class Public_Page
 
         session_start();
         print('<!DOCTYPE html>
+                
     <html>
      <!--Se crea el helper del header privado-->
     <head>

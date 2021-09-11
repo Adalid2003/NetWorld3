@@ -1,12 +1,12 @@
 <?php
-
+session_start();
 class Dashboard_page
 {
 
     public static function headerTemplate($title)
     {
 
-        session_start();
+        //session_start();
         print('<!DOCTYPE html>
     <html>
      <!--Se crea el helper del header privado-->
@@ -47,6 +47,7 @@ class Dashboard_page
     <li><a href="../dashboard/categorias.php"><i class="material-icons">copyright</i>Categorías</a></li>
     <li><a href="../dashboard/valoraciones.php"><i class="material-icons">check</i>Valoraciones</a></li>
     <li><a href="../dashboard/clientes.php"><i class="material-icons">person</i>Clientes</a></li>
+    <li><a href="../dashboard/historial.php"><i class="material-icons">history</i>Actividad de sesión</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Detalle de su cuenta</a></li>
     <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Usuario: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>

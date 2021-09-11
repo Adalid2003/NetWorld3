@@ -16,6 +16,16 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'error' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['id_usuario'])) {
+        if (!isset($_SESSION['tiempo'])) {
+            $_SESSION['tiempo']=time();
+        }
+        else if (time() - $_SESSION['tiempo'] > 5) {
+            session_destroy();
+            $result['status'] = 1;
+            $result['message'] = 'Sesión cerrada por inactividad';
+            die();  
+        }
+        $_SESSION['tiempo']=time(); //Si hay actividad seteamos el valor al tiempo actual
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
         
@@ -46,9 +56,12 @@ if (isset($_GET['action'])) {
             $_SESSION['tiempo'] = time();
                 break;
             case 'logOut':
-                unset($_SESSION['id_usuario']);
-                $result['status'] = 1;
-                $result['message'] = 'Sesión eliminada correctamente';
+                if (session_destroy()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Sesión eliminada correctamente';
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                }
                 break;
             case 'readProfile':
                 if ($result['dataset'] = $usuario->readProfile()) {
@@ -123,6 +136,17 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                case 'readHistorial':
+                    if ($result['dataset'] = $usuario->readHistorial()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay sesiones iniciadas para este usuario';
+                        }
+                    }
+                    break;
             case 'readAll2':
                 if ($result['dataset'] = $usuario->readAll2()) {
                     $result['status'] = 1;
@@ -394,6 +418,7 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'Autenticación correcta';
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
+                        $usuario->createHistorial();
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();

@@ -28,7 +28,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setNombres($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -38,7 +38,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setApellidos($value)
     {
         if ($this->validateAlphabetic($value, 1, 50)) {
@@ -48,7 +48,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setCorreo($value)
     {
         if ($this->validateEmail($value)) {
@@ -58,7 +58,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setTelefono($value)
     {
         if ($this->validatePhone($value)) {
@@ -68,7 +68,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setDUI($value)
     {
         if ($this->validateDUI($value)) {
@@ -78,7 +78,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setNacimiento($value)
     {
         if ($this->validateDate($value)) {
@@ -88,7 +88,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setDireccion($value)
     {
         if ($this->validateString($value, 1, 200)) {
@@ -98,7 +98,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setClave($value)
     {
         if ($this->validatePassword($value)) {
@@ -108,7 +108,7 @@ class Clientes extends Validator
             return false;
         }
     }
-//Métodos para validar y asignar valores del tributo.
+    //Métodos para validar y asignar valores del tributo.
     public function setEstado($value)
     {
         if ($this->validateBoolean($value)) {
@@ -126,47 +126,47 @@ class Clientes extends Validator
     {
         return $this->id;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getNombres()
     {
         return $this->nombres;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getApellidos()
     {
         return $this->apellidos;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getCorreo()
     {
         return $this->correo;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getTelefono()
     {
         return $this->telefono;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getDUI()
     {
         return $this->dui;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getNacimiento()
     {
         return $this->nacimiento;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getDireccion()
     {
         return $this->direccion;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getClave()
     {
         return $this->clave;
     }
-//Método que obtiene los valores del tributo.
+    //Método que obtiene los valores del tributo.
     public function getEstado()
     {
         return $this->estado;
@@ -294,4 +294,55 @@ class Clientes extends Validator
         $params = null;
         return Database::getRows($sql, $params);
     }
+
+    public function recuperarContra()
+    {
+        $sql = 'SELECT correo_cliente where dui_cliente = ?';
+        $params = array($this->dui);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function enviarEmail(){
+        //Import PHPMailer classes into the global namespace
+        //These must be at the top of your script, not inside a function
+        
+        //Load Composer's autoloader
+        require '../../libraries/phpmailer52/class.phpmailer.php';
+        require '../../libraries/phpmailer52/class.smtp.php';
+        require '../../libraries/phpmailer52/class.phpmaileroauthgoogle.php';
+        
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'cuentanetworld@gmail.com';                     //SMTP username
+            $mail->Password   = 'networld123';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('cuentanetworld@gmail.com');
+            $mail->addAddress($this->correo);     //Add a recipient
+        
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'prueba';
+            $mail->Body    = 'Este es su codigo de recuperación: ';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+
 }
+
+

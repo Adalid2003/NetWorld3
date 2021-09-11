@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('fecha_nacimiento').setAttribute('max', date);
 });
 
-// Función para obtener un token del reCAPTCHA y asignarlo al formulario.
+// Función para obtener un token del reCAPTCHA y asignarlo al formularios.
 function reCAPTCHA() {
     // Método para generar el token del reCAPTCHA.
     grecaptcha.ready(function () {
         // Se declara e inicializa una variable para guardar la llave pública del reCAPTCHA.
-        let publicKey = '6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT';
+        let publicKey = '6LfPolscAAAAAJhhr_ZSPtMJBcZuJMRUbI_uUa_r';
         // Se obtiene un token para la página web mediante la llave pública.
         grecaptcha.execute(publicKey, { action: 'homepage' }).then(function (token) {
             // Se asigna el valor del token al campo oculto del formulario

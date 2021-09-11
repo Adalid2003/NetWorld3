@@ -14,6 +14,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'recaptcha' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
+    $_SESSION['correo_cliente'] = $cliente->getCorreo();
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
@@ -36,7 +37,7 @@ if (isset($_GET['action'])) {
                 // Se sanea el valor del token para evitar datos maliciosos.
                 $token = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
                 if ($token) {
-                    $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
+                    $secretKey = '6LfPolscAAAAAAXRkKcN9AlQ7PAZb_INtzy8kOmx';
                     $ip = $_SERVER['REMOTE_ADDR'];
 
                     $data = array(
@@ -124,7 +125,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
-            // Se crea un caso para iniciar sesión
+        
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);
@@ -150,7 +151,7 @@ if (isset($_GET['action'])) {
                             } else {
                                 $result['exception'] = 'Clave incorrecta';
                             }
-                            // Se notifica que la cuenta se desactivo 
+                            // Se notifica que la cuenta se desactiva
                         }
                     } else {
                         $result['exception'] = 'La cuenta ha sido desactivada';
@@ -163,6 +164,16 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Alias incorrecto';
                     }
                 }
+                case 'recuperarContra':
+                    $_POST = $cliente->validateForm($_POST);
+                    if ($cliente->setCorreo($_POST['correo_rec'])) {
+                        if ($cliente->enviarEmail()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Codigo enviado exitosamente';
+                        } else {
+                            $result['exception'] = 'Error al enviar su codigo de recuperación';
+                        }
+                    }
                 // Se finaliza el caso
                 break;
             default:

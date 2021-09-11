@@ -23,7 +23,7 @@ if ($InActiveTime >= $TimeOutSeconds) {
         <form method="post" id="session-form">
             <div class="input-field col s12 m6 offset-m3">
                 <i class="material-icons prefix">person_pin</i>
-                <input id="usuario1" type="text" name="usuario1" class="validate" required/>
+                <input id="usuario1" type="text" name="usuario1" class="validate" required autocomplete="off"/>
                 <label for="usuario">Usuario</label>
             </div>
             <div class="input-field col s12 m6 offset-m3">
@@ -37,6 +37,8 @@ if ($InActiveTime >= $TimeOutSeconds) {
         </form>
     </div>
 </div>
+
+
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
 Dashboard_Page::footerTemplate('index.js');

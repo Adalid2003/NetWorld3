@@ -121,6 +121,9 @@ class Usuarios extends Validator
         }
     }
 
+    //Métodos para validar y asignar valores del tributo.
+    
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -338,4 +341,66 @@ class Usuarios extends Validator
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    public function createHistorial()
+    {
+        // Se hace la consullta para llevar a cabo la acción
+        $sql = 'INSERT INTO historial_sesion(ordenador, hora, id_usuario)
+                VALUES(?,  current_timestamp, ?)';
+        $params = array($_SERVER['SERVER_SOFTWARE'], $_SESSION['id_usuario']);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function readHistorial()
+    {
+        // Se hace la consullta para llevar a cabo la acción
+        $sql = 'SELECT id_sesion, ordenador, hora, apodo_usuario
+                FROM historial_sesion INNER JOIN usuarios USING(id_usuario)
+                WHERE id_usuario = ?
+                ORDER BY apodo_usuario';
+        $params = array($_SESSION['id_usuario']);
+        return Database::getRows($sql, $params);
+    }
+
+    public function enviarEmail(){
+        //Import PHPMailer classes into the global namespace
+        //These must be at the top of your script, not inside a function
+        
+        //Load Composer's autoloader
+        require '../../libraries/phpmailer52/class.phpmailer.php';
+        require '../../libraries/phpmailer52/class.smtp.php';
+        require '../../libraries/phpmailer52/class.phpmaileroauthgoogle.php';
+        
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'cuentanetworld@gmail.com';                     //SMTP username
+            $mail->Password   = 'networld123';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('cuentanetworld@gmail.com');
+            $mail->addAddress($this->correo);     //Add a recipient
+        
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'prueba';
+            $mail->Body    = 'Este es su codigo de recuperación: ';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+
 }

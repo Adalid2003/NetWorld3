@@ -170,16 +170,6 @@ if (isset($_GET['action'])) {
                         $result['exception'] = 'Alias incorrecto';
                     }
                 }
-                case 'recuperarContra':
-                    $_POST = $cliente->validateForm($_POST);
-                    if ($cliente->setCorreo($_POST['correo_rec'])) {
-                        if ($cliente->enviarEmail()) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Codigo enviado exitosamente';
-                        } else {
-                            $result['exception'] = 'Error al enviar su codigo de recuperación';
-                        }
-                    }
                 // Se finaliza el caso
                 break;
             default:

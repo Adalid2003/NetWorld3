@@ -14,15 +14,16 @@ if (isset($_GET['action'])) {
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['id_usuario'])) {
         if (!isset($_SESSION['tiempo'])) {
-            $_SESSION['tiempo']=time();
-        }
-        else if (time() - $_SESSION['tiempo'] > 5) {
+            $_SESSION['tiempo'] = time();
+        } else if (time() - $_SESSION['tiempo'] > 5) {
             session_destroy();
-            $result['status'] = 1;
-            $result['message'] = 'Sesión cerrada por inactividad';
-            die();  
+            if (session_destroy()) {
+                $result['status'] = 1;
+                $result['message'] = 'Sesión cerrada por inactividad';
+                die();
+            }
         }
-        $_SESSION['tiempo']=time(); //Si hay actividad seteamos el valor al tiempo actual
+        $_SESSION['tiempo'] = time(); //Si hay actividad seteamos el valor al tiempo actual
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'logOut':
@@ -106,17 +107,17 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-                case 'readHistorial':
-                    if ($result['dataset'] = $usuario->readHistorial()) {
-                        $result['status'] = 1;
+            case 'readHistorial':
+                if ($result['dataset'] = $usuario->readHistorial()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
                     } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'No hay sesiones iniciadas para este usuario';
-                        }
+                        $result['exception'] = 'No hay sesiones iniciadas para este usuario';
                     }
-                    break;
+                }
+                break;
             case 'readAll2':
                 if ($result['dataset'] = $usuario->readAll2()) {
                     $result['status'] = 1;
@@ -226,63 +227,62 @@ if (isset($_GET['action'])) {
             case 'update':
                 //print_r($_POST);
                 $_POST = $usuario->validateForm($_POST);
-                if($usuario->setId($_POST['id_usuario'])){
-                if ($usuario->setNombres($_POST['nombres'])) {
-                    if($data = $usuario->readOne()){
-                    if ($usuario->setDireccion(($_POST['direccion']))) {
-                        if ($usuario->setApellidos($_POST['apellidos'])) {
-                            if ($usuario->setCorreo($_POST['correo'])) {
-                                            if ($usuario->setDui($_POST['dui_u'])) {
-                                                if ($usuario->setIdU($_POST['tipo_usuario'])) {
-                                                    if (is_uploaded_file($_FILES['foto_usuario']['tmp_name'])) {
-                                                        if ($usuario->setImagen($_FILES['foto_usuario'])) {
-                                                            if ($usuario->updateRow($_FILES['foto_usuario'])) {
-                                                                $result['status'] = 1;
-                                                                if ($usuario->saveFile($_FILES['foto_usuario'], $usuario->getRuta(), $usuario->getImagenU())) {
-                                                                    $result['message'] = 'Usuario actualizado correctamente';
-                                                                } else {
-                                                                    $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
-                                                                }
+                if ($usuario->setId($_POST['id_usuario'])) {
+                    if ($usuario->setNombres($_POST['nombres'])) {
+                        if ($data = $usuario->readOne()) {
+                            if ($usuario->setDireccion(($_POST['direccion']))) {
+                                if ($usuario->setApellidos($_POST['apellidos'])) {
+                                    if ($usuario->setCorreo($_POST['correo'])) {
+                                        if ($usuario->setDui($_POST['dui_u'])) {
+                                            if ($usuario->setIdU($_POST['tipo_usuario'])) {
+                                                if (is_uploaded_file($_FILES['foto_usuario']['tmp_name'])) {
+                                                    if ($usuario->setImagen($_FILES['foto_usuario'])) {
+                                                        if ($usuario->updateRow($_FILES['foto_usuario'])) {
+                                                            $result['status'] = 1;
+                                                            if ($usuario->saveFile($_FILES['foto_usuario'], $usuario->getRuta(), $usuario->getImagenU())) {
+                                                                $result['message'] = 'Usuario actualizado correctamente';
                                                             } else {
-                                                                $result['exception'] = Database::getException();
                                                                 $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                             }
                                                         } else {
-                                                            $result['exception'] = $usuario->getImageError();;
+                                                            $result['exception'] = Database::getException();
+                                                            $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                         }
                                                     } else {
-                                                        if ($usuario->updateRow($data['imagen_usuario'])) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'El usuario se ha actualizado exitosamente';
-                                                        } else {
-                                                            $result['exception'] = Database::getException();
-                                                        }
+                                                        $result['exception'] = $usuario->getImageError();;
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Tipo de usuario incorrecto';
+                                                    if ($usuario->updateRow($data['imagen_usuario'])) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'El usuario se ha actualizado exitosamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
                                                 }
                                             } else {
-                                                $result['exception'] = 'DUI incorrecto';
+                                                $result['exception'] = 'Tipo de usuario incorrecto';
                                             }
-
+                                        } else {
+                                            $result['exception'] = 'DUI incorrecto';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Correo incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Apellidos incorrectos';
+                                }
                             } else {
-                                $result['exception'] = 'Correo incorrecto';
+                                $result['exception'] = 'Nombres incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Apellidos incorrectos';
+                            $result['exception'] = 'Direccion incorrecta';
                         }
                     } else {
-                        $result['exception'] = 'Nombres incorrectos';
+                        $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Direccion incorrecta';
+                    $result['exception'] = 'Usuario incorrecto';
                 }
-            }else{
-                $result['exception'] = 'Usuario inexistente';
-            }
-        }else{
-            $result['exception'] = 'Usuario incorrecto';
-        }
                 break;
             case 'delete':
                 if ($_POST['id_usuario'] != $_SESSION['id_usuario']) {

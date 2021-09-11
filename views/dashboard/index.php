@@ -23,6 +23,8 @@ Dashboard_Page::headerTemplate('Iniciar sesión');
         </form>
     </div>
 </div>
+
+
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.
 Dashboard_Page::footerTemplate('index.js');

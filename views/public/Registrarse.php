@@ -23,27 +23,27 @@ Public_Page::headerTemplate('Registrar Cliente');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">email</i>
-            <input id="correo_cliente" type="email" name="correo_cliente" class="validate" required/>
+            <input id="correo_cliente" type="email" name="correo_cliente" class="validate" autocomplete="off" required/>
             <label for="correo">Correo</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">person_pin</i>
-            <input id="alias" type="text" name="alias" class="validate" required/>
+            <input id="alias" type="text" name="alias" class="validate" autocomplete="off" required/>
             <label for="alias">Usuario</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">security</i>
-            <input id="clave1" type="password" name="clave1" class="validate" required/>
-            <label for="clave1">Contrseña</label>
+            <input id="clave1" type="password" name="clave1" class="validate" autocomplete="off"  required/>
+            <label for="clave1">Contraseña</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">security</i>
-            <input id="clave2" type="password" name="clave2" class="validate" required/>
+            <input id="clave2" type="password" name="clave2" class="validate"  autocomplete="off" required/>
             <label for="clave2">Confirmar contraseña</label>
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">perm_identity</i>
-            <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required/>
+            <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" autocomplete="off"  required/>
             <label for="dui_c">DUI</label>
         </div>
         <div class="input-field col s12 m6">
@@ -73,7 +73,8 @@ Public_Page::headerTemplate('Registrar Cliente');
 </form>
 
 <!-- Importación del archivo para que funcione el reCAPTCHA. Para más información https://developers.google.com/recaptcha/docs/v3 -->
-        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT"></script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LfPolscAAAAAJhhr_ZSPtMJBcZuJMRUbI_uUa_r"></script>
+
 
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.

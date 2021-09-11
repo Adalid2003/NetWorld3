@@ -28,6 +28,7 @@ if ($dataCategorias = $categoria->readAll()) {
             $pdf->Cell(140, 10, utf8_decode($rowCategoria['nombre_categoria']), 1, 0);
             $pdf->Cell(46, 10, utf8_decode($rowCategoria['cantidad']), 1, 1);
         }
+        // Se imprimen los mensajes de errores
     } else {
         $pdf->Cell(0, 10, utf8_decode('No hay compras realizadas en esta fecha'), 1, 1);
     }

@@ -40,6 +40,7 @@ if ($dataProductos = $producto->readAll()) {
                     $pdf->Cell(80, 10, utf8_decode($rowProductos['descripcion']), 1, 0);
                     $pdf->Cell(46, 10, utf8_decode($rowProductos['nombre_categoria']), 1, 1);
                 }
+                // Se imprimen los mensajes de errores
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay productos registrados con este precio'), 1, 1);
             }

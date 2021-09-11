@@ -16,7 +16,7 @@ if ($dataCompras = $compra->readAll()) {
         // Se establece un color de relleno para mostrar el nombre de la categoría.
         $pdf->SetFillColor(175);
         // Se establece la fuente para el nombre de la categoría.
-        $pdf->SetFont('Times', 'B', 12);
+        $pdf->SetFont('Times', 'B', 11);
         // Se imprime una celda con el nombre de la categoría.
         $pdf->Cell(0, 10, utf8_decode('Fecha: '.$rowCompra['fecha_compra']), 1, 1, 'C', 1);
         // Se establece la categoría para obtener sus productos, de lo contrario se imprime un mensaje de error.
@@ -38,6 +38,7 @@ if ($dataCompras = $compra->readAll()) {
                     $pdf->Cell(46, 10, $rowCompras['id_compra'], 1, 0);
                     $pdf->Cell(140, 10, utf8_decode($rowCompras['nombre_cliente']), 1, 1);
                 }
+                // Se imprimen los mensajes de errores
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay compras realizadas en esta fecha'), 1, 1);
             }

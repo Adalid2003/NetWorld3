@@ -288,26 +288,33 @@ function barGraph(canvas, xAxis, yAxis, legend, title) {
     const context = document.getElementById(canvas).getContext('2d');
     // Se crea una instancia para generar la gráfica con los datos recibidos.
     const chart = new Chart(context, {
+        // Se establece el tipo de gráfico
         type: 'bar',
         data: {
             labels: xAxis,
             datasets: [{
+                // Se establecen la leyenda
                 label: legend,
                 data: yAxis,
+                // Se establecen los colores
                 borderColor: '#000000',
                 borderWidht: 1,
                 backgroundColor: colors
             }]
         },
+        // Se establecen las opciones
         options: {
             responsive: true,
+            // Se establece las opciones de la leyenda
             legend: {
                 display: false
             },
+            // Se establece las opciones del título
             title: {
                 display: true,
                 text: title
             },
+            // Se establece las opciones de las escalas
             scales: {
                 yAxes: [{
                     ticks: {
@@ -347,16 +354,20 @@ function pieGraph(canvas, legends, values, title) {
     const context = document.getElementById(canvas).getContext('2d');
     // Se crea una instancia para generar la gráfica con los datos recibidos.
     const chart = new Chart(context, {
+        // Se establece el tipo de gráfico
         type: 'pie',
         data: {
+            // Se establecen la leyenda
             labels: legends,
             datasets: [{
                 data: percentages,
                 backgroundColor: colors
             }]
         },
+        // Se establecen las opciones
         options: {
             responsive: true,
+            // Se establece las opciones del título
             title: {
                 display: true,
                 text: title
@@ -375,27 +386,34 @@ function lineGraph(canvas,xAxis,yAxis,legend,title) {
     const context = document.getElementById(canvas).getContext('2d');
     // Se crea una instancia para generar la gráfica con los datos recibidos.
     const chart = new Chart(context, {
+        // Se establece el tipo de gráfico
         type: 'line',
         data: {
             labels: xAxis,
             datasets: [{
                fill: false,
+               // Se establecen la leyenda
                 label: legend,
                 data: yAxis,
+                // Se establecen los colores
                 borderColor: '#000000',
                 borderWidht: 1,
                 backgroundColor: colors
             }]
         },
+        // Se establecen las opciones
         options: {
             responsive: true,
+            // Se establece las opciones de la leyenda
             legend: {
                 display: false
             },
+            // Se establece las opciones del título
             title: {
                 display: true,
                 text: title
             },
+            // Se establece las opciones de las escalas
             scales: {
                 yAxes: [{
                     ticks: {
@@ -420,20 +438,25 @@ function polarGraph(canvas,xAxis,yAxis,legend,title) {
      const context = document.getElementById(canvas).getContext('2d');
      // Se crea una instancia para generar la gráfica con los datos recibidos.
      const chart = new Chart(context, {
+         // Se establece el tipo de gráfico
          type: 'doughnut',
          data: {
              labels: xAxis,
              datasets: [{
                 fill: false,
+                // Se establecen la leyenda
                  label: legend,
                  data: yAxis,
+                 // Se establecen los colores
                  borderColor: '#000000',
                  borderWidht: 1,
                  backgroundColor: colors
              }]
          },
+         // Se establecen las opciones
          options: {
             responsive: true,
+            // Se establece las opciones del título
             title: {
                 display: true,
                 text: title
@@ -455,26 +478,33 @@ function scatterGraph(canvas,xAxis,yAxis,legend,title) {
     const context = document.getElementById(canvas).getContext('2d');
     // Se crea una instancia para generar la gráfica con los datos recibidos.
     const chart = new Chart(context, {
+        // Se establece el tipo de gráfico
         type: 'polarArea',
         data: {
             labels: xAxis,
             datasets: [{
+                // Se establecen la leyenda
                 label: legend,
                 data: yAxis,
+                // Se establecen los colores
                 borderColor: '#000000',
                 borderWidht: 1,
                 backgroundColor: colors
             }]
         },
+        // Se establecen las opciones
         options: {
             responsive: true,
+            // Se establece las opciones de la leyenda
             legend: {
                 display: false
             },
+            // Se establece las opciones del título
             title: {
                 display: true,
                 text: title
             },
+            // Se establece las opciones de las escalas
             scales: {
                 yAxes: [{
                     ticks: {

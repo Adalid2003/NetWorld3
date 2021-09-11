@@ -7,6 +7,7 @@ require_once('../../models/clientes.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+    
     // Se instancia la clase correspondiente.
     $cliente = new Clientes;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -42,7 +43,7 @@ if (isset($_GET['action'])) {
                 // Se sanea el valor del token para evitar datos maliciosos.
                 $token = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
                 if ($token) {
-                    $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
+                    $secretKey = '6LfPolscAAAAAAXRkKcN9AlQ7PAZb_INtzy8kOmx';
                     $ip = $_SERVER['REMOTE_ADDR'];
 
                     $data = array(
@@ -130,7 +131,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
-            // Se crea un caso para iniciar sesión
+        
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);
@@ -156,7 +157,7 @@ if (isset($_GET['action'])) {
                             } else {
                                 $result['exception'] = 'Clave incorrecta';
                             }
-                            // Se notifica que la cuenta se desactivo 
+                            // Se notifica que la cuenta se desactiva
                         }
                     } else {
                         $result['exception'] = 'La cuenta ha sido desactivada';

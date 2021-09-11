@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('fecha_nacimiento').setAttribute('max', date);
 });
 
-// Función para obtener un token del reCAPTCHA y asignarlo al formulario.
+// Función para obtener un token del reCAPTCHA y asignarlo al formularios.
 function reCAPTCHA() {
     // Método para generar el token del reCAPTCHA.
     grecaptcha.ready(function () {

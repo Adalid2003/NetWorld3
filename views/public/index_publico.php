@@ -7,7 +7,7 @@ Public_Page::headerTemplate('Inicio');
 $TimeOutMinutes = 5; // This is your TimeOut period in minutes
 $LogOff_URL = "inactividad.php"; // If timed out, it will be redirected to this page
 
-$TimeOutSeconds = $TimeOutMinutes * 60; // TimeOut in Seconds
+$TimeOutSeconds = $TimeOutMinutes * 60; // TiimeOut in Seconds
 if (isset($_SESSION['SessionStartTime'])) {
 $InActiveTime = time() - $_SESSION['SessionStartTime'];
 if ($InActiveTime >= $TimeOutSeconds) {

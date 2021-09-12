@@ -14,45 +14,16 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'error' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['id_usuario'])) {
-        if (!isset($_SESSION['tiempo'])) {
-            $_SESSION['tiempo'] = time();
-        } else if (time() - $_SESSION['tiempo'] > 5) {
-            session_destroy();
-            if (session_destroy()) {
-                $result['status'] = 1;
-                $result['message'] = 'Sesión cerrada por inactividad';
-                die();
-            }
-        }
-        $_SESSION['tiempo'] = time(); //Si hay actividad seteamos el valor al tiempo actual
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-        
-        case 'inactividad':
-        
-            if(isset($_SESSION['tiempo']) ) {
-
-                //Tiempo en segundos para dar vida a la sesión.
-                $inactivo = 300;//20min en este caso.
-        
-                //Calculamos tiempo de vida inactivo.
-                $vida_session = time() - $_SESSION['tiempo'];
-        
-                    //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
-                    if($vida_session > $inactivo)
-                    {
-                        //Removemos sesión.
-                        session_unset();
-                        //Destruimos sesión.
-                        session_destroy();              
-                        //Redirigimos pagina.
-                        header("Location: index.php");
-        
-                        exit();
-                    }
-        
-            }
-            $_SESSION['tiempo'] = time();
+            case 'sessionTime':
+                if((time() - $_SESSION['tiempo_usuario']) < 300) {
+                    $_SESSION['tiempo_usuario'] = time();
+                } else {
+                    unset($_SESSION['id_usuario'], $_SESSION['usuario'], $_SESSION['tiempo_usuario']);
+                    $result['status'] = 1;
+                    $result['message'] = 'La sesión se ha cerrado por inactividad';
+                }
                 break;
             case 'logOut':
                 if (session_destroy()) {
@@ -414,6 +385,7 @@ if (isset($_GET['action'])) {
                     if ($usuario->checkPassword($_POST['clave'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Autenticación correcta';
+                        $_SESSION['tiempo_usuario'] = time();
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
                         $usuario->createHistorial();

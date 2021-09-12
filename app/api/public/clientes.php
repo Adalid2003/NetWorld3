@@ -16,6 +16,15 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'sessionTime':
+                if((time() - $_SESSION['tiempo_cliente']) < 300) {
+                    $_SESSION['tiempo_cliente'] = time();
+                } else {
+                    unset($_SESSION['id_cliente'], $_SESSION['cliente'], $_SESSION['tiempo_cliente']);
+                    $result['status'] = 1;
+                    $result['message'] = 'La sesión se ha cerrado por inactividad';
+                }
+                break;
             // Se crea un caso para cerrar sesión
             case 'logOut':
                 unset($_SESSION['id_cliente']);
@@ -133,6 +142,7 @@ if (isset($_GET['action'])) {
                     if ($cliente->getEstado()) {
                         // Se captura la clave 
                         if ($cliente->checkPassword($_POST['clave'])) {
+                            $_SESSION['tiempo_cliente'] = time();
                             // Se captura el id del cliente
                             $_SESSION['id_cliente'] = $cliente->getId();
                             // Se captura el correo del cliente

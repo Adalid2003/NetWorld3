@@ -33,7 +33,7 @@ if (isset($_GET['action'])) {
             if(isset($_SESSION['tiempo']) ) {
 
                 //Tiempo en segundos para dar vida a la sesión.
-                $inactivo = 30;//20min en este caso.
+                $inactivo = 300;//20min en este caso.
         
                 //Calculamos tiempo de vida inactivo.
                 $vida_session = time() - $_SESSION['tiempo'];

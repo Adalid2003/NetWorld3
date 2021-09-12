@@ -5,7 +5,7 @@ require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Inicio');
 $TimeOutMinutes = 5; // This is your TimeOut period in minutes
-$LogOff_URL = "inactividad.php"; // If timed out, it will be redirected to this page
+$LogOff_URL = "index_publico.php"; // If timed out, it will be redirected to this page
 
 $TimeOutSeconds = $TimeOutMinutes * 60; // TiimeOut in Seconds
 if (isset($_SESSION['SessionStartTime'])) {

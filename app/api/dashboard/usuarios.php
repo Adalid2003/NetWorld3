@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'sessionTime':
-                if((time() - $_SESSION['tiempo_usuario']) < 10) {
+                if((time() - $_SESSION['tiempo_usuario']) < 300) {
                     $_SESSION['tiempo_usuario'] = time();
                 } else {
                     unset($_SESSION['id_usuario'], $_SESSION['usuario'], $_SESSION['tiempo_usuario']);

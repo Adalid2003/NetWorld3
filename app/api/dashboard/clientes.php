@@ -27,6 +27,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'search':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $clientes->validateForm($_POST);
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $clientes->searchRows($_POST['search'])) {
@@ -49,6 +50,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'create':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $clientes->validateForm($_POST);
                 if ($clientes->setNombres($_POST['nombres'])) {
                     if ($clientes->setApellidos($_POST['apellidos'])) {
@@ -100,6 +102,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'update':
                 //print_r($_POST);
+                // se obtienen el post para acceder a los inputs
                 $_POST = $clientes->validateForm($_POST);
                 if ($clientes->setId($_POST['id_cliente'])) {
                     if ($clientes->readOne()) {

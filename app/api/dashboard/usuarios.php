@@ -78,40 +78,39 @@ if (isset($_GET['action'])) {
             case 'changePassword':
                 if ($usuario->setId($_SESSION['id_usuario'])) {
                      // se obtienen el post para acceder a los inputs
-                    $_POST = $usuario->validateForm($_POST);
-                    if ($usuario->checkPassword($_POST['clave_actual'])) {
-                        if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                            if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
-                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
-                                            if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                                if ($usuario->changePassword()) {
-                                                     // se ejecuta la funcion del modelo
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Contraseña cambiada correctamente';
-                                                } else {
-                                                     // se verifica si no existe un error
-                                                    $result['exception'] = Database::getException();
-                                                }
-                                            } else {
-                                                $result['exception'] = $usuario->getPasswordError();
-                                            }
-        
-                                } else {
-                                    $result['exception'] = Database::getException();
-                                }
-                            } else {
-                                $result['exception'] = $usuario->getPasswordError();
-                            }
-                        } else {
-                            $result['exception'] = 'Claves nuevas diferentes';
-                        }
-                    } else {
-                        $result['exception'] = 'Clave actual incorrecta';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
-                break;
+                     $_POST = $usuario->validateForm($_POST);
+                     if ($usuario->checkPassword($_POST['clave_actual'])) {
+                         if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                             if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
+                                 if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
+                                             if ($usuario->setClave($_POST['clave_nueva_1'])) {
+                                                 if ($usuario->changePassword()) {
+                                                     $result['status'] = 1;
+                                                     $result['message'] = 'Contraseña cambiada correctamente';
+                                                 } else {
+                                                     $result['exception'] = Database::getException();
+                                                 }
+                                             } else {
+                                                 $result['exception'] = $usuario->getPasswordError();
+                                             }
+ 
+                                 } else {
+                                     $result['exception'] = 'Clave similar a la actual';
+                                 }
+                                         }else{
+                                             $result['exception'] = 'Clave Similar a la actual';
+                                         }
+ 
+                                         }else{
+                                             $result['exception'] = 'Clave nueva diferente';
+                                         }
+                                     }else{
+                                         $result['exception'] = 'Clave actual incorrecta';
+                                     }
+                                 }else{
+                                     $result['exception'] = 'Usuario incorrecto';
+                                 }             
+                 break;
                 // se ejecuta el case readAll
             case 'readAll':
                 if ($result['dataset'] = $usuario->readAll()) {
@@ -288,7 +287,7 @@ if (isset($_GET['action'])) {
                                                             $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                         }
                                                     
-                                                } else {
+                                                //} else {
                                                     if ($usuario->updateRow($data['imagen_usuario'])) {
                                                         $result['status'] = 1;
                                                         $result['message'] = 'El usuario se ha actualizado exitosamente';

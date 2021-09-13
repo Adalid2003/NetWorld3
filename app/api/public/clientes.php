@@ -16,7 +16,16 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-                // Se crea un caso para cerrar sesión
+            case 'sessionTime':
+                if((time() - $_SESSION['tiempo_cliente']) < 300) {
+                    $_SESSION['tiempo_cliente'] = time();
+                } else {
+                    unset($_SESSION['id_cliente'], $_SESSION['cliente'], $_SESSION['tiempo_cliente']);
+                    $result['status'] = 1;
+                    $result['message'] = 'La sesión se ha cerrado por inactividad.';
+                }
+                break;
+            // Se crea un caso para cerrar sesión
             case 'logOut':
                 unset($_SESSION['id_cliente']);
                 $result['status'] = 1;
@@ -134,12 +143,54 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
+<<<<<<< HEAD
 
 
 
 
 
                 
+=======
+                 // se ejecuta el case changepassword
+            case 'changePassword':
+                if ($usuario->setId($_SESSION['id_cliente'])) {
+                     // se obtienen el post para acceder a los inputs
+                    $_POST = $cliente->validateForm($_POST);
+                    if ($cliente->checkPassword($_POST['clave_actual'])) {
+                        if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                            if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
+                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
+                                            if ($cliente->setClave($_POST['clave_nueva_1'])) {
+                                                if ($cliente->changePassword()) {
+                                                     // se ejecuta la funcion del modelo
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Contraseña cambiada correctamente';
+                                                } else {
+                                                     // se verifica si no existe un error
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = $cliente->getPasswordError();
+                                            }
+        
+                                } else {
+                                    $result['exception'] = Database::getException();
+                                }
+                            } else {
+                                $result['exception'] = $cliente->getPasswordError();
+                            }
+                        } else {
+                            $result['exception'] = 'Claves nuevas diferentes';
+                        }
+                    } else {
+                        $result['exception'] = 'Clave actual incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
+                break;
+        
+>>>>>>> e58c248971f928694cb0ccd620a60b634b0186e0
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);

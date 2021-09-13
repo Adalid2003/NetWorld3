@@ -164,6 +164,7 @@ if (isset($_GET['action'])) {
                             $result['message'] = 'Autenticación correcta';
                             // Se captura el id del cliente
                             $_SESSION['id_cliente'] = $cliente->getId();
+                            $_SESSION['tiempo_cliente'] = time();
                             // Se captura el correo del cliente
                             $_SESSION['correo_cliente'] = $cliente->getCorreo();
                             $_SESSION['nombre_cliente'] = $cliente->getNombres();

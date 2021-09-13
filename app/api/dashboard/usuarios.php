@@ -89,10 +89,10 @@ if (isset($_GET['action'])) {
                                             }
 
                                 } else {
-                                    $result['exception'] = 'Clave similar a la actual';
+                                    $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
                                 }
                                         }else{
-                                            $result['exception'] = 'Clave Similar a la actual';
+                                            $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
                                         }
 
                                         }else{

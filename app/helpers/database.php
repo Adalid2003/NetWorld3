@@ -9,7 +9,7 @@ class Database{
         $server = 'localhost';
         $database = 'NetWorld31';
         $username = 'postgres';
-        $password = '20160062itr';
+        $password = 'rojo09';
 
         self::$connection = new PDO('pgsql:host='.$server.';dbname='.$database.';port=5432', $username, $password);
     }

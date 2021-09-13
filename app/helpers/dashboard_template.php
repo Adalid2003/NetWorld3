@@ -1,12 +1,12 @@
 <?php
-
+session_start();
 class Dashboard_page
 {
 
     public static function headerTemplate($title)
     {
 
-        session_start();
+        //session_start();
         print('<!DOCTYPE html>
     <html>
      <!--Se crea el helper del header privado-->
@@ -31,7 +31,7 @@ class Dashboard_page
                 print('    <header>
         <nav class="#0d47a1 blue darken-4" role="navigation">
             <div class="nav-wrapper">
-                <li class="material-icons">dashboard</li> <a href="">Dashboard</a>
+                <li class="material-icons">dashboard</li> <a href="../../views/dashboard/main.php">Dashboard</a>
                 <a id="logo-container" href="../../views/dashboard/main.php" class="brand-logo container center">
                 
                     NetWorld
@@ -47,6 +47,7 @@ class Dashboard_page
     <li><a href="../dashboard/categorias.php"><i class="material-icons">copyright</i>Categorías</a></li>
     <li><a href="../dashboard/valoraciones.php"><i class="material-icons">check</i>Valoraciones</a></li>
     <li><a href="../dashboard/clientes.php"><i class="material-icons">person</i>Clientes</a></li>
+    <li><a href="../dashboard/historial.php"><i class="material-icons">history</i>Actividad de sesión</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Detalle de su cuenta</a></li>
     <li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Usuario: <b>' . $_SESSION['apodo_usuario'] . '</b></a></li>
@@ -117,7 +118,7 @@ class Dashboard_page
           <div class="container">
               <div class="row">
                   <div class="col l6 s12">
-                      <h5 class="white-text">Contactanos</h5>
+                      <h5 class="white-text">Contáctanos</h5>
                       <h5 id="logo-container" href="#" class="brand-logo">
                           <i class="material-icons">facebook</i>
                           NetWorldsv
@@ -139,7 +140,7 @@ class Dashboard_page
                           </a>
                           <h5 id="logo-container" href="" class="brand-logo"></h5>
                               <i class="material-icons">dashboard</i>
-                              <a href="../../views/dashboard/dashboard.php">Dashboard(privado)</a>
+                              <a href="../../views/dashboard/index.php">Dashboard</a>
                   </div>
               </div>
           </div>

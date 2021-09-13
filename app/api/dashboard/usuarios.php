@@ -7,6 +7,7 @@ require_once('../../models/usuarios.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+   //Comprobamos si esta definida la sesión 'tiempo'.
     // Se instancia la clase correspondiente.
     $usuario = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -15,10 +16,22 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'sessionTime':
+                if((time() - $_SESSION['tiempo_usuario']) < 300) {
+                    $_SESSION['tiempo_usuario'] = time();
+                } else {
+                    unset($_SESSION['id_usuario'], $_SESSION['usuario'], $_SESSION['tiempo_usuario']);
+                    $result['status'] = 1;
+                    $result['message'] = 'La sesión se ha cerrado por inactividad';
+                }
+                break;
             case 'logOut':
-                unset($_SESSION['id_usuario']);
-                $result['status'] = 1;
-                $result['message'] = 'Sesión eliminada correctamente';
+                if (session_destroy()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Sesión eliminada correctamente';
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                }
                 break;
             case 'readProfile':
                 if ($result['dataset'] = $usuario->readProfile()) {
@@ -84,21 +97,20 @@ if (isset($_GET['action'])) {
                                             }
         
                                 } else {
-                                    $result['exception'] = 'Clave similar a la actual';
+                                    $result['exception'] = Database::getException();
                                 }
-                                        }else{
-                                            $result['exception'] = 'Clave Similar a la actual';
-                                        }
-
-                                        }else{
-                                            $result['exception'] = 'Clave nueva diferente';
-                                        }
-                                    }else{
-                                        $result['exception'] = 'Clave actual incorrecta';
-                                    }
-                                }else{
-                                    $result['exception'] = 'Usuario incorrecto';
-                                }             
+                            } else {
+                                $result['exception'] = $usuario->getPasswordError();
+                            }
+                        } else {
+                            $result['exception'] = 'Claves nuevas diferentes';
+                        }
+                    } else {
+                        $result['exception'] = 'Clave actual incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
                 break;
                 // se ejecuta el case readAll
             case 'readAll':
@@ -273,33 +285,43 @@ if (isset($_GET['action'])) {
                                                         } else {
                                                             // se verifica si no existe un error
                                                             $result['exception'] = Database::getException();
+                                                            $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                         }
+                                                    } else {
+                                                        $result['exception'] = $usuario->getImageError();;
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Tipo de usuario incorrecto';
+                                                    if ($usuario->updateRow($data['imagen_usuario'])) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'El usuario se ha actualizado exitosamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
                                                 }
                                             } else {
-                                                $result['exception'] = 'DUI incorrecto';
+                                                $result['exception'] = 'Tipo de usuario incorrecto';
                                             }
-
+                                        } else {
+                                            $result['exception'] = 'DUI incorrecto';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Correo incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Apellidos incorrectos';
+                                }
                             } else {
-                                $result['exception'] = 'Correo incorrecto';
+                                $result['exception'] = 'Nombres incorrectos';
                             }
                         } else {
-                            $result['exception'] = 'Apellidos incorrectos';
+                            $result['exception'] = 'Direccion incorrecta';
                         }
                     } else {
-                        $result['exception'] = 'Nombres incorrectos';
+                        $result['exception'] = 'Usuario inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Direccion incorrecta';
+                    $result['exception'] = 'Usuario incorrecto';
                 }
-            }else{
-                $result['exception'] = 'Usuario inexistente';
-            }
-        }else{
-            $result['exception'] = 'Usuario incorrecto';
-        }
                 break;
                 // se ejecuta el case delete
             case 'delete':
@@ -374,42 +396,40 @@ if (isset($_GET['action'])) {
                                                                     $result['exception'] = Database::getException();
                                                                 }
                                                             } else {
-                                                                $result['exception'] = $usuario->getImageError();;
+                                                                $result['exception'] = Database::getException();
                                                             }
                                                         } else {
-                                                            $result['exception'] = 'Selecciona una foto de perfil';
+                                                            $result['exception'] = $usuario->getImageError();;
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Tipo de usuario incorrecto';
+                                                        $result['exception'] = 'Selecciona una foto de perfil';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'DUI incorrecto';
+                                                    $result['exception'] = 'Tipo de usuario incorrecto';
                                                 }
                                             } else {
-                                                $result['exception'] = $usuario->getPasswordError();
+                                                $result['exception'] = 'DUI incorrecto';
                                             }
                                         } else {
-                                            $result['exception'] = 'Claves diferentes';
+                                            $result['exception'] = $usuario->getPasswordError();
                                         }
                                     } else {
-                                        $result['exception'] = 'Alias incorrecto';
+                                        $result['exception'] = 'Claves diferentes';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo incorrecto';
+                                    $result['exception'] = 'Alias incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Apellidos incorrectos';
+                                $result['exception'] = 'Correo incorrecto';
                             }
                         } else {
-                            $result['exception'] = 'Direccion incorrecta';
+                            $result['exception'] = 'Apellidos incorrectos';
                         }
                     } else {
-                        $result['exception'] = 'Nombre incorrecto';
+                        $result['exception'] = 'Nombres incorrectos';
                     }
-                    
-
-                }else{
-                    $result['exception'] = 'Error ya existe un usuario registrado';
+                } else {
+                    $result['exception'] = 'Direccion incorrecta';
                 }
                 break;
               // se ejecuta el case Login
@@ -421,8 +441,10 @@ if (isset($_GET['action'])) {
                 // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                         $result['message'] = 'Autenticación correcta';
+                        $_SESSION['tiempo_usuario'] = time();
                         $_SESSION['id_usuario'] = $usuario->getId();
                         $_SESSION['apodo_usuario'] = $usuario->getUsuario();
+                        $usuario->createHistorial();
                     } else {
                         if (Database::getException()) {
                             // se verifica si no existe un error

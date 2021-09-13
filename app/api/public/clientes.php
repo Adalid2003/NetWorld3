@@ -7,27 +7,29 @@ require_once('../../models/clientes.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    
     // Se instancia la clase correspondiente.
     $cliente = new Clientes;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'recaptcha' => 0, 'message' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
+    $_SESSION['correo_cliente'] = $cliente->getCorreo();
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'sessionTime':
+                if((time() - $_SESSION['tiempo_cliente']) < 300) {
+                    $_SESSION['tiempo_cliente'] = time();
+                } else {
+                    unset($_SESSION['id_cliente'], $_SESSION['cliente'], $_SESSION['tiempo_cliente']);
+                    $result['status'] = 1;
+                    $result['message'] = 'La sesión se ha cerrado por inactividad';
+                }
+                break;
             // Se crea un caso para cerrar sesión
             case 'logOut':
-                if (session_destroy()) {
-                    // Verifica que resultado del estado sea 1 para seguir con la acción
-                    $result['status'] = 1;
-                    // En casi que el estado sea igual a 1 se lleva a cabo la acción
-                    $result['message'] = 'Sesión eliminada correctamente';
-                    //En caso que no sea 1, notifica el error
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
-                }
-                // Se finaliza el caso
+                unset($_SESSION['id_cliente']);
+                $result['status'] = 1;
+                $result['message'] = 'Sesión eliminada correctamente';
                 break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
@@ -140,6 +142,7 @@ if (isset($_GET['action'])) {
                     if ($cliente->getEstado()) {
                         // Se captura la clave 
                         if ($cliente->checkPassword($_POST['clave'])) {
+                            $_SESSION['tiempo_cliente'] = time();
                             // Se captura el id del cliente
                             $_SESSION['id_cliente'] = $cliente->getId();
                             // Se captura el correo del cliente

@@ -61,3 +61,14 @@ document.getElementById('session-form').addEventListener('submit', function (eve
         console.log(error);
     });
 });
+
+//Funcion para generar codigo aleatorio para la recuperacion de contraseña
+function generarCodigo($length = 4) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString = $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}  

@@ -8,6 +8,7 @@ class Public_Page
 
         session_start();
         print('<!DOCTYPE html>
+                
     <html>
      <!--Se crea el helper del header privado-->
     <head>
@@ -39,6 +40,7 @@ class Public_Page
                             <a href="index_publico.php" class="brand-logo"><img src="../../resources/img/logo.jpg" height="60"></a>
                             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                             <ul class="right hide-on-med-and-down">
+                                <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                                 <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                                 <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                                 <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
@@ -47,6 +49,7 @@ class Public_Page
                     </nav>
                 </div>
                 <ul class="sidenav" id="mobile">
+                    <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                     <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                     <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                     <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
@@ -123,7 +126,7 @@ class Public_Page
           <div class="container">
               <div class="row">
                   <div class="col l6 s12">
-                      <h5 class="white-text">Contactanos</h5>
+                      <h5 class="white-text">Contáctanos</h5>
                       <h5 id="logo-container" href="#" class="brand-logo">
                           <i class="material-icons">facebook</i>
                           NetWorldsv
@@ -146,7 +149,7 @@ class Public_Page
                           </a>
                           <h5 id="logo-container" href="" class="brand-logo"></h5>
                               <i class="material-icons">dashboard</i>
-                              <a href="../../views/dashboard/dashboard.php">Dashboard(privado)</a>
+                              <a href="../../views/dashboard/index.php">Dashboard</a>
                   </div>
               </div>
           </div>

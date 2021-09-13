@@ -18,7 +18,7 @@ document.addEventListener('click', function () {
                 if (response.status) {
                     sweetAlert(4, response.message, 'login.php');
                 } else {
-                    console.log('Sesión activa.');
+                    console.log('Sesión activa');
                 }
             });
         } else {

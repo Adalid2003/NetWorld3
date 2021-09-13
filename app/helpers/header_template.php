@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class Public_Page
 {
@@ -6,7 +7,7 @@ class Public_Page
     public static function headerTemplate($title)
     {
 
-        session_start();
+        
         print('<!DOCTYPE html>
                 
     <html>
@@ -42,6 +43,7 @@ class Public_Page
                             <ul class="right hide-on-med-and-down">
                                 <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                                 <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
+                                <li><a href="historial.php"><i class="material-icons left">history</i>Actividad de sesión</a></li>
                                 <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
                             </ul>
                         </div>
@@ -50,10 +52,12 @@ class Public_Page
                 <ul class="sidenav" id="mobile">
                     <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                     <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
+                    <li><a href="historial.php"><i class="material-icons left">history</i>Actividad de sesión</a></li>
                     <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
                 </ul>
             </header>
             <main>
+            <h3 class="center-align">' . $title . '</h3>
         ');
             } else {
                 header('location: index.php');

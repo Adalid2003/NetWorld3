@@ -5,9 +5,7 @@ require_once('../../app/helpers/database.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Recuperar contraseña');
 
-if (isset($_POST['email'])) {
-    //funcion para generar codigo
-    function generarCodigo($longitud, $tipo = 0)
+function generarCodigo($longitud, $tipo = 0)
     {
         //creamos la variable codigo
         $codigo = "";
@@ -22,6 +20,9 @@ if (isset($_POST['email'])) {
         //regresamos codigo como valor
         return $codigo;
     }
+if (isset($_POST['email'])) {
+    //funcion para generar codigo
+    
     //Import PHPMailer classes into the global namespace
     //These must be at the top of your script, not inside a function
 
@@ -57,13 +58,23 @@ if (isset($_POST['email'])) {
         $mail->Body    = 'Este es su codigo de recuperación: ' . generarCodigo(5);
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-       if ($mail->send()) {
-        print('<div class="row center-align">
-        <a href="../../views/public/verificar.php" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar">AVANZAR</a>
-        </div>');
-       }
+        if ($mail->send()) {
+            echo('Codigo eviado');
+        }
+    ;
+    
+        
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
+if (isset($_POST['codigo'])) {
+    $codigop = $_POST['codigo'];
+    if ($codigop == generarCodigo(5)) {
+        header('login.php');
+    }else{
+        echo('El codigo no es correcto o no es valido');
     }
 }
 
@@ -79,6 +90,20 @@ if (isset($_POST['email'])) {
                 <i class="material-icons prefix">email</i>
                 <input type="email" id="email" name="email" class="validate" required />
                 <label for="email">Ingrese su correo electronico...</label>
+            </div>
+        </div>
+        <div class="row center-align">
+            <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Ingresar"><i class="material-icons">send</i></button>
+        </div>
+    </form>
+
+    <h5 class="center-align indigo-text">Ingrese el codigo de recuperacion enviado a su correo</h4>
+    <form method="post" id="save-form">
+        <div class="row">
+            <div class="input-field col s12 m4 offset-m4">
+                <i class="material-icons prefix">looks_one</i>
+                <input type="text" id="codigo" name="codigo" class="validate" required />
+                <label for="codigo">Ingrese su codigo...</label>
             </div>
         </div>
         <div class="row center-align">

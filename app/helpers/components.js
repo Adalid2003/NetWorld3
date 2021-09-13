@@ -59,6 +59,8 @@ function readRowsH(api) {
     });
 }
 
+
+
 /*
 *   Función para obtener los resultados de una búsqueda en los mantenimientos de tablas (operación search).
 *

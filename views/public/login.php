@@ -3,8 +3,6 @@
 require_once('../../app/helpers/header_template.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Iniciar sesión');
-
-
 ?>
 
 <head>

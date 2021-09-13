@@ -16,6 +16,41 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'changePassword':
+                if ($cliente->setId($_SESSION['id_cliente'])) {
+                    $_POST = $cliente->validateForm($_POST);
+                    if ($cliente->checkPassword($_POST['clave_actual'])) {
+                        if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                            if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
+                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
+                                            if ($cliente->setClave($_POST['clave_nueva_1'])) {
+                                                if ($cliente->changePassword()) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Contraseña cambiada correctamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = $cliente->getPasswordError();
+                                            }
+
+                                } else {
+                                    $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
+                                }
+                                        }else{
+                                            $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
+                                        }
+
+                                        }else{
+                                            $result['exception'] = 'Clave nueva diferente';
+                                        }
+                                    }else{
+                                        $result['exception'] = 'Clave actual incorrecta';
+                                    }
+                                }else{
+                                    $result['exception'] = 'Usuario incorrecto';
+                                }             
+                break;
             case 'sessionTime':
                 if((time() - $_SESSION['tiempo_cliente']) < 300) {
                     $_SESSION['tiempo_cliente'] = time();

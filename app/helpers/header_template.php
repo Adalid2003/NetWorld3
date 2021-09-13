@@ -41,7 +41,7 @@ class Public_Page
                             <a href="index_publico.php" class="brand-logo"><img src="../../resources/img/logo.jpg" height="60"></a>
                             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                             <ul class="right hide-on-med-and-down">
-                                <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
+                                <li><a href="#" onclick="openPasswordDialog()"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                                 <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                                 <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                                 <li><a href="historial.php"><i class="material-icons left">history</i>Actividad de sesión</a></li>
@@ -51,7 +51,7 @@ class Public_Page
                     </nav>
                 </div>
                 <ul class="sidenav" id="mobile">
-                    <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
+                    <li><a href="#" onclick="openPasswordDialog()"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                     <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                     <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                     <li><a href="historial.php"><i class="material-icons left">history</i>Actividad de sesión</a></li>
@@ -225,6 +225,41 @@ class Public_Page
                     <a href="#!" class="modal-action modal-close btn waves-effect"><i class="material-icons">done</i></a>
                 </div>
             </div>
+
+            <!-- Componente Modal para mostrar el formulario de cambiar contraseña -->
+            <div id="password-modal" class="modal">
+                <div class="modal-content">
+                    <h4 class="center-align">Cambiar contraseña</h4>
+                    <form method="post" id="password-form">
+                        <div class="row">
+                            <div class="input-field col s12 m6 offset-m3">
+                                <i class="material-icons prefix">security</i>
+                                <input id="clave_actual" type="password" name="clave_actual" class="validate" required/>
+                                <label for="clave_actual">Clave actual</label>
+                            </div>
+                        </div>
+                        <div class="row center-align">
+                            <label>CLAVE NUEVA</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                <i class="material-icons prefix">security</i>
+                                <input id="clave_nueva_1" type="password" name="clave_nueva_1" class="validate" required/>
+                                <label for="clave_nueva_1">Clave</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <i class="material-icons prefix">security</i>
+                                <input id="clave_nueva_2" type="password" name="clave_nueva_2" class="validate" required/>
+                                <label for="clave_nueva_2">Confirmar clave</label>
+                            </div>
+                        </div>
+                        <div class="row center-align">
+                            <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                            <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>  
         ');
     }
 }

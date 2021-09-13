@@ -191,6 +191,7 @@ class Clientes extends Validator
         }
     }
 
+    
     public function checkPassword($password)
     {
         // Se hace la consullta para llevar a cabo la acción
@@ -209,7 +210,7 @@ class Clientes extends Validator
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         // Se hace la consullta para llevar a cabo la acción
         $sql = 'UPDATE clientes SET clave_cliente = ? WHERE id_cliente = ?';
-        $params = array($hash, $this->id);
+        $params = array($hash, $_SESSION['id_cliente']);
         return Database::executeRow($sql, $params);
     }
 

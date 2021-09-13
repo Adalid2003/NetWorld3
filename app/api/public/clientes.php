@@ -16,20 +16,22 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_cliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'sessionTime':
-                if((time() - $_SESSION['tiempo_cliente']) < 300) {
-                    $_SESSION['tiempo_cliente'] = time();
-                } else {
-                    unset($_SESSION['id_cliente'], $_SESSION['cliente'], $_SESSION['tiempo_cliente']);
-                    $result['status'] = 1;
-                    $result['message'] = 'La sesión se ha cerrado por inactividad';
-                }
-                break;
-            // Se crea un caso para cerrar sesión
+                // Se crea un caso para cerrar sesión
             case 'logOut':
                 unset($_SESSION['id_cliente']);
                 $result['status'] = 1;
                 $result['message'] = 'Sesión eliminada correctamente';
+                break;
+            case 'readHistorial':
+                if ($result['dataset'] = $cliente->readHistorial()) {
+                    $result['status'] = 1;
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'No hay sesiones iniciadas para este usuario';
+                    }
+                }
                 break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
@@ -37,7 +39,7 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
-            // Se crea un caso para registrarse
+                // Se crea un caso para registrarse
             case 'register':
                 //print_r($_POST);
                 $_POST = $cliente->validateForm($_POST);
@@ -80,25 +82,25 @@ if (isset($_GET['action'])) {
                                             if ($cliente->setNacimiento($_POST['fecha_nacimiento'])) {
                                                 if ($cliente->setTelefono($_POST['telefono'])) {
                                                     if ($_POST['clave1'] == $_POST['clave2']) {
-                                                        if($cliente->setEstado(true)){
-                                                        if ($cliente->setClave($_POST['clave1'])) {
-                                                            // Se crea la fila
-                                                            if ($cliente->createRow()) {
-                                                                // Verifica si el estado es 1 
-                                                                $result['status'] = 1;
-                                                                // En caso de que sea 1 se lleva a cabo la acción
-                                                                $result['message'] = 'Cliente registrado correctamente';
-                                                                // En caso de no sea uno se notifican los errores
+                                                        if ($cliente->setEstado(true)) {
+                                                            if ($cliente->setClave($_POST['clave1'])) {
+                                                                // Se crea la fila
+                                                                if ($cliente->createRow()) {
+                                                                    // Verifica si el estado es 1 
+                                                                    $result['status'] = 1;
+                                                                    // En caso de que sea 1 se lleva a cabo la acción
+                                                                    $result['message'] = 'Cliente registrado correctamente';
+                                                                    // En caso de no sea uno se notifican los errores
+                                                                } else {
+                                                                    $result['exception'] = Database::getException();
+                                                                }
                                                             } else {
-                                                                $result['exception'] = Database::getException();
+                                                                $result['exception'] = $cliente->getPasswordError();
                                                             }
                                                         } else {
-                                                            $result['exception'] = $cliente->getPasswordError();
+                                                            $result['exception'] = 'Estado incorrecto';
                                                         }
-                                                    }else{
-                                                        $result['exception'] = 'Estado incorrecto';
-                                                    }
-                                                }else {
+                                                    } else {
                                                         $result['exception'] = 'Claves diferentes';
                                                     }
                                                 } else {
@@ -132,6 +134,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cargar el reCAPTCHA';
                 }
                 break;
+<<<<<<< HEAD
                  // se ejecuta el case changepassword
             case 'changePassword':
                 if ($usuario->setId($_SESSION['id_cliente'])) {
@@ -171,6 +174,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
         
+=======
+
+>>>>>>> 3e9bc4262360b34302b23a25bb082a45246d1a95
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);
@@ -180,15 +186,16 @@ if (isset($_GET['action'])) {
                     if ($cliente->getEstado()) {
                         // Se captura la clave 
                         if ($cliente->checkPassword($_POST['clave'])) {
-                            $_SESSION['tiempo_cliente'] = time();
-                            // Se captura el id del cliente
-                            $_SESSION['id_cliente'] = $cliente->getId();
-                            // Se captura el correo del cliente
-                            $_SESSION['correo_cliente'] = $cliente->getCorreo();
                             // Se declara que el estado es uno
                             $result['status'] = 1;
                             // En caso que sea uno se lleva a cabo la acción de forma exitosa
                             $result['message'] = 'Autenticación correcta';
+                            // Se captura el id del cliente
+                            $_SESSION['id_cliente'] = $cliente->getId();
+                            // Se captura el correo del cliente
+                            $_SESSION['correo_cliente'] = $cliente->getCorreo();
+                            $_SESSION['nombre_cliente'] = $cliente->getNombres();
+                            $cliente->createHistorial();
                             // En caso que no sea uno se infroma el error
                         } else {
                             if (Database::getException()) {

@@ -75,25 +75,35 @@ if (isset($_GET['action'])) {
                     $_POST = $usuario->validateForm($_POST);
                     if ($usuario->checkPassword($_POST['clave_actual'])) {
                         if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
-                            if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                if ($usuario->changePassword()) {
-                                    $result['status'] = 1;
-                                    $result['message'] = 'Contraseña cambiada correctamente';
+                            if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
+                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
+                                            if ($usuario->setClave($_POST['clave_nueva_1'])) {
+                                                if ($usuario->changePassword()) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Contraseña cambiada correctamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = $usuario->getPasswordError();
+                                            }
+
                                 } else {
-                                    $result['exception'] = Database::getException();
+                                    $result['exception'] = 'Clave similar a la actual';
                                 }
-                            } else {
-                                $result['exception'] = $usuario->getPasswordError();
-                            }
-                        } else {
-                            $result['exception'] = 'Claves nuevas diferentes';
-                        }
-                    } else {
-                        $result['exception'] = 'Clave actual incorrecta';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
+                                        }else{
+                                            $result['exception'] = 'Clave Similar a la actual';
+                                        }
+
+                                        }else{
+                                            $result['exception'] = 'Clave nueva diferente';
+                                        }
+                                    }else{
+                                        $result['exception'] = 'Clave actual incorrecta';
+                                    }
+                                }else{
+                                    $result['exception'] = 'Usuario incorrecto';
+                                }             
                 break;
             case 'readAll':
                 if ($result['dataset'] = $usuario->readAll()) {

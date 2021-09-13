@@ -40,6 +40,7 @@ class Public_Page
                             <a href="index_publico.php" class="brand-logo"><img src="../../resources/img/logo.jpg" height="60"></a>
                             <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                             <ul class="right hide-on-med-and-down">
+                                <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                                 <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                                 <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                                 <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>
@@ -48,6 +49,7 @@ class Public_Page
                     </nav>
                 </div>
                 <ul class="sidenav" id="mobile">
+                    <li><a href=".php"><i class="material-icons left">security</i>Cambiar contraseña</a></li>
                     <li><a href="index_publico.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
                     <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                     <li><a href="#" onclick="logOut()"><i class="material-icons left">close</i>Cerrar sesión</a></li>

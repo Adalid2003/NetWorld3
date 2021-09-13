@@ -39,7 +39,7 @@ Public_Page::headerTemplate('Iniciar sesión');
     </form>
 
     
-    <H5 class="black-text text-lighten-3 center-align">Es nuevo? por favor de <a href="../../views/public/Registrarse.php">click aquí</a> para registrarse</H1>
+    <H5 class="black-text text-lighten-3 center-align">¿Es nuevo? Por favor de <a href="../../views/public/Registrarse.php">click aquí</a> para registrarse</H5>
 </body>
 <?php
 // Se imprime la plantilla del pie enviando el nombre del controlador para la página web.

@@ -26,10 +26,13 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                //se ejecuta el case search
             case 'search':
+                  // se obtienen el post para acceder a los inputs
                 $_POST = $producto->validateForm($_POST);
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $producto->searchRows($_POST['search'])) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                         $rows = count($result['dataset']);
                         if ($rows > 1) {
@@ -39,6 +42,8 @@ if (isset($_GET['action'])) {
                         }
                     } else {
                         if (Database::getException()) {
+                            
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay coincidencias';
@@ -48,7 +53,9 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+                 //se ejecuta el case create
             case 'create':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $producto->validateForm($_POST);
                 if ($producto->setNombre($_POST['nombre_producto'])) {
                     if ($producto->setDescripcion($_POST['descripcion'])) {
@@ -59,6 +66,7 @@ if (isset($_GET['action'])) {
                                         if (is_uploaded_file($_FILES['archivo_producto']['tmp_name'])) {
                                             if ($producto->setImagen($_FILES['archivo_producto'])) {
                                                 if ($producto->createRow()) {
+                                                     // se ejecuta la funcion del modelo
                                                     $result['status'] = 1;
                                                     if ($producto->saveFile($_FILES['archivo_producto'], $producto->getRuta(), $producto->getImagen())) {
                                                         $result['message'] = 'Producto creado correctamente';
@@ -66,6 +74,7 @@ if (isset($_GET['action'])) {
                                                         $result['message'] = 'Producto creado pero no se guardó la imagen';
                                                     }
                                                 } else {
+                                                     // se verifica si no existe un error
                                                     $result['exception'] = Database::getException();;
                                                 }
                                             } else {
@@ -93,12 +102,16 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombre incorrecto';
                 }
                 break;
+                // se ejecuta el case readOne
             case 'readOne':
                 if ($producto->setId($_POST['id_producto'])) {
                     if ($result['dataset'] = $producto->readOne()) {
+                          // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
+
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'Este producto no existe';
@@ -108,6 +121,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'El producto es incorrecto';
                 }
                 break;
+                // se ejecuta el case update
             case 'update':
                 $_POST = $producto->validateForm($_POST);
                 if ($producto->setId($_POST['id_producto'])) {
@@ -120,6 +134,7 @@ if (isset($_GET['action'])) {
                                             if (is_uploaded_file($_FILES['archivo_producto']['tmp_name'])) {
                                                 if ($producto->setImagen($_FILES['archivo_producto'])) {
                                                     if ($producto->updateRow($data['imagen_producto'])) {
+                                                         // se ejecuta la funcion del modelo
                                                         $result['status'] = 1;
                                                         if ($producto->saveFile($_FILES['archivo_producto'], $producto->getRuta(), $producto->getImagen())) {
                                                             $result['message'] = 'El producto se ha actualizado exitosamente';
@@ -127,6 +142,7 @@ if (isset($_GET['action'])) {
                                                             $result['message'] = 'El producto se ha acutualizado pero no se guardó la imagen';
                                                         }
                                                     } else {
+                                                         // se verifica si no existe un error
                                                         $result['exception'] = Database::getException();
                                                     }
                                                 } else {
@@ -162,10 +178,12 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Producto es incorrecto';
                 }
                 break;
+                 //se ejecuta el case delete
             case 'delete':
                 if ($producto->setId($_POST['id_producto'])) {
                     if ($data = $producto->readOne()) {
                         if ($producto->deleteRow()) {
+                            // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                             if ($producto->deleteFile($producto->getRuta(), $data['imagen_producto'])) {
                                 $result['message'] = 'El producto se ha eliminado';
@@ -173,6 +191,7 @@ if (isset($_GET['action'])) {
                                 $result['message'] = 'El producto ha eliminado pero no se borró la imagen';
                             }
                         } else {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         }
                     } else {
@@ -182,33 +201,44 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Producto es incorrecto';
                 }
                 break;
+                //se ejecuta el case
             case 'cantidadProductosCategoria':
                 if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
+                     // se ejecuta la funcion del modelo
                     $result['status'] = 1;
                 } else {
                     if (Database::getException()) {
+                         // se verifica si no existe un error
                         $result['exception'] = Database::getException();
                     } else {
                         $result['exception'] = 'No hay datos disponibles';
                     }
                 }
                 break;
+                // se ejecuta el case
                 case 'ProductosMasvendidos':
                     if ($result['dataset'] = $producto->Productosmasvendidos()) {
+                    // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay datos disponibles';
                         }
                     }
                     break;
+                    // se ejecuta el case
                     case 'productosMasCaros':
+
                         if ($result['dataset'] = $producto->productosMasCaros()) {
+                            // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                         } else {
+
                             if (Database::getException()) {
+                                 // se verifica si no existe un error
                                 $result['exception'] = Database::getException();
                             } else {
                                 $result['exception'] = 'No hay datos disponibles';

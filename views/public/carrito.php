@@ -39,7 +39,7 @@ Public_Page::headerTemplate('Carrito')
     </div>
 </div>
 
-<h5 class="black-text text-lighten-3 center-align">Nota: RECUERDE que el pago lo realizara en efectivo en el momento que se haga la entrega en la dirección especificada.</h5>
+<h5 class="black-text text-lighten-3 center-align">Nota: RECUERDE que el pago lo realizará en efectivo en el momento que se haga la entrega en la dirección especificada.</h5>
 
 <!-- Componente Modal para mostrar una caja de dialogo -->
 <div id="item-modal" class="modal">

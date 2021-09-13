@@ -54,7 +54,7 @@ Dashboard_Page::headerTemplate('Registrar primer usuario');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">map</i>
-            <input id="direccion" type="text" name="direccion" class="validate" required/>
+            <input id="direccion" type="text" name="direccion" class="validate" autocomplete="off" required/>
             <label for="direccion">Dirección</label>
         </div>
       </div>

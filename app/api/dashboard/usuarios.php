@@ -287,9 +287,7 @@ if (isset($_GET['action'])) {
                                                             $result['exception'] = Database::getException();
                                                             $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                         }
-                                                    } else {
-                                                        $result['exception'] = $usuario->getImageError();;
-                                                    }
+                                                    
                                                 } else {
                                                     if ($usuario->updateRow($data['imagen_usuario'])) {
                                                         $result['status'] = 1;

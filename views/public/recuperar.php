@@ -5,6 +5,7 @@ require_once('../../app/helpers/database.php');
 // Se imprime la plantilla del encabezado enviando el título de la página web.
 Public_Page::headerTemplate('Recuperar contraseña');
 
+//funcion para generar codigo
 function generarCodigo($longitud, $tipo = 0)
     {
         //creamos la variable codigo
@@ -20,8 +21,9 @@ function generarCodigo($longitud, $tipo = 0)
         //regresamos codigo como valor
         return $codigo;
     }
+    $codigoo = generarCodigo(5);
 if (isset($_POST['email'])) {
-    //funcion para generar codigo
+    
     
     //Import PHPMailer classes into the global namespace
     //These must be at the top of your script, not inside a function
@@ -55,7 +57,7 @@ if (isset($_POST['email'])) {
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Recuperación de contraseña';
-        $mail->Body    = 'Este es su codigo de recuperación: ' . generarCodigo(5);
+        $mail->Body    = 'Este es su codigo de recuperación: ' . $codigoo;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         if ($mail->send()) {
@@ -71,7 +73,7 @@ if (isset($_POST['email'])) {
 
 if (isset($_POST['codigo'])) {
     $codigop = $_POST['codigo'];
-    if ($codigop == generarCodigo(5)) {
+    if ($codigop == $codigoo) {
         header('login.php');
     }else{
         echo('El codigo no es correcto o no es valido');

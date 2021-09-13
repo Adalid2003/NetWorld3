@@ -116,9 +116,9 @@ class Database{
             case '7':
                 self::$error = 'Existe un problema al conectar con el servidor';
                 break;
-            //case '42703':
-                //self::$error = 'Nombre de campo desconocido';
-                //break;
+            case '42703':
+                self::$error = 'Nombre de campo desconocido';
+                break;
             case '23505':
                 self::$error = 'Dato duplicado, no se puede guardar';
                 break;
@@ -129,7 +129,7 @@ class Database{
                 self::$error = 'Registro ocupado, no se puede eliminar';
                 break;
             default:
-                //self::$error = 'Ocurrió un problema en la base de datos';
+                self::$error = 'Ocurrió un problema en la base de datos';
                 self::$error = $message;
         }
     }

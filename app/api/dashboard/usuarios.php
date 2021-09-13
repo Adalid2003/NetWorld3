@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
                 } else {
                     unset($_SESSION['id_usuario'], $_SESSION['usuario'], $_SESSION['tiempo_usuario']);
                     $result['status'] = 1;
-                    $result['message'] = 'La sesión se ha cerrado por inactividad.';
+                    $result['message'] = 'La sesión se ha cerrado por inactividad';
                 }
                 break;
             case 'logOut':

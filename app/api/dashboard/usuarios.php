@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
                 } else {
                     unset($_SESSION['id_usuario'], $_SESSION['usuario'], $_SESSION['tiempo_usuario']);
                     $result['status'] = 1;
-                    $result['message'] = 'La sesión se ha cerrado por inactividad';
+                    $result['message'] = 'La sesión se ha cerrado por inactividad.';
                 }
                 break;
             case 'logOut':
@@ -247,10 +247,8 @@ if (isset($_GET['action'])) {
                                                             $result['exception'] = Database::getException();
                                                             $result['message'] = 'Usuario actualizado pero no se guardó la imagen';
                                                         }
-                                                    } else {
-                                                        $result['exception'] = $usuario->getImageError();;
-                                                    }
-                                                } else {
+                                                    
+                                                //} else {
                                                     if ($usuario->updateRow($data['imagen_usuario'])) {
                                                         $result['status'] = 1;
                                                         $result['message'] = 'El usuario se ha actualizado exitosamente';
@@ -282,6 +280,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
                 }
+            }
                 break;
             case 'delete':
                 if ($_POST['id_usuario'] != $_SESSION['id_usuario']) {

@@ -48,7 +48,7 @@ Public_Page::headerTemplate('Registrar Cliente');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">map</i>
-            <input id="direccion" type="text" name="direccion" class="validate" required/>
+            <input id="direccion" type="text" name="direccion" class="validate"autocomplete="off" required/>
             <label for="direccion">Dirección</label>
         </div>
         <div class="input-field col s12 m6">
@@ -58,7 +58,7 @@ Public_Page::headerTemplate('Registrar Cliente');
         </div>
         <div class="input-field col s12 m6">
             <i class="material-icons prefix">phone</i>
-            <input id="telefono" type="text" name="telefono" class="validate" required/>
+            <input id="telefono" type="text" name="telefono" class="validate"autocomplete="off" required/>
             <label for="telefono">Telefono</label>
         </div>
         <label class="center-align col s12">

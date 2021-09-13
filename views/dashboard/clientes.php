@@ -72,22 +72,22 @@ Dashboard_Page::headerTemplate('Administrar clientes');
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">email</i>
-                    <input id="correo" type="email" name="correo" class="validate" required />
+                    <input id="correo" type="email" name="correo" class="validate"autocomplete="off" required />
                     <label for="correo">Correo</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">security</i>
-                    <input id="clave1" type="password" name="clave1" class="validate" required />
-                    <label for="clave1">Contrseña</label>
+                    <input id="clave1" type="password" name="clave1" class="validate"autocomplete="off" required />
+                    <label for="clave1">Contraseña</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">security</i>
-                    <input id="clave2" type="password" name="clave2" class="validate" required />
+                    <input id="clave2" type="password" name="clave2" class="validate" autocomplete="off"required />
                     <label for="clave2">Confirmar contraseña</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">perm_identity</i>
-                    <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required />
+                    <input id="dui_c" type="text" name="dui_c" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" autocomplete="off" required />
                     <label for="dui_c">DUI</label>
                 </div>
                 <div class="input-field col s12 m6">
@@ -102,7 +102,7 @@ Dashboard_Page::headerTemplate('Administrar clientes');
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">phone</i>
-                    <input id="telefono" type="text" name="telefono" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required />
+                    <input id="telefono" type="text" name="telefono" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate"  autocomplete="off"required />
                     <label for="telefono">Telefono</label>
                 </div>
                 <div class="col s12 m6">

@@ -27,9 +27,12 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'search':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $compras->validateForm($_POST);
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $compras->searchRows($_POST['search'])) {
+                        
+                           // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                         $rows = count($result['dataset']);
                         if ($rows > 1) {
@@ -39,6 +42,7 @@ if (isset($_GET['action'])) {
                         }
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay coincidencias';
@@ -48,16 +52,21 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+                // se ejecuta el case create
                 case 'create':
                     //print_r($_POST);
+                    
+                    // se obtienen el post para acceder a los inputs
                     $_POST = $compras->validateForm($_POST);
                     if($compras->setCliente($_POST['cliente_compra'])){
                         if($compras->setFecha($_POST['fecha_compra'])){
                             if ($compras->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
                                 if ($compras->createRow()) {
+                                        // se ejecuta la funcion del modelo
                                     $result['status'] = 1;
                                     $result['message'] = 'Regitro de compra creada correctamente';
                                 } else {
+                                    // se verifica si no existe un error
                                     $result['exception'] = Database::getException();
                                 }
 
@@ -76,9 +85,12 @@ if (isset($_GET['action'])) {
                     }
                   
                 break;
+                // se ejecuta el case readOne
                 case 'readOne':
+                    // se obtienen el post para acceder a los inputs
                     if ($compras->setId($_POST['id_compra'])) {
                         if ($result['dataset'] = $compras->readOne()) {
+                             // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                         } else {
                             if (Database::getException()) {
@@ -97,15 +109,17 @@ if (isset($_GET['action'])) {
                             $result['status'] = 1;
                         } else {
                             if (Database::getException()) {
+                                // se verifica si no existe un error
                                 $result['exception'] = Database::getException();
                             } else {
                                 $result['exception'] = 'No hay cliente registrado';
                             }
                         }
                         break;
-    
+                        // se ejecuta el case update
                     case 'update':
                         //print_r($_POST);
+                         // se obtienen el post para acceder a los inputs
                         $_POST = $compras->validateForm($_POST);
                         if ($compras->setId($_POST['id_compra'])) {
                             if ($data = $compras->readOne()) {
@@ -113,9 +127,11 @@ if (isset($_GET['action'])) {
                                     if($compras->setFecha($_POST['fecha_compra'])) {
                                         if ($compras->setEstado(isset($_POST['estado_compra']) ? 1 : 0)){
                                             if ($compras->updateRow($_POST['id_compra'])) {
+                                                // se ejecuta la funcion del modelo
                                                 $result['status'] = 1;
                                                 $result['message'] = 'Compra modificada correctamente';
                                             } else {
+                                                // se verifica si no existe un error
                                                 $result['exception'] = Database::getException();
                                             }
     
@@ -137,12 +153,15 @@ if (isset($_GET['action'])) {
 
                             }
                         }
+                            // se ejecuta el case delete
                             case 'delete':
                                 if ($compras->setId($_POST['id_compra'])) {
                                     if ($data = $compras->readOne()) {
                                         if ($compras->deleteRow()) {
+                                             // se ejecuta la funcion del modelo
                                             $result['status'] = 1;
                                         } else {
+                                            // se verifica si no existe un error
                                             $result['exception'] = Database::getException();
                                         }
                                     } else {
@@ -152,11 +171,14 @@ if (isset($_GET['action'])) {
                                     $result['exception'] = 'Compra incorrecta';
                                 }
                                 break;
+                                // se ejecuta el case
                                 case 'comprasMasRecientes':
                                     if ($result['dataset'] = $compras->comprasMasRecientes()) {
+                                        // se ejecuta la funcion del modelo
                                         $result['status'] = 1;
                                     } else {
                                         if (Database::getException()) {
+                                            // se verifica si no existe un error
                                             $result['exception'] = Database::getException();
                                         } else {
                                             $result['exception'] = 'No hay cliente registrado';

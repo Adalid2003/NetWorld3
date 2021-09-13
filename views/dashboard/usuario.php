@@ -69,7 +69,7 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
       </div>
       <div class="input-field col s12 m6">
         <i class="material-icons prefix">email</i>
-        <input id="correo" type="email" name="correo" class="validate" required />
+        <input id="correo" type="email" name="correo" class="validate" autocomplete="off"required />
         <label for="correo">Correo</label>
       </div>
       <div class="input-field col s12 m6">
@@ -79,12 +79,12 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
       </div>
       <div class="input-field col s12 m6">
         <i class="material-icons prefix">security</i>
-        <input id="clave1" type="password" name="clave1" class="validate" required />
+        <input id="clave1" type="password" name="clave1" class="validate"autocomplete="off" required />
         <label for="clave1">Contrseña</label>
       </div>
       <div class="input-field col s12 m6">
         <i class="material-icons prefix">security</i>
-        <input id="clave2" type="password" name="clave2" class="validate" required />
+        <input id="clave2" type="password" name="clave2" class="validate"autocomplete="off"required />
         <label for="clave2">Confirmar contraseña</label>
       </div>
       <div class="input-field col s6">
@@ -94,7 +94,7 @@ Dashboard_Page::headerTemplate('Administrar usuarios');
       </div>
       <div class="input-field col s12 m6">
         <i class="material-icons prefix">perm_identity</i>
-        <input id="dui_u" type="text" name="dui_u" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required />
+        <input id="dui_u" type="text" name="dui_u" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" autocomplete="off" required />
         <label for="dui_u">DUI</label>
       </div>
       <div class="file-field input-field col s12 m6">

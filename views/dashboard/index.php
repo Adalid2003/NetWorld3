@@ -14,7 +14,7 @@ Dashboard_Page::headerTemplate('Iniciar sesión');
             </div>
             <div class="input-field col s12 m6 offset-m3">
                 <i class="material-icons prefix">security</i>
-                <input id="clave" type="password" name="clave" class="validate" required/>
+                <input id="clave" type="password" name="clave" class="validate"  autocomplete="off"required/>
                 <label for="contra">Contraseña</label>
             </div>
             <div class="col s12 center-align">

@@ -25,10 +25,14 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                // se ejecuta el case search
             case 'search':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $proveedores->validateForm($_POST);
+                // se verifica que el campo no este vacio
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $proveedores->searchRows($_POST['search'])) {
+                          // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                         $rows = count($result['dataset']);
                         if ($rows > 1) {
@@ -38,6 +42,7 @@ if (isset($_GET['action'])) {
                         }
                     } else {
                         if (Database::getException()) {
+                             // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay coincidencias';
@@ -47,15 +52,19 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+                // se ejecuta el case create 
             case 'create':
                 //print_r($_POST);
+                // se obtienen el post para acceder a los inputs
                 $_POST = $proveedores->validateForm($_POST);
                 if ($proveedores->setNombre_proveedor($_POST['nombre_proveedor'])) {
                     if ($proveedores->setTelefono_proveedor($_POST['telefono_proveedor'])) {
                         if ($proveedores->setDireccion_proveedor($_POST['direccion_proveedor'])) {
                             if ($proveedores->createRow()) {
+                                // se ejecuta la funcion del modelo
                                 $result['status'] = 1;
                             } else {
+                                // se verifica si no existe un error
                                 $result['exception'] = Database::getException();
                             }
                         } else {
@@ -68,12 +77,15 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombre incorrecto';
                 }
                 break;
+                // se ejecuta el case readOne
             case 'readOne':
                 if ($proveedores->setId($_POST['id_proveedor'])) {
                     if ($result['dataset'] = $proveedores->readOne()) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                             // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'Este Proveedor no existe';
@@ -83,7 +95,9 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'El Proveedor es incorrecto';
                 }
                 break;
+                // se ejecuta el case update
             case 'update':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $proveedores->validateForm($_POST);
                 if ($proveedores->setId($_POST['id_proovedor'])) {
 
@@ -92,9 +106,11 @@ if (isset($_GET['action'])) {
                             if ($proveedores->setTelefono_proveedor($_POST['telefono_proveedor'])) {
                                 if ($proveedores->setDireccion_proveedor($_POST['direccion_proveedor'])) {
                                     if ($proveedores->updateRow()) {
+                                        // se ejecuta la funcion del modelo
                                         $result['status'] = 1;
                                         $result['message'] = 'Proveedor modificado correctamente';
                                     } else {
+                                          // se verifica si no existe un error
                                         $result['exception'] = Database::getException();
                                     }
                                 } else {
@@ -111,14 +127,18 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                // se ejecuta el case delete
             case 'delete':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $proveedores->validateForm($_POST);
                 if ($proveedores->setId($_POST['id_proveedor'])) {
                     if ($data = $proveedores->readOne()) {
                         if ($proveedores -> deleteRow()) {
+                               // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                             $result['message'] = 'Proveedor eliminado correctamente';
                         } else {
+                             // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         }
                     } else {

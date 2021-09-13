@@ -16,9 +16,11 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
+                //se ejecuta la funcion del modelo
                 if ($result['dataset'] = $categoria->readAll()) {
                     $result['status'] = 1;
                 } else {
+                    //Verifica si hay algun error
                     if (Database::getException()) {
                         $result['exception'] = Database::getException();
                     } else {
@@ -26,9 +28,13 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                //Ejecutamos el case buscar para las categorias.
             case 'search':
+                  // se obtienen el post para acceder a los inputs
                 $_POST = $categoria->validateForm($_POST);
+                // se verifica que el campo no este vacio
                 if ($_POST['search'] != '') {
+                    // se ejecuta la funcion del modelo
                     if ($result['dataset'] = $categoria->searchRows($_POST['search'])) {
                         $result['status'] = 1;
                         $rows = count($result['dataset']);
@@ -38,6 +44,7 @@ if (isset($_GET['action'])) {
                             $result['message'] = 'Solo existe una coincidencia';
                         }
                     } else {
+                        // se verifica si hay algun problema en la base de datos
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         } else {
@@ -48,13 +55,16 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+            //se ejecuta el case CREATE para categorias
             case 'create':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $categoria->validateForm($_POST);
                 if ($categoria->setNombre($_POST['nombre_categoria'])) {
                     if ($categoria->setDescripcion($_POST['descripcion_categoria'])) {
                         if (is_uploaded_file($_FILES['archivo_categoria']['tmp_name'])) {
                             if ($categoria->setImagen($_FILES['archivo_categoria'])) {
                                 if ($categoria->createRow()) {
+                                     // se ejecuta la funcion del modelo
                                     $result['status'] = 1;
                                     if ($categoria->saveFile($_FILES['archivo_categoria'], $categoria->getRuta(), $categoria->getImagen())) {
                                         $result['message'] = 'Categoría creada correctamente';
@@ -79,6 +89,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'readOne':
                 if ($categoria->setId($_POST['id_categoria'])) {
+                     // se ejecuta la funcion del modelo
                     if ($result['dataset'] = $categoria->readOne()) {
                         $result['status'] = 1;
                     } else {
@@ -93,6 +104,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+                // se obtienen el post para acceder a los inputs
                 $_POST = $categoria->validateForm($_POST);
                 if ($categoria->setId($_POST['id_categoria'])) {
                     if ($data = $categoria->readOne()) {
@@ -101,6 +113,7 @@ if (isset($_GET['action'])) {
                                 if (is_uploaded_file($_FILES['archivo_categoria']['tmp_name'])) {
                                     if ($categoria->setImagen($_FILES['archivo_categoria'])) {
                                         if ($categoria->updateRow($data['imagen_catoria'])) {
+                                             // se ejecuta la funcion del modelo
                                             $result['status'] = 1;
                                             if ($categoria->saveFile($_FILES['archivo_categoria'], $categoria->getRuta(), $categoria->getImagen())) {
                                                 $result['message'] = 'Categoría modificada correctamente';
@@ -115,9 +128,11 @@ if (isset($_GET['action'])) {
                                     }
                                 } else {
                                     if ($categoria->updateRow($data['imagen_catoria'])) {
+                                         // se ejecuta la funcion del modelo
                                         $result['status'] = 1;
                                         $result['message'] = 'Categoría modificada correctamente';
                                     } else {
+                                        // se verifica si no existe un error
                                         $result['exception'] = Database::getException();
                                     }
                                 }
@@ -134,10 +149,12 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Categoría incorrecta';
                 }
                 break;
+                // se ejecuta el caso DELETE
             case 'delete':
                 if ($categoria->setId($_POST['id_categoria'])) {
                     if ($data = $categoria->readOne()) {
                         if ($categoria->deleteRow()) {
+                             // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                             if ($categoria->deleteFile($categoria->getRuta(), $data['imagen_catoria'])) {
                                 $result['message'] = 'Categoría eliminada correctamente';
@@ -145,6 +162,7 @@ if (isset($_GET['action'])) {
                                 $result['message'] = 'Categoría eliminada pero no se borró la imagen';
                             }
                         } else {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         }
                     } else {

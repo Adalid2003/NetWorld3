@@ -15,32 +15,42 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_usuario'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            // se ejecuta el case readAll
             case 'readAll':
                 if ($result['dataset'] = $valoraciones->readAll()) {
+                    // se ejecuta la funcion del modelo
                     $result['status'] = 1;
                 } else {
                     if (Database::getException()) {
+                        // se verifica si no existe un error 
                         $result['exception'] = Database::getException();
                     } else {
                         $result['exception'] = 'No hay valoraciones ingresados aún';
                     }
                 }
                 break;
+                // se ejecuta el case
                 case 'readAll2':
                     if ($result['dataset'] = $valoraciones->readAll2()) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay tipos de usuario registrados';
                         }
                     }
                     break;
+                    // se ejecuta el case search
             case 'search':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $valoraciones->validateForm($_POST);
+                //se verifica si el campo no esta vacio
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $valoraciones->searchRows($_POST['search'])) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                         $rows = count($result['dataset']);
                         if ($rows > 1) {
@@ -50,6 +60,7 @@ if (isset($_GET['action'])) {
                         }
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay coincidencias';
@@ -59,7 +70,9 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+                // se ejecuta el case create
             case 'create':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $valoraciones->validateForm($_POST);
                     if ($valoraciones->setComentario($_POST['comentario_producto'])) {
                         if ($valoraciones->setCalificacion($_POST['calificacion_producto'])) {
@@ -67,9 +80,11 @@ if (isset($_GET['action'])) {
                                 if ($valoraciones->setCliente($_POST['cliente_valoracion'])) {
                                     if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0)) { 
                                         if ($valoraciones->createRow()) {
+                                            // se ejecuta la funcion del modelo
                                             $result['status'] = 1;
                                             $result['message'] = 'Valoracion creado correctamente';
                                         } else {
+                                            // se verifica si no existe un error
                                             $result['exception'] = Database::getException();
                                         }
                                     } else {
@@ -88,12 +103,15 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Estado incorrecto';
             }
             break;
+            // se ejecuta el case readOne
             case 'readOne':
                 if ($valoraciones->setId($_POST['id_valoracion'])) {
                     if ($result['dataset'] = $valoraciones->readOne()) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                            // se verifica si no existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'Esta valoracion no existe';
@@ -104,6 +122,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'update':
+                 // se obtienen el post para acceder a los inputs
                 $_POST = $valoraciones->validateForm($_POST);
                 if ($valoraciones->setId($_POST['id_valoracion'])) {
                     if ($data = $valoraciones->readOne()) {
@@ -113,9 +132,11 @@ if (isset($_GET['action'])) {
                                         if ($valoraciones->setCliente($_POST['cliente_valoracion'])) {
                                     if ($valoraciones->setEstado(isset($_POST['estado_comentario']) ? 1 : 0))
                                         if ($valoraciones->updateRow($_POST['id_valoracion'])) {
+                                            // se ejecuta la funcion del modelo
                                             $result['status'] = 1;
                                             $result['message'] = 'El producto se ha actualizado exitosamente';
                                         } else {
+                                            // se verifica si no existe un error
                                             $result['exception'] = Database::getException();
                                         }
                                 }
@@ -136,11 +157,14 @@ if (isset($_GET['action'])) {
         }
             break;
             case 'delete':
+                 // se obtienen el post para acceder a los inputs
                 if ($valoraciones->setId($_POST['id_valoracion'])) {
                     if ($data = $valoraciones->readOne()) {
                         if ($valoraciones->deleteRow()) {
+                            // se ejecuta la funcion del modelo
                             $result['status'] = 1;
                         } else {
+                            // se verifica si existe un error
                             $result['exception'] = Database::getException();
                         }
                     } else {
@@ -150,11 +174,14 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Valoracion es incorrecta';
                 }
                 break;
+                //se ejecuta el case
                 case 'valoracionesPorProducto':
                     if ($result['dataset'] = $valoraciones->valoracionPorProducto()) {
+                        // se ejecuta la funcion del modelo
                         $result['status'] = 1;
                     } else {
                         if (Database::getException()) {
+                            // se verifica si existe un error
                             $result['exception'] = Database::getException();
                         } else {
                             $result['exception'] = 'No hay datos disponibles';

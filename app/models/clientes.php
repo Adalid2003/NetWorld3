@@ -48,6 +48,16 @@ class Clientes extends Validator
             return false;
         }
     }
+
+    public function setPassword($value)
+    {
+        if ($this->validatePassword($value)) {
+            $this->clavec = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
     //Métodos para validar y asignar valores del tributo.
     public function setCorreo($value)
     {
@@ -323,6 +333,20 @@ class Clientes extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function checkEmail()
+    {
+        $sql = 'SELECT correo_cliente ,id_cliente FROM clientes WHERE correo_cliente = ?';
+        $params = array($this->correo);
+        return Database::getRow($sql, $params);
+    }
+
+    public function changePasswordOut()
+    {
+        $hash = password_hash($this->clavec, PASSWORD_DEFAULT);
+        $sql = 'UPDATE clientes SET contrasena = ? WHERE id_cliente = ?';
+        $params = array($hash, $_SESSION['id_cliente_tmp']);
+        return Database::executeRow($sql, $params);
+    }
 
 }
 

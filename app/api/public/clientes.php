@@ -22,37 +22,35 @@ if (isset($_GET['action'])) {
                     if ($cliente->checkPassword($_POST['clave_actual'])) {
                         if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
                             if ($_POST['clave_nueva_1'] != $_POST['clave_actual']) {
-                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']){
-                                            if ($cliente->setClave($_POST['clave_nueva_1'])) {
-                                                if ($cliente->changePassword()) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Contraseña cambiada correctamente';
-                                                } else {
-                                                    $result['exception'] = Database::getException();
-                                                }
-                                            } else {
-                                                $result['exception'] = $cliente->getPasswordError();
-                                            }
-
+                                if ($_POST['clave_nueva_2'] != $_POST['clave_actual']) {
+                                    if ($cliente->setClave($_POST['clave_nueva_1'])) {
+                                        if ($cliente->changePassword()) {
+                                            $result['status'] = 1;
+                                            $result['message'] = 'Contraseña cambiada correctamente';
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = $cliente->getPasswordError();
+                                    }
                                 } else {
                                     $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
                                 }
-                                        }else{
-                                            $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
-                                        }
-
-                                        }else{
-                                            $result['exception'] = 'Clave nueva diferente';
-                                        }
-                                    }else{
-                                        $result['exception'] = 'Clave actual incorrecta';
-                                    }
-                                }else{
-                                    $result['exception'] = 'Usuario incorrecto';
-                                }             
+                            } else {
+                                $result['exception'] = 'Por su seguridad, su contraseña debe ser diferente a la que usa actualmente';
+                            }
+                        } else {
+                            $result['exception'] = 'Clave nueva diferente';
+                        }
+                    } else {
+                        $result['exception'] = 'Clave actual incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
                 break;
             case 'sessionTime':
-                if((time() - $_SESSION['tiempo_cliente']) < 300) {
+                if ((time() - $_SESSION['tiempo_cliente']) < 300) {
                     $_SESSION['tiempo_cliente'] = time();
                 } else {
                     unset($_SESSION['id_cliente'], $_SESSION['cliente'], $_SESSION['tiempo_cliente']);
@@ -60,7 +58,7 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'La sesión se ha cerrado por inactividad.';
                 }
                 break;
-            // Se crea un caso para cerrar sesión
+                // Se crea un caso para cerrar sesión
             case 'logOut':
                 unset($_SESSION['id_cliente']);
                 $result['status'] = 1;
@@ -183,7 +181,7 @@ if (isset($_GET['action'])) {
 
 
 
-                
+
             case 'logIn':
                 //Se valida el formulario
                 $_POST = $cliente->validateForm($_POST);
@@ -226,6 +224,106 @@ if (isset($_GET['action'])) {
                     }
                 }
                 // Se finaliza el caso
+                break;
+            case 'validateEmail':
+                //print_r($_POST);
+                $_POST = $cliente->validateForm($_POST);
+                if ($cliente->setCorreo($_POST['txtCorreo'])) {
+                    if ($correo = $cliente->checkEmail()) {
+                        if ($correo['correo_cliente'] == $_POST['txtCorreo']) {
+                            $_SESSION['id_cliente_tmp'] = $correo['id_cliente'];
+                            $_SESSION['correo_ciente'] = $correo['correo_cliente'];
+                            $result['status'] = 1;
+                            $result['message'] = 'Correo verificado.';
+                        } else {
+                            $result['exception'] = 'El correo electrónico ingresado no coincide con su cuenta.';
+                        }
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'El correo ingresado no existe en nuestros registros, por favor verifique su información o vuelva a intentarlo.';
+                        }
+                    }
+                } else {
+                    $result['exception'] = 'Id pendiente de ingresar.';
+                }
+                break;
+            case 'sendEmail':
+                $_SESSION['codigo_email'] = random_int(100, 999999);
+                try {
+
+
+
+                    //Load Composer's autoloader
+                    require '../../libraries/phpmailer52/class.phpmailer.php';
+                    require '../../libraries/phpmailer52/class.smtp.php';
+                    require '../../libraries/phpmailer52/class.phpmaileroauthgoogle.php';
+
+                    //Create an instance; passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->setLanguage("es");
+                    //Ajustes del servidor
+                    $mail->SMTPDebug = 0;
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'cuentanetworld@gmail.com';
+                    $mail->Password   = 'networld123';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port       = 587;
+
+                    //Receptores
+                    $mail->setFrom('recuperacionsmartfix@gmail.com', 'Soporte SmartFix');
+                    $mail->addAddress($_SESSION['correo_cliente']);
+
+                    //Contenido
+                    $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->Subject = 'Codigo de Verificación';
+                    $mail->Body    = 'Tu código de verificación es: <b>' . $_SESSION['codigo_email'] . '</b>.';
+                    $mail->AltBody = 'Tu código de verificación es: ' . $_SESSION['codigo_email'] . '.';
+
+                    if ($mail->send()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Se ha enviado un código de recuperación de contraseña a su correo.';
+                    }
+                } catch (Exception $e) {
+                    $result['exception'] = $mail->ErrorInfo;
+                }
+                break;
+            case 'validateCode':
+                $_POST = $cliente->validateForm($_POST);
+                if ($_SESSION['codigo_email'] == $_POST['txtCodigo']) {
+                    unset($_SESSION['codigo_email']);
+                    $result['status'] = 1;
+                    $result['message'] = 'Código verificado correctamente.';
+                } else {
+                    $result['exception'] = 'El código que usted ha ingresado ya venció o es invalido.';
+                }
+
+                break;
+            case 'changePasswordOut':
+                if ($cliente->setId($_SESSION['id_cliente_tmp'])) {
+                    $_POST = $cliente->validateForm($_POST);
+                    if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                        if ($cliente->setPassword($_POST['clave_nueva_1'])) {
+                            if ($cliente->changePasswordOut()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Contraseña cambiada correctamente';
+                                unset($_SESSION['id_cliente_tmp']);
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = $cliente->getPasswordError();
+                        }
+                    } else {
+                        $result['exception'] = 'Claves nuevas diferentes';
+                    }
+                } else {
+                    $result['exception'] = 'Usuario incorrecto';
+                }
                 break;
             default:
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
